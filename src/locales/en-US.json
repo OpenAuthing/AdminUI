@@ -1,0 +1,15 @@
+{
+    "menus": {
+        "dashboard": "Dashboard",
+        "application": "Applications",
+        "orginizations": "Orginizations",
+        "departments": "Departments",
+        "users": "Users",
+        "usergroups": "User Groups",
+        "authentication": "Authentication",
+        "permissions": "Permissions",
+        "roles": "Roles",
+        "branding": "Branding",
+        "settings": "Settings"
+    }
+}

@@ -9,6 +9,9 @@ export default defineConfig({
   headScripts: [
     // "css-prefers-color-scheme/dist/browser-global.js"
   ],
+  links: [
+    { href: "https://rsms.me/inter/inter.css", rel: "stylesheet" }
+  ],
   plugins: [
     '@umijs/plugins/dist/initial-state',
     '@umijs/plugins/dist/model',

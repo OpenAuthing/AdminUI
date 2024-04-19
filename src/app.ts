@@ -103,5 +103,6 @@ export const request: RuntimeConfig['request'] = {
 };
 
 export const rootContainer: RuntimeConfig['rootContainer'] = (container: JSX.Element, args?: any) => {
+    console.log(container)
     return React.createElement(RootContainer, null, container);
 }

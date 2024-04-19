@@ -10,6 +10,9 @@ module.exports = {
   theme: {
     extend: {
       colors: theme.colors,
+      width: {
+        '38': '144px'
+      }
     },
   },
 }

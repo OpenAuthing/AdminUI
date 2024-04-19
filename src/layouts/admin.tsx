@@ -1,126 +1,116 @@
-import Logo from "@/components/logo"
-import { NavLink } from "@mantine/core"
-import { Link, Outlet, useAppData } from "umi"
-import { IconChartDots2 } from '@tabler/icons-react'
-import { useEffect, useState } from "react"
+import { Outlet } from "umi"
+import { Avatar, Menu, ScrollArea, Select, UnstyledButton } from "@mantine/core";
+import Navbar from "@/components/Navbar.tsx";
+import Header from "@/components/Header";
+import { ChevronRightIcon, LanguagesIcon, LogOutIcon, MonitorIcon, MoonStarIcon, SparklesIcon, SunIcon, SunMoonIcon, UserIcon } from "lucide-react";
 
-
-const NavMenu = () => {
-    // get all routes from the react router
-    const { routes } = useAppData()
-    const [menuTree, setMenuTree] = useState<any[]>([])
-
-    useEffect(() => {
-
-        const menus: any[] = []
-        for (const key in routes) {
-            const route: any = routes[key]
-            if (route.menu) {
-                menus.push({
-                    parent: route.parent,
-                    path: route.path,
-                    ...route.menu
-                })
-            }
-        }
-        // 将 menus 转换为树形结构
-        const menuTree = menus.reduce((acc, cur) => {
-            if (!cur.parent) {
-                acc.push(cur)
-            } else {
-                const parent = acc.find((item: any) => item.label === cur.parent)
-                if (parent) {
-                    if (!parent.children) {
-                        parent.children = []
-                    }
-                    parent.children.push(cur)
-                }
-            }
-            return acc
-        }, [])
-
-        setMenuTree(menuTree)
-    }, [routes])
-
-    console.log(menuTree)
-
-    // menu 中 icon 存的是 icon 的名称，这里需要转换成 icon 组件，这里使用的是 tabler icons
-    // 优化以下代码，不需要每次都 require 一次
-    const getIcon = (icon: string) => {
-        const iconComponent = require(`@tabler/icons-react/${icon}`).default
-        return iconComponent
-    }
-
-
-    return (
-        <aside
-            className="flex-[0_0_auto] h-full mr-[28px] xl:mr-[265px] xl:transition-[margin] z-10 will-change-[margin]">
-            <div
-                className="w-[265px] overflow-x-hidden overflow-y-auto fixed left-0 top-0 bottom-0 flex flex-col justify-start h-auto bg-gray-50 border-r border-r-gray-100 shadow-[rgba(0,0,0,0.1)_16px_0px_16px] xl:shadow-none transition-[width_shadow] will-change-[width_shadow]">
-                <Link to="/admin">
-                    <div className="pl-8 pr-3 py-5">
-                        <Logo />
-                    </div>
-                </Link>
-                <nav className="flex-1 px-4 overflow-x-hidden overflow-y-auto">
-                    <NavLink
-                        className="text-base font-medium text-gray-700 transition-colors hover:text-primary-600 data-[active=true]:text-primary-600"
-                        href="/admin/dashboard"
-                        label="Dashboard"
-                        leftSection={<IconChartDots2 size="1rem" stroke={1.5} />}
-                        active
-                    />
-                    <NavLink
-                        className="text-base font-medium"
-                        href="#required-for-focus"
-                        label="First parent link"
-                        leftSection={<IconChartDots2 size="1rem" stroke={1.5} />}
-                        childrenOffset={28}
-                    >
-                        <NavLink href="#required-for-focus" label="First child link" />
-                        <NavLink label="Second child link" href="#required-for-focus" />
-                        <NavLink label="Nested parent link" childrenOffset={28} href="#required-for-focus">
-                            <NavLink label="First child link" href="#required-for-focus" />
-                            <NavLink label="Second child link" href="#required-for-focus" />
-                            <NavLink label="Third child link" href="#required-for-focus" />
-                        </NavLink>
-                    </NavLink>
-
-                    <NavLink
-                        href="#required-for-focus"
-                        label="Second parent link"
-                        // leftSection={<IconFingerprint size="1rem" stroke={1.5} />}
-                        childrenOffset={28}
-                        defaultOpened
-                    >
-                        <NavLink label="First child link" href="#required-for-focus" />
-                        <NavLink label="Second child link" href="#required-for-focus" />
-                        <NavLink label="Third child link" href="#required-for-focus" />
-                    </NavLink>
-                </nav>
-            </div>
-        </aside>
-    )
-}
-
+const Themes = [
+    { value: 'auto', label: 'System', icon: <MonitorIcon className="size-4 stroke-gray-600" /> },
+    { value: 'light', label: 'Light', icon: <SunIcon className="size-4 stroke-gray-600" /> },
+    { value: 'dark', label: 'Dark', icon: <MoonStarIcon className="size-4 stroke-gray-600" /> },
+]
 
 const AdminLayout = () => {
 
     return (
-        <div className="w-screen h-screen max-w-full flex items-center flex-col">
-            <div className="h-full w-full flex items-start">
-                <NavMenu />
-                <div className="w-full">
-                    {/* <AdminHeader /> */}
-                    <div className="flex-1 overflow-hidden xl:container xl:mx-auto p-8 py-5">
-                        <div className="h-full min-w-[780px] w-full max-w-full overflow-auto">
-                            <Outlet />
+        <div className="h-screen flex pt-14 justify-between bg-background text-gray-800 dark:text-white dark:bg-slate-900">
+            <div className="fixed z-10 top-0 left-0 right-0">
+                <Header />
+            </div>
+            <aside className="flex flex-col flex-initial w-[264px] min-w-[264px] h-full overflow-hidden relative shadow bg-white border-r border-gray-200 dark:bg-slate-800 dark:text-white">
+                <ScrollArea className="h-full px-3">
+                    <Navbar />
+                </ScrollArea>
+                <Menu position="right-end" offset={-10} width={240}>
+                    <Menu.Target>
+                        <div className="group flex text-sm px-3 py-1.5 gap-x-2 items-center cursor-pointer transition-colors hover:bg-gray-50">
+                            <Avatar size="md" />
+                            <div className="flex flex-col gap-y-1 items-start justify-center">
+                                <span className="font-medium">Ender</span>
+                                <span className="text-gray-600 text-xs">zengande@outlook.com</span>
+                            </div>
+                            <UnstyledButton className="ml-auto">
+                                <ChevronRightIcon className="size-5 stroke-gray-500 transition-all group-hover:translate-x-1 group-hover:stroke-gray-700" />
+                            </UnstyledButton>
                         </div>
+                    </Menu.Target>
+                    <Menu.Dropdown>
+                        <div className="flex py-2 gap-x-2 px-3 text-sm items-center">
+                            <span className="">Theme</span>
+                            <Select
+                                checkIconPosition="right"
+                                defaultValue={'light'}
+                                data={[
+                                    { value: 'auto', label: 'System' },
+                                    { value: 'light', label: 'Light' },
+                                    { value: 'dark', label: 'Dark' },
+                                ]}
+                            />
+                        </div>
+                        <Menu position="right-end" offset={10} width={160} trigger="click-hover">
+                            <Menu.Target>
+                                <Menu.Item closeMenuOnClick={false}
+                                    leftSection={<SunMoonIcon className="size-4 stroke-gray-600" />}
+                                    rightSection={<ChevronRightIcon className="size-4 stroke-gray-600" />}>
+                                    <span>Theme</span>
+                                </Menu.Item>
+                            </Menu.Target>
+                            <Menu.Dropdown>
+                                {Themes.map((theme) => (
+                                    <Menu.Item leftSection={theme.icon}>
+                                        <span className="text-gray-600 text-xs">{theme.label}</span>
+                                    </Menu.Item>
+                                ))}
+
+                            </Menu.Dropdown>
+                        </Menu>
+
+                        <Menu position="right-end" offset={10} trigger="click-hover">
+                            <Menu.Target>
+                                <Menu.Item closeMenuOnClick={false}
+                                    leftSection={<LanguagesIcon className="size-4 stroke-gray-600" />}
+                                    rightSection={<ChevronRightIcon className="size-4 stroke-gray-600" />}>
+                                    <span>Language</span>
+                                </Menu.Item>
+                            </Menu.Target>
+                            <Menu.Dropdown>
+                                <Menu.Item component="a" href="/"
+                                    leftSection={<UserIcon className="size-4 stroke-gray-600" />}>
+                                    Your profile
+                                </Menu.Item>
+                            </Menu.Dropdown>
+                        </Menu>
+
+                        <Menu.Divider />
+
+                        <Menu.Item component="a" href="/"
+                            leftSection={<UserIcon className="size-4 stroke-gray-600" />}>
+                            Your profile
+                        </Menu.Item>
+                        <Menu.Item component="a" href="/"
+                            leftSection={<SparklesIcon className="size-4 stroke-gray-600" />}>
+                            Getting started
+                        </Menu.Item>
+
+                        <Menu.Divider />
+
+                        <Menu.Item color="red"
+                            leftSection={<LogOutIcon className="size-4 stroke-gray-600" />}>
+                            Sign out
+                        </Menu.Item>
+                    </Menu.Dropdown>
+                </Menu>
+            </aside>
+            <div className="flex-auto flex flex-col relative bg-gray-100/50">
+                <ScrollArea className="flex-1">
+                    <div className="xl:container xl:mx-auto p-8 py-6">
+                        <Outlet />
                     </div>
-                </div>
+                </ScrollArea>
             </div>
         </div>
     )
 }
 
 export default AdminLayout
+// export default withOidcSecure(AdminLayout);
