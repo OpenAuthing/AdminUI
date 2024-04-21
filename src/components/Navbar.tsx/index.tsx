@@ -1,5 +1,5 @@
 import { Transition } from "@headlessui/react";
-import { ChevronUp, ChevronDown, Network, ShieldCheckIcon, MonitorSmartphone, Share2, Palette, Settings, Fingerprint, Key } from "lucide-react";
+import { ChevronUp, ChevronDown, Network, ShieldCheckIcon, MonitorSmartphone, Share2, Palette, Settings, Fingerprint, Key, SparklesIcon } from "lucide-react";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { FormattedMessage, Link, useAppData, useIntl, useSelectedRoutes } from "umi";
 import { LinkProps } from "react-router-dom";
@@ -98,6 +98,8 @@ type NavMenuItemType = {
 
 const getIcon = (icon?: MenuIconType) => {
     switch (icon) {
+        case "Sparkles":
+            return (<SparklesIcon className="w-5 h-5 stroke-gray-600 group-aria-selected:stroke-blue-600 group-hover:stroke-blue-600" />)
         case 'Dashboard':
             return (<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">

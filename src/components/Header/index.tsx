@@ -4,16 +4,17 @@ import { GithubIcon } from "lucide-react"
 
 export default () => {
     return (
-        <div className="flex items-center h-14 px-4 bg-slate-950 shadow">
+        <div className="flex items-center h-14 px-4 shadow">
             <div className="mr-auto flex gap-x-2 items-center">
                 <UnstyledButton
                     component="a"
-                    className="p-1 transition-colors hover:bg-gray-600/50 rounded"
                     href="/">
-                    <LogoIcon className="size-8 fill-primary-600" />
+                    <div className="flex items-center gap-x-0.5">
+                        <LogoIcon className="size-8 fill-primary-600" />
+                        <LogoText className="w-38 fill-primary-600" />
+                    </div>
                 </UnstyledButton>
-                <div className="mx-1 h-6 w-[1.5px] bg-gray-500"></div>
-                <LogoText className="w-38 fill-primary-600" />
+
             </div>
             <div className="ml-auto flex items-center gap-x-4">
                 <UnstyledButton component="a"

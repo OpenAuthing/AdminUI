@@ -11,7 +11,9 @@ export default function Page() {
           <Button>Button</Button>
         </PageHeader.Right>
         <PageHeader.Content>
-          <p>asdgdshfdhgfhgdfdsfsfdf</p>
+          <p>
+            <FormattedMessage id="pages.departments.header.content" />
+          </p>
         </PageHeader.Content>
       </PageHeader>
     </div>

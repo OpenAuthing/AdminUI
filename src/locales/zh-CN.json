@@ -1,5 +1,24 @@
 {
+    "layouts": {
+        "admin": {
+            "menu": {
+                "appearance": "外观",
+                "language": "语言",
+                "theme": "主题",
+                "others": "其他",
+                "gettingstarted": "快速开始",
+                "yourprofile": "个人资料",
+                "signout": "退出登录"
+            }
+        }
+    },
+    "theme": {
+        "system": "跟随系统",
+        "light": "亮色",
+        "dark": "暗黑"
+    },
     "menus": {
+        "gettingstarted": "快速开始",
         "dashboard": "数据概览",
         "application": "应用管理",
         "orginizations": "组织部门",
@@ -13,6 +32,21 @@
         "settings": "系统设置"
     },
     "pages": {
+        "gettingstarted": {
+            "header": "快速开始",
+            "section1": {
+                "title": "将 OpenAuthing 集成到您的应用程序",
+                "content": "将 OpenAuthing 集成到您的应用程序，或者使用我们的示例快速开始体验。",
+                "button": "创建应用",
+                "learnmore": "了解更多"
+            },
+            "nextsteps": {
+                "title": "Next Steps"
+            }
+        },
+        "dashboard":{
+            "header": "数据概览"
+        },
         "departments": {
             "header": "部门管理",
             "header.description": "部门管理"

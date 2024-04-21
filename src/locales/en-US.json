@@ -1,5 +1,24 @@
 {
+    "layouts": {
+        "admin": {
+            "menu": {
+                "appearance": "Appearance",
+                "language": "Language",
+                "theme": "Theme",
+                "others": "Others",
+                "gettingstarted": "Getting started",
+                "yourprofile": "Your profile",
+                "signout": "Sign out"
+            }
+        }
+    },
+    "theme": {
+        "system": "System",
+        "light": "Light",
+        "dark": "Dark"
+    },
     "menus": {
+        "gettingstarted": "Getting Started",
         "dashboard": "Dashboard",
         "application": "Applications",
         "orginizations": "Orginizations",
@@ -11,5 +30,26 @@
         "roles": "Roles",
         "branding": "Branding",
         "settings": "Settings"
+    },
+    "pages": {
+        "gettingstarted": {
+            "header": "Getting Started",
+            "section1": {
+                "title": "Integrate OpenAuthing into your application",
+                "content": "Integrate OpenAuthing into your application or use one of our samples to get started in minutes.",
+                "button": "Create application",
+                "learnmore": "Learn more"
+            },
+            "nextsteps": {
+                "title": "Next Steps"
+            }
+        },
+        "dashboard":{
+            "header": "Dashboard"
+        },
+        "departments": {
+            "header": "Deparments",
+            "header.content": "Manage your departments here, you can add, edit and delete departments."
+        }
     }
 }

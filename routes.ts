@@ -19,6 +19,8 @@ const routes: Array<RouteType> = [
             path: '/admin',
             component: '@/layouts/admin',
             routes: [
+                { path: '/admin', component: 'GettingStarted', showInMenu: true, label: "menus.gettingstarted", icon: "Sparkles" },
+
                 { path: '/admin/dashboard', component: 'Dashboard', showInMenu: true, label: "menus.dashboard", icon: "Dashboard" },
 
                 { path: '/admin/applications', component: 'Applications', showInMenu: true, label: "menus.application", icon: "MonitorSmartphone" },
@@ -47,9 +49,7 @@ const routes: Array<RouteType> = [
 
                 { path: '/admin/branding', component: "Branding", showInMenu: true, label: "menus.branding", icon: "Palette" },
 
-                { path: '/admin/settings', showInMenu: true, label: "menus.settings", icon: "Settings" },
-
-                { path: '/admin', redirect: '/admin/dashboard' }
+                { path: '/admin/settings', showInMenu: true, label: "menus.settings", icon: "Settings" }
             ]
         }, {
             path: '/',

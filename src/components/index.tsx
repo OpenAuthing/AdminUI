@@ -1,7 +1,11 @@
 import { ColorSchemeScript, MantineProvider, createTheme } from '@mantine/core'
 import theme from '@/theme'
-import { UseRequestProvider } from 'umi';
+import { UseRequestProvider, getLocale } from 'umi';
 import React from 'react';
+import { DatesProvider } from '@mantine/dates';
+
+import 'dayjs/locale/zh-cn'
+import 'dayjs/locale/en'
 
 const mantineTheme = createTheme({
     colors: {
@@ -25,12 +29,16 @@ const mantineTheme = createTheme({
 
 export const RootContainer = ({ children }: { children: React.ReactNode }) => {
 
+    const locale = getLocale()
+
     return (
         <>
             <ColorSchemeScript />
             <UseRequestProvider value={{ throwOnError: true }}>
                 <MantineProvider theme={mantineTheme}>
-                    {children}
+                    <DatesProvider settings={{ locale: locale }}>
+                        {children}
+                    </DatesProvider>
                 </MantineProvider>
             </UseRequestProvider>
         </>
