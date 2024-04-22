@@ -1,6 +1,5 @@
 import { Loader, Tabs, Text, keys } from "@mantine/core"
 import { ArrowLeftIcon } from "lucide-react"
-import { useEffect, useState } from "react"
 import { Link, Outlet, useParams, generatePath, useSelectedRoutes, history, useIntl, useRequest, Navigate } from "umi"
 import ClientId from "./components/ClientId"
 
@@ -59,8 +58,8 @@ export default () => {
                     <div className="grid grid-cols-1 gap-y-10">
                         <div className="flex gap-x-6 items-start">
                             <div className="size-16 rounded bg-gray-200/80"></div>
-                            <div>
-                                <Text component="h1" size="2rem" fw={500} lh={1.25}>Default Client</Text>
+                            <div className="grid grid-cols-1 justify-between">
+                                <Text component="h1" size="1.8rem" fw={500} lh={1.25}>Default Client</Text>
                                 <div className="flex items-center gap-x-4">
                                     <Text size="sm" className="text-gray-500" fw={500}>Single Page Application</Text>
                                     <ClientId value="1234561234564sadfsdgsdgefefafsd" />

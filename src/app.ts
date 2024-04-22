@@ -1,7 +1,7 @@
 import React from 'react';
 import { RuntimeConfig, AxiosResponse, getIntl, AxiosRequestConfig, getLocale, history, UseRequestProvider } from 'umi';
 import { ResponseResult } from '@/types';
-import { RootContainer } from '@/components'
+import RootContainer from '@/components/RootContainer'
 
 const toast = {
     error: (msg: string) => console.error(msg)

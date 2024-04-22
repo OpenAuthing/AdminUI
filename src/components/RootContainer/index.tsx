@@ -7,6 +7,8 @@ import { DatesProvider } from '@mantine/dates';
 import 'dayjs/locale/zh-cn'
 import 'dayjs/locale/en'
 
+const InputClassnames = "ring-1 ring-transparent focus:ring-primary-500 transition-[shadow]"
+
 const mantineTheme = createTheme({
     colors: {
         primary: [
@@ -24,10 +26,27 @@ const mantineTheme = createTheme({
     },
     primaryColor: 'primary',
     primaryShade: 4,
-    fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji"
+    fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji",
+    components: {
+        TextInput: {
+            classNames: {
+                input: InputClassnames
+            }
+        },
+        Textarea: {
+            classNames: {
+                input: InputClassnames
+            }
+        },
+        Select: {
+            classNames: {
+                input: InputClassnames
+            }
+        }
+    }
 });
 
-export const RootContainer = ({ children }: { children: React.ReactNode }) => {
+const RootContainer = ({ children }: { children: React.ReactNode }) => {
 
     const locale = getLocale()
 
@@ -44,3 +63,5 @@ export const RootContainer = ({ children }: { children: React.ReactNode }) => {
         </>
     )
 }
+
+export default RootContainer

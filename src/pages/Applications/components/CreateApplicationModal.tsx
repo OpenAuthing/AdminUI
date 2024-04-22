@@ -63,7 +63,7 @@ export default ({
                                     <div key={index}
                                         onClick={() => setCurrent(index)}
                                         aria-checked={index === current}
-                                        className={classNames("border rounded p-6 cursor-pointer transition-[border-color,box-shadow] overflow-hidden aria-checked:shadow-black-inset aria-checked:shadow-primary-500 aria-checked:border-primary-500")}>
+                                        className={classNames("border rounded p-6 cursor-pointer transition-[border-color,box-shadow] overflow-hidden ring-1 ring-transparent aria-checked:ring-primary-600 aria-checked:border-primary-500")}>
                                         <div className="grid grid-cols-1 text-center justify-center gap-4">
                                             <div className="mx-auto size-16 bg-gray-200/80 rounded"></div>
                                             <Text component="h6" size="sm" fw={500}>

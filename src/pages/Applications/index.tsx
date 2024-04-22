@@ -34,8 +34,10 @@ export default function Page() {
                     </PageHeader.Content>
                     <PageHeader.Actions>
                         <Button onClick={open}>
-                            <PlusIcon className="size-5 mr-1" />
-                            <FormattedMessage id="pages.applications.header.actions.create" />
+                            <PlusIcon className="size-4 mr-1" />
+                            <span className="text-sm">
+                                <FormattedMessage id="pages.applications.header.actions.create" />
+                            </span>
                         </Button>
                     </PageHeader.Actions>
                 </PageHeader>

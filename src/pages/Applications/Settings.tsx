@@ -147,7 +147,7 @@ export default () => {
             </div >
             <div className="grid grid-cols-1 gap-4">
                 <h2 className="text-xl font-medium">Danger Zone</h2>
-                <div className="grid grid-cols-1 gap-2">
+                <div className="grid grid-cols-1 gap-2.5">
                     <div className="flex items-center p-6 rounded text-[rgb(118,28,23)] bg-[rgb(251,238,237)]">
                         <div className="flex-1 grid grid-cols-1 gap-1">
                             <h6 className="text-sm font-medium leading-6">Delete this application</h6>

@@ -1,9 +1,17 @@
-import { Transition } from "@headlessui/react";
-import { ChevronUp, ChevronDown, Network, ShieldCheckIcon, MonitorSmartphone, Share2, Palette, Settings, Fingerprint, Key, SparklesIcon } from "lucide-react";
-import { useState, useEffect, useCallback, useMemo } from "react";
+// import { Transition } from "@headlessui/react";
+import { ChevronUp, ChevronDown, Network, ShieldCheckIcon, MonitorSmartphone, Palette, Settings, Fingerprint, Key, SparklesIcon } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
 import { FormattedMessage, Link, useAppData, useIntl, useSelectedRoutes } from "umi";
 import { LinkProps } from "react-router-dom";
 import { MenuIconType } from "@/types";
+import { MantineTransition, Transition } from "@mantine/core";
+
+const menuTransition = {
+    common: {},
+    in: { gridTemplateRows: '1fr', opacity: 1},
+    out: { gridTemplateRows: '0fr', opacity: 0 },
+    transitionProperty: 'grid-template-rows'
+} as MantineTransition
 
 const NestedNavMenu = ({
     icon,
@@ -27,7 +35,7 @@ const NestedNavMenu = ({
                 onClick={() => setOpended(!opened)}>
                 <span>{icon}</span>
                 <span
-                    className="flex-1 ml-3 whitespace-nowrap font-semibold group-hover:text-primary-600 group-aria-selected:text-primary-600 transition-colors duration-300">
+                    className="flex-1 ml-3 whitespace-nowrap font-medium group-hover:text-primary-600 group-aria-selected:text-primary-600 transition-colors duration-300">
                     <FormattedMessage id={label} />
                 </span>
                 <span className="group-hover:text-primary-600">
@@ -39,25 +47,26 @@ const NestedNavMenu = ({
             </div>
 
             <Transition
-                as="div"
-                className="grid transition-[grid-template-rows] duration-200 ease-in-out will-change-[grid-template-rows]"
-                show={opened}
-                unmount={false}
-                enterFrom="grid-rows-[0fr]"
-                enterTo="grid-rows-[1fr]"
-                leaveFrom="grid-rows-[1fr]"
-                leaveTo="grid-rows-[0fr]"
-            >
-                <div className="w-full overflow-hidden">
-                    {items.map(item => (
-                        <Link to={item.href}
-                            key={item.id}
-                            aria-selected={selectedRouteKeys.includes(item.id)}
-                            className="mt-2 block py-2.5 pl-10 whitespace-nowrap font-semibold rounded text-gray-500 hover:bg-blue-50 hover:text-primary-600 aria-selected:text-primary-600 aria-selected:bg-blue-100 transition-colors duration-300">
-                            <FormattedMessage id={item.label} />
-                        </Link>
-                    ))}
-                </div>
+                mounted={opened}
+                transition={menuTransition}
+                duration={200}
+                timingFunction="ease-in-out"
+                keepMounted>
+                {style => (
+                    <div style={{ ...style }}
+                        className="grid grid-rows-[0fr]">
+                        <div className="w-full overflow-hidden">
+                            {items.map(item => (
+                                <Link to={item.href}
+                                    key={item.id}
+                                    aria-selected={selectedRouteKeys.includes(item.id)}
+                                    className="mt-2 block py-2.5 pl-10 whitespace-nowrap font-medium text-sm rounded text-gray-500 hover:bg-blue-50 hover:text-primary-600 aria-selected:text-primary-600 aria-selected:bg-blue-100 transition-colors duration-300">
+                                    <FormattedMessage id={item.label} />
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </Transition>
         </div>
     );
@@ -81,7 +90,7 @@ const NavMenuItem = ({
             className="group flex items-center px-2 py-2.5 rounded hover:bg-blue-50 aria-selected:bg-blue-100 transition-colors duration-300">
             {icon}
             <span
-                className="ml-3 group-hover:text-blue-600 font-semibold group-aria-selected:text-blue-600 transition-colors duration-300">
+                className="ml-3 group-hover:text-blue-600 font-medium group-aria-selected:text-blue-600 transition-colors duration-300">
                 {text}
             </span>
         </Link>

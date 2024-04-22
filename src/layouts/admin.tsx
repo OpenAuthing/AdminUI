@@ -1,6 +1,6 @@
 import { FormattedMessage, Outlet, getAllLocales, getLocale, setLocale } from "umi"
 import { Avatar, MantineColorScheme, Menu, ScrollArea, UnstyledButton, keys, useMantineColorScheme } from "@mantine/core";
-import Navbar from "@/components/Navbar.tsx";
+import Navbar from "@/components/Navbar";
 import Header from "@/components/Header";
 import { CheckIcon, ChevronRightIcon, LanguagesIcon, LogOutIcon, MonitorIcon, MoonStarIcon, SparklesIcon, SunIcon, SunMoonIcon, UserIcon } from "lucide-react";
 import React from "react";
@@ -41,8 +41,8 @@ const AdminLayout = () => {
                 </ScrollArea>
                 <Menu position="right-end" offset={-10} width={260}>
                     <Menu.Target>
-                        <div className="flex-initial grid grid-cols-1 items-center w-full h-16 border-t border-gray-200">
-                            <div className="group flex text-sm px-3 gap-x-2 items-center cursor-pointer transition-colors hover:bg-gray-50">
+                        <div className="flex-initial grid grid-cols-1 items-center w-full h-16 border-t border-gray-200 transition-colors hover:bg-gray-50 cursor-pointer">
+                            <div className="group flex text-sm px-3 gap-x-2 items-center">
                                 <Avatar size={38} />
                                 <div className="flex flex-col gap-y-0.5 items-start justify-center">
                                     <span className="font-medium">Ender</span>
