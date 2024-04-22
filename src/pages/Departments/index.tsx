@@ -4,18 +4,17 @@ import { FormattedMessage } from "umi";
 
 
 export default function Page() {
-  return (
-    <div>
-      <PageHeader title={<FormattedMessage id="pages.departments.header" />} >
-        <PageHeader.Right>
-          <Button>Button</Button>
-        </PageHeader.Right>
-        <PageHeader.Content>
-          <p>
-            <FormattedMessage id="pages.departments.header.content" />
-          </p>
-        </PageHeader.Content>
-      </PageHeader>
-    </div>
-  );
+    return (
+        <div>
+            <PageHeader title={<FormattedMessage id="pages.departments.header" />} >
+                <PageHeader.Content>
+                    <FormattedMessage id="pages.departments.header.content" />
+                </PageHeader.Content>
+
+                <PageHeader.Actions>
+                    <Button>Button</Button>
+                </PageHeader.Actions>
+            </PageHeader>
+        </div>
+    );
 }

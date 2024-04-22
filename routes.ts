@@ -10,6 +10,7 @@ type RouteType = {
     showInMenu?: (boolean | undefined);
     label?: string;
     icon?: MenuIconType;
+    key?: string;
 }
 
 const routes: Array<RouteType> = [
@@ -19,37 +20,49 @@ const routes: Array<RouteType> = [
             path: '/admin',
             component: '@/layouts/admin',
             routes: [
-                { path: '/admin', component: 'GettingStarted', showInMenu: true, label: "menus.gettingstarted", icon: "Sparkles" },
+                { path: '/admin', component: 'GettingStarted', showInMenu: true, label: "routes.menus.gettingstarted", icon: "Sparkles" },
 
-                { path: '/admin/dashboard', component: 'Dashboard', showInMenu: true, label: "menus.dashboard", icon: "Dashboard" },
-
-                { path: '/admin/applications', component: 'Applications', showInMenu: true, label: "menus.application", icon: "MonitorSmartphone" },
+                { path: '/admin/dashboard', component: 'Dashboard', showInMenu: true, label: "routes.menus.dashboard", icon: "Dashboard" },
 
                 {
-                    label: "menus.orginizations", icon: "Network", showInMenu: true,
+                    path: '/admin/applications', showInMenu: true, label: "routes.menus.application", icon: "MonitorSmartphone",
                     routes: [
-                        { path: '/admin/departments', component: 'Departments', showInMenu: true, label: "menus.departments" },
-                        { path: '/admin/users', component: 'Users', showInMenu: true, label: "menus.users" },
-                        { path: '/admin/user-groups', component: 'UserGroups', showInMenu: true, label: "menus.usergroups" },
+                        { path: "/admin/applications", component: 'Applications' },
+                        {
+                            path: '/admin/applications/:id', component: 'Applications/Details',
+                            routes: [
+                                { key: "quickstart", path: "/admin/applications/:id/quickstart", component: "Applications/Quickstart" },
+                                { key: "settings", path: "/admin/applications/:id/settings", component: "Applications/Settings" }
+                            ]
+                        }
                     ]
                 },
 
                 {
-                    label: "menus.authentication", icon: "Fingerprint", showInMenu: true,
+                    label: "routes.menus.orginizations", icon: "Network", showInMenu: true,
+                    routes: [
+                        { path: '/admin/departments', component: 'Departments', showInMenu: true, label: "routes.menus.departments" },
+                        { path: '/admin/users', component: 'Users', showInMenu: true, label: "routes.menus.users" },
+                        { path: '/admin/user-groups', component: 'UserGroups', showInMenu: true, label: "routes.menus.usergroups" },
+                    ]
+                },
+
+                {
+                    label: "routes.menus.authentication", icon: "Fingerprint", showInMenu: true,
                     routes: [
                     ]
                 },
 
                 {
-                    label: "menus.permissions", icon: "Key", showInMenu: true,
+                    label: "routes.menus.permissions", icon: "Key", showInMenu: true,
                     routes: [
-                        { path: '/admin/roles', component: 'Roles', showInMenu: true, label: "menus.roles" },
+                        { path: '/admin/roles', component: 'Roles', showInMenu: true, label: "routes.menus.roles" },
                     ]
                 },
 
-                { path: '/admin/branding', component: "Branding", showInMenu: true, label: "menus.branding", icon: "Palette" },
+                { path: '/admin/branding', component: "Branding", showInMenu: true, label: "routes.menus.branding", icon: "Palette" },
 
-                { path: '/admin/settings', showInMenu: true, label: "menus.settings", icon: "Settings" }
+                { path: '/admin/settings', showInMenu: true, label: "routes.menus.settings", icon: "Settings" }
             ]
         }, {
             path: '/',

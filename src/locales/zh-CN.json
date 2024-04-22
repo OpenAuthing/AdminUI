@@ -1,4 +1,24 @@
 {
+    "common": {
+        "copy": "复制",
+        "copied": "已复制"
+    },
+    "routes": {
+        "menus": {
+            "gettingstarted": "快速开始",
+            "dashboard": "数据概览",
+            "application": "应用管理",
+            "orginizations": "组织部门",
+            "departments": "部门管理",
+            "users": "用户管理",
+            "usergroups": "用户组管理",
+            "authentication": "身份认证",
+            "permissions": "权限管理",
+            "roles": "角色管理",
+            "branding": "品牌化",
+            "settings": "系统设置"
+        }
+    },
     "layouts": {
         "admin": {
             "menu": {
@@ -17,20 +37,6 @@
         "light": "亮色",
         "dark": "暗黑"
     },
-    "menus": {
-        "gettingstarted": "快速开始",
-        "dashboard": "数据概览",
-        "application": "应用管理",
-        "orginizations": "组织部门",
-        "departments": "部门管理",
-        "users": "用户管理",
-        "usergroups": "用户组管理",
-        "authentication": "身份认证",
-        "permissions": "权限管理",
-        "roles": "角色管理",
-        "branding": "品牌化",
-        "settings": "系统设置"
-    },
     "pages": {
         "gettingstarted": {
             "header": "快速开始",
@@ -44,12 +50,28 @@
                 "title": "Next Steps"
             }
         },
-        "dashboard":{
+        "dashboard": {
             "header": "数据概览"
         },
         "departments": {
             "header": "部门管理",
             "header.description": "部门管理"
+        },
+        "applications": {
+            "header": {
+                "title": "应用管理",
+                "content": "设置原生、Web 或 IoT 应用程序以使用 OpenAuthing 进行身份验证。",
+                "actions": {
+                    "create": "创建应用"
+                }
+            },
+            "list": {
+                "actions": {
+                    "quickstart": "快速开始",
+                    "settings": "应用设置",
+                    "credentials": "应用凭证"
+                }
+            }
         }
     }
 }

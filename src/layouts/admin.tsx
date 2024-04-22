@@ -32,24 +32,26 @@ const AdminLayout = () => {
 
     return (
         <div className="h-screen flex pt-14 justify-between bg-background text-gray-800 dark:text-white dark:bg-slate-900">
-            <div className="fixed z-10 top-0 left-0 right-0">
+            <div className="fixed z-30 top-0 left-0 right-0">
                 <Header />
             </div>
-            <aside className="flex flex-col flex-initial w-[264px] min-w-[264px] h-full overflow-hidden relative shadow bg-white border-r border-gray-200 dark:bg-slate-800 dark:text-white">
-                <ScrollArea className="h-full px-3">
+            <aside className="z-20 flex flex-col flex-initial w-[264px] min-w-[264px] h-full overflow-hidden relative shadow bg-white border-r border-gray-200 dark:bg-slate-800 dark:text-white">
+                <ScrollArea className="flex-1 h-full px-3">
                     <Navbar />
                 </ScrollArea>
                 <Menu position="right-end" offset={-10} width={260}>
                     <Menu.Target>
-                        <div className="group flex text-sm px-3 py-1.5 gap-x-2 items-center cursor-pointer transition-colors hover:bg-gray-50 border-t border-gray-200">
-                            <Avatar size={38} />
-                            <div className="flex flex-col gap-y-0.5 items-start justify-center">
-                                <span className="font-medium">Ender</span>
-                                <span className="text-gray-600 text-xs">zengande@outlook.com</span>
+                        <div className="flex-initial grid grid-cols-1 items-center w-full h-16 border-t border-gray-200">
+                            <div className="group flex text-sm px-3 gap-x-2 items-center cursor-pointer transition-colors hover:bg-gray-50">
+                                <Avatar size={38} />
+                                <div className="flex flex-col gap-y-0.5 items-start justify-center">
+                                    <span className="font-medium">Ender</span>
+                                    <span className="text-gray-600 text-xs">zengande@outlook.com</span>
+                                </div>
+                                <UnstyledButton className="ml-auto">
+                                    <ChevronRightIcon className="size-5 stroke-gray-500 transition-all group-hover:stroke-gray-700" />
+                                </UnstyledButton>
                             </div>
-                            <UnstyledButton className="ml-auto">
-                                <ChevronRightIcon className="size-5 stroke-gray-500 transition-all group-hover:stroke-gray-700" />
-                            </UnstyledButton>
                         </div>
                     </Menu.Target>
                     <Menu.Dropdown>
@@ -57,7 +59,7 @@ const AdminLayout = () => {
                             <FormattedMessage id="layouts.admin.menu.appearance" />
                         </Menu.Label>
 
-                        <Menu position="right-end" offset={10} width={160} trigger="hover">
+                        <Menu position="right-end" offset={10} width={160}>
                             <Menu.Target>
                                 <Menu.Item closeMenuOnClick={false}
                                     leftSection={<LanguagesIcon className="size-4 stroke-gray-600" />}
@@ -89,8 +91,7 @@ const AdminLayout = () => {
                                 })}
                             </Menu.Dropdown>
                         </Menu>
-                        <Menu position="right-end" offset={10} width={160} trigger="hover"
-                            withinPortal={false}>
+                        <Menu position="right-end" offset={10} width={160} withinPortal={false}>
                             <Menu.Target>
                                 <Menu.Item closeMenuOnClick={false}
                                     leftSection={<SunMoonIcon className="size-4 stroke-gray-600" />}
@@ -153,7 +154,7 @@ const AdminLayout = () => {
             </aside>
             <div className="flex-auto flex flex-col relative bg-gray-100/50">
                 <ScrollArea className="flex-1">
-                    <div className="xl:container xl:mx-auto p-8 py-6">
+                    <div className="xl:max-w-content mx-auto px-6 pt-10 pb-12">
                         <Outlet />
                     </div>
                 </ScrollArea>

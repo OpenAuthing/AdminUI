@@ -1,4 +1,5 @@
-import { Button, UnstyledButton } from "@mantine/core"
+import PageHeader from "@/components/PageHeader"
+import { Button, Space, UnstyledButton } from "@mantine/core"
 import { ArrowRightIcon } from "lucide-react"
 import { FormattedMessage } from "umi"
 
@@ -6,10 +7,9 @@ import { FormattedMessage } from "umi"
 export default () => {
 
     return (
-        <div className="lg:w-[837px] mx-auto">
-            <h1 className="text-3xl font-semibold mb-4">
-                <FormattedMessage id="pages.gettingstarted.header" />
-            </h1>
+        <div className="px-6">
+            <PageHeader title={<FormattedMessage id="pages.gettingstarted.header" />} />
+            <Space h="md" />
             <div className="grid auto-cols-fr gap-6">
                 <div className="flex rounded-xl w-full bg-gray-100">
                     <div className="p-10 flex-[3_1_0%] grid auto-cols-fr gap-6">

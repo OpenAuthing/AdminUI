@@ -1,3 +1,4 @@
+import { Space } from "@mantine/core";
 import React from "react"
 
 type PageHeaderProps = {
@@ -7,14 +8,14 @@ type PageHeaderProps = {
 const PageHeader = ({
     title, children
 }: PageHeaderProps) => {
-    let right = null;
+    let actions = null;
     let content = null;
 
     React.Children.toArray(children).forEach(child => {
         if (!React.isValidElement(child)) return
 
-        if (child.type === PageHeaderRight) {
-            right = child;
+        if (child.type === PageHeaderActions) {
+            actions = child;
         } else if (child.type === PageHeaderContent) {
             content = child;
         }
@@ -23,23 +24,24 @@ const PageHeader = ({
 
     return (
         <div className="flex justify-between items-center gap-x-4">
-            <div className="flex-1 space-y-2 p-2">
-                <h1 className="text-2xl font-semibold">{title}</h1>
+            <div className="flex-1 p-2">
+                <h1 className="text-3xl font-semibold">{title}</h1>
+                <Space h="md" />
                 <div className="text-sm text-gray-500">
                     {content}
                 </div>
             </div>
             <div>
-                {right}
+                {actions}
             </div>
         </div>
     )
 }
 
-const PageHeaderRight: React.FC<React.PropsWithChildren> = ({ children }) => children
+const PageHeaderActions: React.FC<React.PropsWithChildren> = ({ children }) => children
 const PageHeaderContent: React.FC<React.PropsWithChildren> = ({ children }) => children
 
-PageHeader.Right = PageHeaderRight
+PageHeader.Actions = PageHeaderActions
 PageHeader.Content = PageHeaderContent
 
 

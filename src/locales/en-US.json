@@ -1,4 +1,24 @@
 {
+    "common": {
+        "copy": "Copy",
+        "copied": "Copied"
+    },
+    "routes": {
+        "menus": {
+            "gettingstarted": "Getting Started",
+            "dashboard": "Dashboard",
+            "application": "Applications",
+            "orginizations": "Orginizations",
+            "departments": "Departments",
+            "users": "Users",
+            "usergroups": "User Groups",
+            "authentication": "Authentication",
+            "permissions": "Permissions",
+            "roles": "Roles",
+            "branding": "Branding",
+            "settings": "Settings"
+        }
+    },
     "layouts": {
         "admin": {
             "menu": {
@@ -17,20 +37,6 @@
         "light": "Light",
         "dark": "Dark"
     },
-    "menus": {
-        "gettingstarted": "Getting Started",
-        "dashboard": "Dashboard",
-        "application": "Applications",
-        "orginizations": "Orginizations",
-        "departments": "Departments",
-        "users": "Users",
-        "usergroups": "User Groups",
-        "authentication": "Authentication",
-        "permissions": "Permissions",
-        "roles": "Roles",
-        "branding": "Branding",
-        "settings": "Settings"
-    },
     "pages": {
         "gettingstarted": {
             "header": "Getting Started",
@@ -44,12 +50,28 @@
                 "title": "Next Steps"
             }
         },
-        "dashboard":{
+        "dashboard": {
             "header": "Dashboard"
         },
         "departments": {
             "header": "Deparments",
             "header.content": "Manage your departments here, you can add, edit and delete departments."
+        },
+        "applications": {
+            "header": {
+                "title": "Applications",
+                "content": "Setup a mobile, web or IoT application to use OpenAuthing for Authentication.",
+                "actions": {
+                    "create": "Create Application"
+                }
+            },
+            "list": {
+                "actions": {
+                    "quickstart": "Quickstart",
+                    "settings": "Settings",
+                    "credentials": "Credentials"
+                }
+            }
         }
     }
 }
