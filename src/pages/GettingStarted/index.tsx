@@ -1,3 +1,4 @@
+import Content from "@/components/Content"
 import PageHeader from "@/components/PageHeader"
 import { Button, Space, UnstyledButton } from "@mantine/core"
 import { ArrowRightIcon } from "lucide-react"
@@ -7,7 +8,7 @@ import { FormattedMessage } from "umi"
 export default () => {
 
     return (
-        <div className="px-6">
+        <Content>
             <PageHeader title={<FormattedMessage id="pages.gettingstarted.header" />} />
             <Space h="md" />
             <div className="grid auto-cols-fr gap-6">
@@ -57,6 +58,6 @@ export default () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Content>
     )
 }

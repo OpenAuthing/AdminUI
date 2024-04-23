@@ -7,7 +7,7 @@ import { DatesProvider } from '@mantine/dates';
 import 'dayjs/locale/zh-cn'
 import 'dayjs/locale/en'
 
-const InputClassnames = "ring-1 ring-transparent focus:ring-primary-500 transition-[shadow]"
+const InputClassnames = "ring-1 ring-transparent focus:ring-primary-500 transition-[shadow] disabled:opacity-100"
 
 const mantineTheme = createTheme({
     colors: {
@@ -31,7 +31,7 @@ const mantineTheme = createTheme({
         TextInput: {
             classNames: {
                 input: InputClassnames
-            }
+            },
         },
         Textarea: {
             classNames: {
@@ -42,6 +42,14 @@ const mantineTheme = createTheme({
             classNames: {
                 input: InputClassnames
             }
+        },
+        InputWrapper: {
+            defaultProps: {
+                inputWrapperOrder: ['label', 'input', 'description', 'error'],
+            },
+        },
+        Container: {
+            classNames: "px-6"
         }
     }
 });

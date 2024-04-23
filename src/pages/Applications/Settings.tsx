@@ -1,7 +1,7 @@
-import { Button, Fieldset, Kbd, Text, TextInput, CopyButton, Tooltip, ActionIcon, PasswordInput, Textarea, Divider, Select } from "@mantine/core"
+import { Button, Kbd, Input, Text, TextInput, CopyButton, Tooltip, ActionIcon, PasswordInput, Textarea, Divider, Select } from "@mantine/core"
 import { useForm } from "@mantine/form";
 import { useDisclosure, useHotkeys } from "@mantine/hooks";
-import { CopyIcon, EyeIcon, EyeOffIcon } from "lucide-react";
+import { CopyIcon, EyeIcon, EyeOffIcon, LinkIcon } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useIntl } from "umi";
 
@@ -60,6 +60,7 @@ export default () => {
                             <div className="grid grid-cols-1 gap-6">
                                 <TextInput
                                     label="Name"
+                                    placeholder="Enter name for application"
                                     required={true}
                                     rightSection={<Copy value={"name"} />} />
                                 <TextInput
@@ -99,11 +100,61 @@ export default () => {
                         <fieldset className="grid items-start border-none grid-cols-1 gap-6 lg:gap-10 lg:grid-cols-[2fr_minmax(0px,3fr)]">
                             <div>
                                 <legend className="text-base font-medium text-gray-800">
+                                    Endpoint Information
+                                </legend>
+                            </div>
+                            <div className="grid grid-cols-1 gap-6">
+                                <TextInput label="Issuer"
+                                    disabled={true}
+                                    value={"https://dgdfefdfe.authing.cn/oidc"}
+                                    rightSection={<Copy value={"https://dgdfefdfe.authing.cn/oidc"} />} />
+                                <TextInput label="Token Endpoint"
+                                    disabled={true}
+                                    value={"https://dgdfefdfe.authing.cn/oidc/token"}
+                                    rightSection={<Copy value={"https://dgdfefdfe.authing.cn/oidc/token"} />} />
+                                <TextInput label="User Information Endpoint"
+                                    disabled={true}
+                                    value={"https://dgdfefdfe.authing.cn/oidc/me"}
+                                    rightSection={<Copy value={"https://dgdfefdfe.authing.cn/oidc/me"} />} />
+                                <TextInput label="User Information Endpoint"
+                                    disabled={true}
+                                    value={"https://dgdfefdfe.authing.cn/oidc/me"}
+                                    rightSection={<Copy value={"https://dgdfefdfe.authing.cn/oidc/me"} />} />
+                                <TextInput label="OpenID Configuration"
+                                    disabled={true}
+                                    value={"https://dgdfefdfe.authing.cn/oidc/.well-known/openid-configuration"}
+                                    rightSection={<Copy value={"https://dgdfefdfe.authing.cn/oidc/.well-known/openid-configuration"} />} />
+                                <TextInput label="OpenID Configuration"
+                                    disabled={true}
+                                    value={"https://dgdfefdfe.authing.cn/oidc/.well-known/jwks.json"}
+                                    rightSection={<Copy value={"https://dgdfefdfe.authing.cn/oidc/.well-known/jwks.json"} />} />
+                            </div>
+                        </fieldset>
+
+                        <Divider my="md" />
+
+                        <fieldset className="grid items-start border-none grid-cols-1 gap-6 lg:gap-10 lg:grid-cols-[2fr_minmax(0px,3fr)]">
+                            <div>
+                                <legend className="text-base font-medium text-gray-800">
                                     Application Properties
                                 </legend>
                             </div>
                             <div className="grid grid-cols-1 gap-6">
+                                <Input.Wrapper
+                                    label="Application Logo"
+                                    description="The URL of the logo to display for the application, if none is set the default badge for this type of application will be shown. Recommended size is 150x150 pixels.">
+                                    <div className="grid grid-cols-1 pb-1">
+                                        <div className="flex items-center justify-center h-32 border border-b-0 border-[val(--input-bd)] rounded-tl-md rounded-tr-md">
+                                            <img className="h-14" src="/assets/logo.png" />
+                                        </div>
+                                        <TextInput
+                                            classNames={{ input: "rounded-tl-none rounded-tr-none" }}
+                                            leftSection={<LinkIcon className="size-4" />}
+                                            placeholder="https://path.to/my_logo.png" />
+                                    </div>
+                                </Input.Wrapper>
                                 <Select label="Application Type"
+                                    disabled={true}
                                     defaultValue={ApplicationTypes[0].value}
                                     data={ApplicationTypes} />
                             </div>
@@ -118,18 +169,29 @@ export default () => {
                                 </legend>
                             </div>
                             <div className="grid grid-cols-1 gap-6">
-                                <TextInput label="Login URL"
+                                <TextInput
+                                    label="Login URL"
                                     description=""
                                     placeholder="https://myapp.cc/login" />
+                                <Textarea label="Allowed Callback URLs"
+                                    description=""
+                                    placeholder="Separate multiple URLs with a comma."
+                                    rows={3} />
+                                <Textarea label="Allowed Logout URLs"
+                                    description=""
+                                    placeholder="Separate multiple URLs with a comma."
+                                    rows={3} />
                             </div>
                         </fieldset>
 
                     </div>
                     <div className="fixed left-0 right-0 bottom-0 bg-white h-16 flex justify-end z-10" >
                         <div className="border-t w-[calc(100%-264px)] flex items-center justify-center">
-                            <div className="flex justify-between items-center w-5/6 h-full">
+                            <div className="flex justify-between px-10 items-center 2xl:px-0 2xl:w-5/6 w-full h-full">
                                 <div className="flex items-center gap-x-3">
-                                    <Text size="sm" c="gray.6" fw={500}>Showing 1-10 of 100</Text>
+                                    <Text size="sm" c="gray.6" fw={500}>
+                                        Save changes
+                                    </Text>
                                     <div>
                                         <Kbd>CTRL</Kbd>+<Kbd>Enter</Kbd>
                                     </div>
@@ -168,6 +230,6 @@ export default () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

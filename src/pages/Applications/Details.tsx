@@ -2,6 +2,7 @@ import { Loader, Tabs, Text, keys } from "@mantine/core"
 import { ArrowLeftIcon } from "lucide-react"
 import { Link, Outlet, useParams, generatePath, useSelectedRoutes, history, useIntl, useRequest, Navigate } from "umi"
 import ClientId from "./components/ClientId"
+import Content from "@/components/Content"
 
 const NavTabs = {
     quickstart: {
@@ -44,7 +45,7 @@ export default () => {
     }
 
     return (
-        <div>
+        <Content>
             <Link to="/admin/applications"
                 className="flex items-center gap-x-1 text-gray-500 text-sm mb-4">
                 <ArrowLeftIcon className="size-4" />
@@ -87,7 +88,6 @@ export default () => {
                     </div>
                 }
             </div>
-
-        </div>
+        </Content>
     )
 }

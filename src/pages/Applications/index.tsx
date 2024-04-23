@@ -5,6 +5,7 @@ import { PlusIcon } from 'lucide-react';
 import { FormattedMessage } from 'umi';
 import ApplicationList, { Application } from './components/ApplicationList';
 import CreateApplicationModal from './components/CreateApplicationModal';
+import Content from '@/components/Content';
 
 
 
@@ -26,7 +27,7 @@ export default function Page() {
     }]
 
     return (
-        <>
+        <Content>
             <div className="grid grid-cols-1 gap-y-10">
                 <PageHeader title={<FormattedMessage id="pages.applications.header.title" />}>
                     <PageHeader.Content>
@@ -46,6 +47,6 @@ export default function Page() {
                 </div>
             </div>
             <CreateApplicationModal opened={opened} onClose={close} />
-        </>
+        </Content>
     );
 }

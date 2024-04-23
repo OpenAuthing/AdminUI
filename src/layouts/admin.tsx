@@ -154,9 +154,7 @@ const AdminLayout = () => {
             </aside>
             <div className="flex-auto flex flex-col relative bg-gray-100/50">
                 <ScrollArea className="flex-1">
-                    <div className="xl:max-w-content mx-auto px-6 pt-10 pb-12">
-                        <Outlet />
-                    </div>
+                    <Outlet />
                 </ScrollArea>
             </div>
         </div>
