@@ -4,7 +4,7 @@ import { GithubIcon } from "lucide-react"
 
 export default () => {
     return (
-        <div className="flex items-center h-14 px-4 shadow bg-black">
+        <div className="flex items-center h-full">
             <div className="mr-auto flex gap-x-2 items-center">
                 <UnstyledButton
                     component="a"

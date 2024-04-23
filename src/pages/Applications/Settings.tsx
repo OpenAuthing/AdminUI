@@ -48,7 +48,7 @@ export default () => {
 
     return (
         <div className="grid grid-cols-1 gap-10 mb-16">
-            <div className="p-8 border rounded-lg bg-white">
+            <div className="p-8 border rounded-lg">
                 <form onSubmit={form.onSubmit(handleSubmit)}>
                     <div className="grid grid-cols-1 gap-10">
                         <fieldset className="grid items-start border-none grid-cols-1 gap-6 lg:gap-10 lg:grid-cols-[2fr_minmax(0px,3fr)]">

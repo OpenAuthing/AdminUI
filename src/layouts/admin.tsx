@@ -1,9 +1,10 @@
 import { FormattedMessage, Outlet, getAllLocales, getLocale, setLocale } from "umi"
-import { Avatar, MantineColorScheme, Menu, ScrollArea, UnstyledButton, keys, useMantineColorScheme } from "@mantine/core";
+import { AppShell, Avatar, Burger, Group, MantineColorScheme, Menu, ScrollArea, UnstyledButton, keys, useMantineColorScheme } from "@mantine/core";
 import Navbar from "@/components/Navbar";
 import Header from "@/components/Header";
 import { CheckIcon, ChevronRightIcon, LanguagesIcon, LogOutIcon, MonitorIcon, MoonStarIcon, SparklesIcon, SunIcon, SunMoonIcon, UserIcon } from "lucide-react";
 import React from "react";
+import { useDisclosure } from "@mantine/hooks";
 
 const Themes: Record<MantineColorScheme, { label: string, icon: React.ReactNode }> = {
     "auto": { label: 'theme.system', icon: <MonitorIcon className="size-4" /> },
@@ -23,6 +24,7 @@ const Languages: Record<any, { name: string, icon: React.ReactElement }> = {
 }
 
 const AdminLayout = () => {
+    const [opened, { toggle }] = useDisclosure();
     const { colorScheme, setColorScheme } = useMantineColorScheme()
     const changeLang = (lang: string): void => {
         setLocale(lang, true);
@@ -31,133 +33,142 @@ const AdminLayout = () => {
     const currentLanguage = Languages[currentLocale];
 
     return (
-        <div className="h-screen flex pt-14 justify-between bg-background text-gray-800 dark:text-white dark:bg-slate-900">
-            <div className="fixed z-30 top-0 left-0 right-0">
-                <Header />
-            </div>
-            <aside className="z-20 flex flex-col flex-initial w-[264px] min-w-[264px] h-full overflow-hidden relative shadow bg-white border-r border-gray-200 dark:bg-slate-800 dark:text-white">
-                <ScrollArea className="flex-1 h-full px-3">
+        <AppShell
+            header={{ height: 56 }}
+            navbar={{ width: 264, breakpoint: 'sm', collapsed: { mobile: !opened } }}
+            padding="md"
+        >
+            <AppShell.Header>
+                <Group h="100%" px="md">
+                    <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+                    <div className="flex-1">
+                        <Header />
+                    </div>
+                </Group>
+            </AppShell.Header>
+            <AppShell.Navbar>
+                <AppShell.Section p="md" grow component={ScrollArea}>
                     <Navbar />
-                </ScrollArea>
-                <Menu position="right-end" offset={-10} width={260}>
-                    <Menu.Target>
-                        <div className="flex-initial grid grid-cols-1 items-center w-full h-16 border-t border-gray-200 transition-colors hover:bg-gray-50 cursor-pointer">
-                            <div className="group flex text-sm px-3 gap-x-2 items-center">
-                                <Avatar size={38} />
-                                <div className="flex flex-col gap-y-0.5 items-start justify-center">
-                                    <span className="font-medium">Ender</span>
-                                    <span className="text-gray-600 text-xs">zengande@outlook.com</span>
+                </AppShell.Section>
+                <AppShell.Section>
+                    <Menu position="right-end" offset={-10} width={260}>
+                        <Menu.Target>
+                            <div className="flex-initial grid grid-cols-1 items-center w-full h-16 border-t border-gray-200 transition-colors hover:bg-gray-50 cursor-pointer">
+                                <div className="group flex text-sm px-3 gap-x-2 items-center">
+                                    <Avatar size={38} />
+                                    <div className="flex flex-col gap-y-0.5 items-start justify-center">
+                                        <span className="font-medium">Ender</span>
+                                        <span className="text-gray-600 text-xs">zengande@outlook.com</span>
+                                    </div>
+                                    <UnstyledButton className="ml-auto">
+                                        <ChevronRightIcon className="size-5 stroke-gray-500 transition-all group-hover:stroke-gray-700" />
+                                    </UnstyledButton>
                                 </div>
-                                <UnstyledButton className="ml-auto">
-                                    <ChevronRightIcon className="size-5 stroke-gray-500 transition-all group-hover:stroke-gray-700" />
-                                </UnstyledButton>
                             </div>
-                        </div>
-                    </Menu.Target>
-                    <Menu.Dropdown>
-                        <Menu.Label>
-                            <FormattedMessage id="layouts.admin.menu.appearance" />
-                        </Menu.Label>
+                        </Menu.Target>
+                        <Menu.Dropdown>
+                            <Menu.Label>
+                                <FormattedMessage id="layouts.admin.menu.appearance" />
+                            </Menu.Label>
 
-                        <Menu position="right-end" offset={10} width={160}>
-                            <Menu.Target>
-                                <Menu.Item closeMenuOnClick={false}
-                                    leftSection={<LanguagesIcon className="size-4 stroke-gray-600" />}
-                                    rightSection={<ChevronRightIcon className="size-4 stroke-gray-600" />}>
-                                    <div className="flex items-center justify-between">
-                                        <span><FormattedMessage id="layouts.admin.menu.language" /></span>
-                                        <span className="text-xs text-gray-400">{currentLanguage.name}</span>
-                                    </div>
-                                </Menu.Item>
-                            </Menu.Target>
-                            <Menu.Dropdown>
-                                {getAllLocales().map((locale) => {
-                                    const language = Languages[locale]
-                                    if (language === undefined) return null
-                                    const active = locale === currentLocale
-                                    return (
-                                        <Menu.Item onClick={() => changeLang(locale)}
-                                            key={locale}
-                                            leftSection={language.icon}
-                                            className={active ? "text-primary-600" : "text-gray-600"}>
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-xs">{language.name}</span>
-                                                {active &&
-                                                    <CheckIcon className="size-4" />
-                                                }
-                                            </div>
-                                        </Menu.Item>
-                                    )
-                                })}
-                            </Menu.Dropdown>
-                        </Menu>
-                        <Menu position="right-end" offset={10} width={160} withinPortal={false}>
-                            <Menu.Target>
-                                <Menu.Item closeMenuOnClick={false}
-                                    leftSection={<SunMoonIcon className="size-4 stroke-gray-600" />}
-                                    rightSection={<ChevronRightIcon className="size-4 stroke-gray-600" />}>
-                                    <div className="flex items-center justify-between">
-                                        <span><FormattedMessage id="layouts.admin.menu.theme" /></span>
-                                        <span className="text-xs text-gray-400">
-                                            <FormattedMessage id={Themes[colorScheme].label} />
-                                        </span>
-                                    </div>
-                                </Menu.Item>
-                            </Menu.Target>
-                            <Menu.Dropdown>
-                                {keys(Themes).map((key) => {
-                                    const theme = Themes[key]
-                                    const active = key === colorScheme
-                                    return (
-                                        <Menu.Item key={key}
-                                            leftSection={theme.icon}
-                                            className={active ? "text-primary-600" : "text-gray-600"}
-                                            onClick={() => setColorScheme(key)}>
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-xs">
-                                                    <FormattedMessage id={theme.label} />
-                                                </span>
-                                                {active &&
-                                                    <CheckIcon className="size-4" />
-                                                }
-                                            </div>
-                                        </Menu.Item>
-                                    )
-                                })}
+                            <Menu position="right-end" offset={10} width={160}>
+                                <Menu.Target>
+                                    <Menu.Item closeMenuOnClick={false}
+                                        leftSection={<LanguagesIcon className="size-4 stroke-gray-600" />}
+                                        rightSection={<ChevronRightIcon className="size-4 stroke-gray-600" />}>
+                                        <div className="flex items-center justify-between">
+                                            <span><FormattedMessage id="layouts.admin.menu.language" /></span>
+                                            <span className="text-xs text-gray-400">{currentLanguage.name}</span>
+                                        </div>
+                                    </Menu.Item>
+                                </Menu.Target>
+                                <Menu.Dropdown>
+                                    {getAllLocales().map((locale) => {
+                                        const language = Languages[locale]
+                                        if (language === undefined) return null
+                                        const active = locale === currentLocale
+                                        return (
+                                            <Menu.Item onClick={() => changeLang(locale)}
+                                                key={locale}
+                                                leftSection={language.icon}
+                                                className={active ? "text-primary-600" : "text-gray-600"}>
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-xs">{language.name}</span>
+                                                    {active &&
+                                                        <CheckIcon className="size-4" />
+                                                    }
+                                                </div>
+                                            </Menu.Item>
+                                        )
+                                    })}
+                                </Menu.Dropdown>
+                            </Menu>
+                            <Menu position="right-end" offset={10} width={160} withinPortal={false}>
+                                <Menu.Target>
+                                    <Menu.Item closeMenuOnClick={false}
+                                        leftSection={<SunMoonIcon className="size-4 stroke-gray-600" />}
+                                        rightSection={<ChevronRightIcon className="size-4 stroke-gray-600" />}>
+                                        <div className="flex items-center justify-between">
+                                            <span><FormattedMessage id="layouts.admin.menu.theme" /></span>
+                                            <span className="text-xs text-gray-400">
+                                                <FormattedMessage id={Themes[colorScheme].label} />
+                                            </span>
+                                        </div>
+                                    </Menu.Item>
+                                </Menu.Target>
+                                <Menu.Dropdown>
+                                    {keys(Themes).map((key) => {
+                                        const theme = Themes[key]
+                                        const active = key === colorScheme
+                                        return (
+                                            <Menu.Item key={key}
+                                                leftSection={theme.icon}
+                                                className={active ? "text-primary-600" : "text-gray-600"}
+                                                onClick={() => setColorScheme(key)}>
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-xs">
+                                                        <FormattedMessage id={theme.label} />
+                                                    </span>
+                                                    {active &&
+                                                        <CheckIcon className="size-4" />
+                                                    }
+                                                </div>
+                                            </Menu.Item>
+                                        )
+                                    })}
 
-                            </Menu.Dropdown>
-                        </Menu>
+                                </Menu.Dropdown>
+                            </Menu>
 
-                        <Menu.Divider />
-                        <Menu.Label>
-                            <FormattedMessage id="layouts.admin.menu.others" />
-                        </Menu.Label>
+                            <Menu.Divider />
+                            <Menu.Label>
+                                <FormattedMessage id="layouts.admin.menu.others" />
+                            </Menu.Label>
 
-                        <Menu.Item component="a" href="/"
-                            leftSection={<UserIcon className="size-4 stroke-gray-600" />}>
-                            <FormattedMessage id="layouts.admin.menu.yourprofile" />
-                        </Menu.Item>
-                        <Menu.Item component="a" href="/admin"
-                            leftSection={<SparklesIcon className="size-4 stroke-gray-600" />}>
-                            <FormattedMessage id="layouts.admin.menu.gettingstarted" />
-                        </Menu.Item>
+                            <Menu.Item component="a" href="/"
+                                leftSection={<UserIcon className="size-4 stroke-gray-600" />}>
+                                <FormattedMessage id="layouts.admin.menu.yourprofile" />
+                            </Menu.Item>
+                            <Menu.Item component="a" href="/admin"
+                                leftSection={<SparklesIcon className="size-4 stroke-gray-600" />}>
+                                <FormattedMessage id="layouts.admin.menu.gettingstarted" />
+                            </Menu.Item>
 
-                        <Menu.Divider />
+                            <Menu.Divider />
 
-                        <Menu.Item color="red"
-                            leftSection={<LogOutIcon className="size-4 stroke-gray-600" />}
-                            component="a" href="/signout">
-                            <FormattedMessage id="layouts.admin.menu.signout" />
-                        </Menu.Item>
-                    </Menu.Dropdown>
-                </Menu>
-            </aside>
-            <div className="flex-auto flex flex-col relative bg-gray-100/50">
-                <ScrollArea className="flex-1">
-                    <Outlet />
-                </ScrollArea>
-            </div>
-        </div>
+                            <Menu.Item color="red"
+                                leftSection={<LogOutIcon className="size-4 stroke-gray-600" />}
+                                component="a" href="/signout">
+                                <FormattedMessage id="layouts.admin.menu.signout" />
+                            </Menu.Item>
+                        </Menu.Dropdown>
+                    </Menu>
+                </AppShell.Section>
+            </AppShell.Navbar>
+            <AppShell.Main>
+                <Outlet />
+            </AppShell.Main>
+        </AppShell>
     )
 }
 

@@ -22,7 +22,7 @@ const ApplicationList = ({
     const intl = useIntl()
 
     return (
-        <div className="bg-white rounded-lg border">
+        <div className="">
             <Table withRowBorders={false}>
                 <Table.Tbody>
                     {list?.map((item) => (

@@ -175,7 +175,7 @@ const Navbar = () => {
     const selectedRouteKeys = useMemo(() => selectedRoutes.filter((x: any) => x.route.showInMenu).map(x => x.route.id), [selectedRoutes])
 
     return (
-        <ul className="space-y-2 pt-6 text-sm text-gray-900 dark:text-white select-none">
+        <ul className="space-y-2 text-sm text-gray-900 dark:text-white select-none">
             {menuTree.map(menu => (
                 <li key={menu.id}>
                     {(menu.items?.length ?? false) ? (

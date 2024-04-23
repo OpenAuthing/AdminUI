@@ -18,7 +18,7 @@ export default () => {
                         <Button>Button</Button>
                     </PageHeader.Actions>
                 </PageHeader>
-                <div className="flex gap-8 w-full flex-1 overflow-y-hidden border rounded-lg bg-white">
+                <div className="flex gap-8 w-full flex-1 overflow-y-hidden">
                     <div className="flex flex-col gap-y-4 border-r overflow-y-hidden p-4">
                         <div className="flex gap-x-0.5 h-8 w-full items-center justify-start">
                             <Input className="flex-1"
