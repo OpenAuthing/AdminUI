@@ -6,6 +6,11 @@ export default defineConfig({
     routes,
     esbuildMinifyIIFE: true,
     npmClient: 'yarn',
+    helmet: false,
+    history: {
+        type: 'browser',
+    },
+    historyWithQuery: {},
     headScripts: [
         // "css-prefers-color-scheme/dist/browser-global.js"
     ],

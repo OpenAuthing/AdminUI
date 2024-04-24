@@ -2,7 +2,7 @@ import mockjs from 'mockjs';
 import { defineMock } from 'umi';
 
 export default defineMock({
-    'GET /api/departments': (req, res) => {
+    'GET /api/admin/departments': (req, res) => {
         const { parentId } = req.query;
         console.log('parentId', parentId);
         setTimeout(() => {
@@ -18,10 +18,10 @@ export default defineMock({
                     ],
                 }),
             );
-        }, mockjs.Random.integer(300, 3000));
+        }, mockjs.Random.integer(100, 500));
     },
 
-    'POST /api/departments': (req, res) => {
+    'POST /api/admin/departments': (req, res) => {
         setTimeout(() => {
             res.status(200).json(
                 mockjs.mock({
@@ -32,7 +32,7 @@ export default defineMock({
         }, mockjs.Random.integer(300, 3000));
     },
 
-    'PUT /api/departments/:id': (req, res) => {
+    'PUT /api/admin/departments/:id': (req, res) => {
         setTimeout(() => {
             res.status(200).json({
                 code: 200,
@@ -41,7 +41,7 @@ export default defineMock({
         }, mockjs.Random.integer(300, 3000));
     },
 
-    'DELETE /api/departments/:id': (req, res) => {
+    'DELETE /api/admin/departments/:id': (req, res) => {
         setTimeout(() => {
             res.status(200).json({
                 code: 200,
@@ -50,7 +50,7 @@ export default defineMock({
         }, mockjs.Random.integer(300, 3000));
     },
 
-    'GET /api/departments/:departmentId/members': (req, res) => {
+    'GET /api/admin/departments/:departmentId/members': (req, res) => {
         const { pageSize = 20 } = req.params;
         setTimeout(() => {
             res.status(200).json(
@@ -81,7 +81,7 @@ export default defineMock({
         }, mockjs.Random.integer(300, 3000));
     },
 
-    'POST /api/departments/:departmentId/members': (req, res) => {
+    'POST /api/admin/departments/:departmentId/members': (req, res) => {
         setTimeout(() => {
             res.status(200).json(
                 mockjs.mock({
@@ -92,7 +92,10 @@ export default defineMock({
         }, mockjs.Random.integer(300, 3000));
     },
 
-    'PUT /api/departments/:departmentId/members/:userId/leader': (req, res) => {
+    'PUT /api/admin/departments/:departmentId/members/:userId/leader': (
+        req,
+        res,
+    ) => {
         setTimeout(() => {
             res.status(200).json({
                 code: 200,

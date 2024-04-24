@@ -30,13 +30,14 @@ export default function Page() {
     return (
         <Content>
             <div className="grid grid-cols-1 gap-y-10">
-                <PageHeader
-                    title={
-                        <FormattedMessage id="pages.applications.header.title" />
-                    }
-                >
+                <PageHeader>
                     <PageHeader.Content>
-                        <FormattedMessage id="pages.applications.header.content" />
+                        <PageHeader.Title>
+                            <FormattedMessage id="pages.applications.header.title" />
+                        </PageHeader.Title>
+                        <PageHeader.Description>
+                            <FormattedMessage id="pages.applications.header.content" />
+                        </PageHeader.Description>
                     </PageHeader.Content>
                     <PageHeader.Actions>
                         <Button onClick={open}>

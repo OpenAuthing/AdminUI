@@ -27,7 +27,7 @@ const menuTransition = {
     common: {},
     in: { gridTemplateRows: '1fr', opacity: 1 },
     out: { gridTemplateRows: '0fr', opacity: 0 },
-    transitionProperty: 'grid-template-rows',
+    transitionProperty: 'grid-template-rows, opacity',
 } as MantineTransition;
 
 const NestedNavMenu = ({
@@ -73,7 +73,10 @@ const NestedNavMenu = ({
                 keepMounted
             >
                 {(style) => (
-                    <div style={{ ...style }} className="grid grid-rows-[0fr]">
+                    <div
+                        style={{ ...style }}
+                        className="grid grid-rows-[0fr] opacity-0"
+                    >
                         <div className="w-full overflow-hidden">
                             {items.map((item) => (
                                 <Link

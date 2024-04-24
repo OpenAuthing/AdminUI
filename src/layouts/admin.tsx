@@ -350,7 +350,12 @@ const AdminLayout = () => {
                 </AppShell.Section>
             </AppShell.Navbar>
             <AppShell.Main>
-                <Outlet />
+                <ScrollArea
+                    px="var(--mantine-spacing-md)"
+                    h="calc(100vh - var(--app-shell-header-height, 0rem))"
+                >
+                    <Outlet />
+                </ScrollArea>
             </AppShell.Main>
         </AppShell>
     );

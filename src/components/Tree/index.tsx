@@ -10,9 +10,7 @@ export interface TreeNode {
     children?: Array<TreeNode>;
 }
 
-export interface OrgTreeProps {
-    isLoading?: boolean;
-
+export interface TreeProps {
     treeData?: Array<TreeNode>;
 
     className?: string;
@@ -49,7 +47,7 @@ export interface OrgTreeProps {
     renderMoreMenu?: (node: TreeNode, selected: boolean) => React.ReactNode;
 }
 
-export interface OrgTreeNodeProps {
+export interface TreeNodeProps {
     current: TreeNode;
 
     level: number;
@@ -96,7 +94,7 @@ const TreeNodeItem = ({
     onExpand,
     onLoadData,
     onSelect,
-}: OrgTreeNodeProps) => {
+}: TreeNodeProps) => {
     const [isLoading, setLoading] = useState(false);
 
     const onItemClick = (node: TreeNode) => {
@@ -131,7 +129,7 @@ const TreeNodeItem = ({
             <div
                 aria-selected={currentSeleted}
                 className={classNames(
-                    'w-full h-10 flex items-center hover:bg-gray-100 px-2 rounded cursor-pointer mb-1 transition-colors group',
+                    'h-[38px] flex items-center hover:bg-gray-100 px-2 rounded cursor-pointer mb-1 transition-colors group',
                     'aria-selected:bg-blue-600 aria-selected:text-white',
                 )}
                 title={current.title}
@@ -172,26 +170,30 @@ const TreeNodeItem = ({
                         mounted={currentExpanded}
                         keepMounted={true}
                         transition={{
-                            in: { opacity: 1 },
-                            out: { opacity: 0 },
-                            transitionProperty: 'opacity',
+                            in: { gridTemplateRows: '1fr', opacity: 1 },
+                            out: { gridTemplateRows: '0fr', opacity: 0 },
+                            transitionProperty: 'grid-template-rows',
                         }}
                         duration={200}
-                        timingFunction="ease-in-out"
                     >
                         {(style) => (
-                            <div style={{ ...style }} className="opacity-0">
-                                <TreeNodeItem
-                                    key={node.key}
-                                    current={node}
-                                    level={level + 1}
-                                    expandedKeys={expandedKeys}
-                                    selectedKey={selectedKey}
-                                    onExpand={onExpand}
-                                    onLoadData={onLoadData}
-                                    onSelect={onSelect}
-                                    renderMoreMenu={renderMoreMenu}
-                                />
+                            <div
+                                style={{ ...style }}
+                                className="grid grid-rows-[0fr] opacity-0"
+                            >
+                                <div className="">
+                                    <TreeNodeItem
+                                        key={node.key}
+                                        current={node}
+                                        level={level + 1}
+                                        expandedKeys={expandedKeys}
+                                        selectedKey={selectedKey}
+                                        onExpand={onExpand}
+                                        onLoadData={onLoadData}
+                                        onSelect={onSelect}
+                                        renderMoreMenu={renderMoreMenu}
+                                    />
+                                </div>
                             </div>
                         )}
                     </Transition>
@@ -200,14 +202,14 @@ const TreeNodeItem = ({
     );
 };
 
-const Tree: React.FC<OrgTreeProps> = (props: OrgTreeProps) => {
-    const { isLoading = false, treeData, className } = props;
+const Tree: React.FC<TreeProps> = (props) => {
+    const { treeData, className } = props;
 
     const isEmpty = (treeData?.length ?? 0) <= 0;
 
     return (
-        <div className={classNames(className)}>
-            <div className="w-full">
+        <div className={classNames('relative', className)}>
+            <div>
                 {treeData &&
                     treeData.map((node) => (
                         <TreeNodeItem

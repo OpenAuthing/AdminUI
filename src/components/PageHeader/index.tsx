@@ -1,42 +1,50 @@
-import { Space } from '@mantine/core';
+import { Factory, factory, useProps } from '@mantine/core';
+import { useId } from '@mantine/hooks';
 import React from 'react';
+import PageHeaderActions from './PageHeaderActions';
+import PageHeaderContent from './PageHeaderContent';
+import PageHeaderDescription from './PageHeaderDescription';
+import PageHeaderTitle from './PageHeaderTitle';
 
-type PageHeaderProps = {
-    title: React.ReactNode;
-} & React.PropsWithChildren;
+export interface PageHeaderProps {
+    children?: React.ReactNode;
+    id?: string;
+}
 
-const PageHeader = ({ title, children }: PageHeaderProps) => {
-    let actions = null;
-    let content = null;
+export type PageHeaderFactory = Factory<{
+    props: PageHeaderProps;
+    ref: HTMLDivElement | null;
+    staticComponents: {
+        Title: typeof PageHeaderTitle;
+        Description: typeof PageHeaderDescription;
+        Content: typeof PageHeaderContent;
+        Actions: typeof PageHeaderActions;
+    };
+}>;
 
-    React.Children.toArray(children).forEach((child) => {
-        if (!React.isValidElement(child)) return;
+const defaultProps: Partial<PageHeaderProps> = {};
 
-        if (child.type === PageHeaderActions) {
-            actions = child;
-        } else if (child.type === PageHeaderContent) {
-            content = child;
-        }
-    });
+const PageHeader = factory<PageHeaderFactory>((_props, ref) => {
+    const props = useProps('PageHeader', defaultProps, _props);
+    const { children, id, ...others } = props;
+
+    const uid = useId(id);
 
     return (
-        <div className="flex justify-between items-center gap-x-4">
-            <div className="flex-1 p-2">
-                <h1 className="text-2xl font-semibold">{title}</h1>
-                <Space h="md" />
-                <div className="text-sm text-gray-500">{content}</div>
-            </div>
-            <div>{actions}</div>
+        <div
+            ref={ref}
+            id={uid}
+            className="flex justify-between items-center gap-x-4"
+            {...others}
+        >
+            {children}
         </div>
     );
-};
+});
 
-const PageHeaderActions: React.FC<React.PropsWithChildren> = ({ children }) =>
-    children;
-const PageHeaderContent: React.FC<React.PropsWithChildren> = ({ children }) =>
-    children;
-
-PageHeader.Actions = PageHeaderActions;
+PageHeader.Title = PageHeaderTitle;
+PageHeader.Description = PageHeaderDescription;
 PageHeader.Content = PageHeaderContent;
+PageHeader.Actions = PageHeaderActions;
 
 export default PageHeader;

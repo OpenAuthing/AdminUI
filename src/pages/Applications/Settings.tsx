@@ -304,7 +304,7 @@ export default () => {
                         </fieldset>
                     </div>
                     <div className="fixed left-0 right-0 bottom-0 bg-white h-16 flex justify-end z-10">
-                        <div className="border-t w-[calc(100%-264px)] flex items-center justify-center">
+                        <div className="border-t w-[calc(100%-var(--app-shell-navbar-width))] flex items-center justify-center">
                             <div className="flex justify-between px-10 items-center 2xl:px-0 2xl:w-5/6 w-full h-full">
                                 <div className="flex items-center gap-x-3">
                                     <Text size="sm" c="gray.6" fw={500}>
