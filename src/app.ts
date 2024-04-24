@@ -57,7 +57,9 @@ export const request: RuntimeConfig['request'] = {
 
                     history.push({
                         pathname: '/logout',
-                        search: `?returnUrl=${encodeURIComponent('/account/login')}`,
+                        search: `?returnUrl=${encodeURIComponent(
+                            '/account/login',
+                        )}`,
                     });
 
                     return;

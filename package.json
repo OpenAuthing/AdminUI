@@ -7,7 +7,9 @@
     "postinstall": "umi setup",
     "setup": "umi setup",
     "start": "npm run dev",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prettier:test": "prettier --check \"**/*.{ts,tsx,css}\"",
+    "prettier:write": "prettier --write \"**/*.{ts,tsx,css}\""
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
