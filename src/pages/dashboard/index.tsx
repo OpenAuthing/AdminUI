@@ -1,11 +1,11 @@
-import PageHeader from "@/components/PageHeader"
-import { Paper, Tooltip } from "@mantine/core"
-import { FormattedMessage } from "umi"
-import StatsGrid from "./components/StatsGrid"
-import DateRangePicker from "./components/DateRangePicker"
+import Content from '@/components/Content';
+import PageHeader from '@/components/PageHeader';
 import { LineChart } from '@mantine/charts';
-import { CircleHelpIcon } from "lucide-react"
-import Content from "@/components/Content"
+import { Paper, Tooltip } from '@mantine/core';
+import { CircleHelpIcon } from 'lucide-react';
+import { FormattedMessage } from 'umi';
+import DateRangePicker from './components/DateRangePicker';
+import StatsGrid from './components/StatsGrid';
 
 const data = [
     {
@@ -45,7 +45,9 @@ export default () => {
         <Content>
             <div className="h-[8000px]">
                 <div className="grid grid-cols-1 gap-y-6">
-                    <PageHeader title={<FormattedMessage id="pages.dashboard.header" />} />
+                    <PageHeader
+                        title={<FormattedMessage id="pages.dashboard.header" />}
+                    />
                     <StatsGrid />
 
                     <div className="flex items-center justify-end">
@@ -54,7 +56,9 @@ export default () => {
                     <Paper withBorder p="md" radius="md">
                         <div className="grid grid-cols-1 gap-y-6">
                             <div className="flex gap-x-2 items-center">
-                                <h2 className="text-lg text-gray-500 font-medium">Daily Active Users</h2>
+                                <h2 className="text-lg text-gray-500 font-medium">
+                                    Daily Active Users
+                                </h2>
                                 <Tooltip label="Unique users with a successful authentication or authorization activity.">
                                     <CircleHelpIcon className="size-4 stroke-gray-400" />
                                 </Tooltip>
@@ -78,5 +82,5 @@ export default () => {
                 </div>
             </div>
         </Content>
-    )
-}
+    );
+};

@@ -1,13 +1,14 @@
-import { ColorSchemeScript, MantineProvider, createTheme } from '@mantine/core'
-import theme from '@/theme'
-import { UseRequestProvider, getLocale } from 'umi';
-import React from 'react';
+import theme from '@/theme';
+import { ColorSchemeScript, MantineProvider, createTheme } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
+import React from 'react';
+import { UseRequestProvider, getLocale } from 'umi';
 
-import 'dayjs/locale/zh-cn'
-import 'dayjs/locale/en'
+import 'dayjs/locale/en';
+import 'dayjs/locale/zh-cn';
 
-const InputClassnames = "ring-1 ring-transparent focus:ring-primary-500 transition-[shadow] disabled:opacity-100"
+const InputClassnames =
+    'ring-1 ring-transparent focus:ring-primary-500 transition-[shadow] disabled:opacity-100';
 
 const mantineTheme = createTheme({
     colors: {
@@ -26,22 +27,23 @@ const mantineTheme = createTheme({
     },
     primaryColor: 'primary',
     primaryShade: 4,
-    fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji",
+    fontFamily:
+        'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
     components: {
         TextInput: {
             classNames: {
-                input: InputClassnames
+                input: InputClassnames,
             },
         },
         Textarea: {
             classNames: {
-                input: InputClassnames
-            }
+                input: InputClassnames,
+            },
         },
         Select: {
             classNames: {
-                input: InputClassnames
-            }
+                input: InputClassnames,
+            },
         },
         InputWrapper: {
             defaultProps: {
@@ -49,14 +51,13 @@ const mantineTheme = createTheme({
             },
         },
         Container: {
-            classNames: "px-6"
-        }
-    }
+            classNames: 'px-6',
+        },
+    },
 });
 
 const RootContainer = ({ children }: { children: React.ReactNode }) => {
-
-    const locale = getLocale()
+    const locale = getLocale();
 
     return (
         <>
@@ -69,7 +70,7 @@ const RootContainer = ({ children }: { children: React.ReactNode }) => {
                 </MantineProvider>
             </UseRequestProvider>
         </>
-    )
-}
+    );
+};
 
-export default RootContainer
+export default RootContainer;

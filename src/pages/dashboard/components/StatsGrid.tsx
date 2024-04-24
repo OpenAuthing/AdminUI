@@ -1,10 +1,16 @@
-import { Group, Paper, SimpleGrid, ThemeIcon, Text } from "@mantine/core";
-import { ArrowDownRightIcon, ArrowUpRightIcon, BoxesIcon, UserPlusIcon, UsersIcon } from "lucide-react";
+import { Group, Paper, SimpleGrid, Text } from '@mantine/core';
+import {
+    ArrowDownRightIcon,
+    ArrowUpRightIcon,
+    BoxesIcon,
+    UserPlusIcon,
+    UsersIcon,
+} from 'lucide-react';
 
 const icons = {
     user: UserPlusIcon,
     users: UsersIcon,
-    boxs: BoxesIcon
+    boxs: BoxesIcon,
 };
 
 const data = [
@@ -28,7 +34,9 @@ function StatsGrid() {
                 </Group>
 
                 <Group align="flex-end" gap="xs" mt={25}>
-                    <Text className="text-2xl font-bold leading-none">{stat.value}</Text>
+                    <Text className="text-2xl font-bold leading-none">
+                        {stat.value}
+                    </Text>
                 </Group>
 
                 <Text fz="xs" c="dimmed" mt={7}>
@@ -38,9 +46,7 @@ function StatsGrid() {
         );
     });
 
-    return (
-        <SimpleGrid cols={{ base: 1, sm: 3 }}>{stats}</SimpleGrid>
-    );
+    return <SimpleGrid cols={{ base: 1, sm: 3 }}>{stats}</SimpleGrid>;
 }
 
-export default StatsGrid
+export default StatsGrid;

@@ -3,7 +3,7 @@
 @import '@mantine/charts/styles.css';
 
 @layer tailwind {
-  @tailwind base;
+    @tailwind base;
 }
 @tailwind components;
 @tailwind utilities;

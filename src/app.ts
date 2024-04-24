@@ -1,23 +1,30 @@
-import React from 'react';
-import { RuntimeConfig, AxiosResponse, getIntl, AxiosRequestConfig, getLocale, history, UseRequestProvider } from 'umi';
+import RootContainer from '@/components/RootContainer';
 import { ResponseResult } from '@/types';
-import RootContainer from '@/components/RootContainer'
+import React from 'react';
+import {
+    AxiosRequestConfig,
+    AxiosResponse,
+    RuntimeConfig,
+    getIntl,
+    getLocale,
+    history,
+} from 'umi';
 
 const toast = {
-    error: (msg: string) => console.error(msg)
-}
+    error: (msg: string) => console.error(msg),
+};
 
 export const request: RuntimeConfig['request'] = {
     timeout: 10000,
     beforeRedirect(options, responseDetails) {
-        console.log('redirect', responseDetails)
+        console.log('redirect', responseDetails);
     },
     headers: { 'X-Requested-With': 'XMLHttpRequest' },
     // other axios options you want
     errorConfig: {
         // 错误抛出
         errorThrower: (res: any) => {
-            console.error('errorThrower', res)
+            console.error('errorThrower', res);
             const { success, data, errorCode, errorMessage } = res;
             if (!success) {
                 const error: any = new Error(errorMessage);
@@ -28,10 +35,10 @@ export const request: RuntimeConfig['request'] = {
         },
         // 错误接收及处理
         errorHandler: async (error: any, opts) => {
-            console.error('errorHandler', error)
-            const intl = getIntl()
+            console.error('errorHandler', error);
+            const intl = getIntl();
             // 取消请求时跳过全局错误处理
-            if (error.name === 'CanceledError') return
+            if (error.name === 'CanceledError') return;
             if (opts?.skipErrorHandler) throw error;
             // 我们的 errorThrower 抛出的错误。
             if (error.name === 'BizError') {
@@ -46,14 +53,14 @@ export const request: RuntimeConfig['request'] = {
                 // Axios 的错误
                 // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
                 if (error.response.status === 401) {
-                    toast.error(intl.formatMessage({ id: 'common.error.401' }))
+                    toast.error(intl.formatMessage({ id: 'common.error.401' }));
 
                     history.push({
                         pathname: '/logout',
-                        search: `?returnUrl=${encodeURIComponent("/account/login")}`
-                    })
+                        search: `?returnUrl=${encodeURIComponent('/account/login')}`,
+                    });
 
-                    return
+                    return;
                 }
                 toast.error(`Response status:${error.response.status}`);
             } else if (error.request) {
@@ -70,16 +77,16 @@ export const request: RuntimeConfig['request'] = {
     requestInterceptors: [
         (config: AxiosRequestConfig) => {
             // Accept-Language
-            const locale = getLocale()
+            const locale = getLocale();
             if (locale) {
                 config.headers = {
                     ...config.headers,
-                    'Accept-Language': locale
+                    'Accept-Language': locale,
                 };
             }
 
-            return config
-        }
+            return config;
+        },
     ],
     responseInterceptors: [
         (response: AxiosResponse) => {
@@ -89,7 +96,11 @@ export const request: RuntimeConfig['request'] = {
                 throw unauthorizedError;
             }
 
-            const { code: errorCode, message: errorMessage, data } = response.data;
+            const {
+                code: errorCode,
+                message: errorMessage,
+                data,
+            } = response.data;
             response.data = {
                 errorCode,
                 errorMessage,
@@ -99,9 +110,12 @@ export const request: RuntimeConfig['request'] = {
 
             return response;
         },
-    ]
+    ],
 };
 
-export const rootContainer: RuntimeConfig['rootContainer'] = (container: JSX.Element, args?: any) => {
+export const rootContainer: RuntimeConfig['rootContainer'] = (
+    container: JSX.Element,
+    args?: any,
+) => {
     return React.createElement(RootContainer, null, container);
-}
+};

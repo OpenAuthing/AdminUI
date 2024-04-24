@@ -1,9 +1,8 @@
-import React from 'react'
-import LoadingBar from 'react-top-loading-bar'
+import React from 'react';
+import LoadingBar from 'react-top-loading-bar';
 
 class Loading extends React.PureComponent {
-
-    private bar: any
+    private bar: any;
 
     constructor(props: any) {
         super(props);
@@ -11,19 +10,16 @@ class Loading extends React.PureComponent {
     }
 
     override componentDidMount(): void {
-        this.bar.current.continuousStart()
+        this.bar.current.continuousStart();
     }
 
     override componentWillUnmount(): void {
-        this.bar.current.complete()
+        this.bar.current.complete();
     }
 
     render() {
-
-        return (
-            <LoadingBar color="#2998ff" ref={this.bar} />
-        )
+        return <LoadingBar color="#2998ff" ref={this.bar} />;
     }
 }
 
-export default Loading
+export default Loading;

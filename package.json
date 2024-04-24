@@ -6,7 +6,11 @@
     "dev": "cross-env UMI_ENV=dev umi dev",
     "postinstall": "umi setup",
     "setup": "umi setup",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "@axa-fr/react-oidc": "^7.22.3",
@@ -31,6 +35,8 @@
     "@umijs/plugins": "^4.1.9",
     "classnames": "^2.5.1",
     "cross-env": "^7.0.3",
+    "husky": "^9",
+    "lint-staged": "^13",
     "mockjs": "^1.1.0",
     "prettier": "^2",
     "prettier-plugin-organize-imports": "^3.2.2",

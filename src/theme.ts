@@ -6,7 +6,7 @@ const theme = {
             200: '#a3bef8',
             300: '#719af2',
             400: '#487ced',
-            500: '#2e68eb', 
+            500: '#2e68eb',
             600: '#1e5fea', // Base
             700: '#0e4fd1',
             800: '#0146bc',
@@ -16,5 +16,4 @@ const theme = {
     },
 };
 
-
-export default theme
+export default theme;

@@ -1,5 +1,3 @@
 export default () => {
-    return (
-        <div>QuickStart</div>
-    )
-}
+    return <div>QuickStart</div>;
+};
