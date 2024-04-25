@@ -16,7 +16,7 @@ const toast = {
 
 export const request: RuntimeConfig['request'] = {
     timeout: 10000,
-    beforeRedirect(options, responseDetails) {
+    beforeRedirect(options: any, responseDetails: any) {
         console.log('redirect', responseDetails);
     },
     headers: { 'X-Requested-With': 'XMLHttpRequest' },
@@ -34,7 +34,7 @@ export const request: RuntimeConfig['request'] = {
             }
         },
         // 错误接收及处理
-        errorHandler: async (error: any, opts) => {
+        errorHandler: async (error: any, opts: any) => {
             console.error('errorHandler', error);
             const intl = getIntl();
             // 取消请求时跳过全局错误处理
@@ -78,6 +78,12 @@ export const request: RuntimeConfig['request'] = {
     },
     requestInterceptors: [
         (config: AxiosRequestConfig) => {
+            // const oidc = getOidc()
+            // let headers = config.headers || {}
+            // if (oidc && oidc?.tokens) {
+            //     headers['Authorization'] = `Bearer ${oidc.tokens.accessToken}`
+            // }
+
             // Accept-Language
             const locale = getLocale();
             if (locale) {
@@ -86,8 +92,12 @@ export const request: RuntimeConfig['request'] = {
                     'Accept-Language': locale,
                 };
             }
+            const baseURL = ADMIN_API_BASE_URL;
 
-            return config;
+            return {
+                ...config,
+                baseURL,
+            };
         },
     ],
     responseInterceptors: [

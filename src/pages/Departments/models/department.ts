@@ -1,6 +1,6 @@
 import { TreeNode } from '@/components/Tree';
 import DepartmentService from '@/services/department.service';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const addChildrenToTree = (
     tree: TreeNode[],
@@ -60,12 +60,6 @@ export default () => {
         }
         setDepartmentTree(tree);
     };
-
-    useEffect(() => {
-        getDepartments();
-
-        return () => setDepartmentTree([]);
-    }, []);
 
     return {
         loading,

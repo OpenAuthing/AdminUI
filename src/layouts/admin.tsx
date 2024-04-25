@@ -139,7 +139,7 @@ const AdminLayout = () => {
         setLocale(lang, true);
     };
     const currentLocale = getLocale();
-    const currentLanguage = Languages[currentLocale];
+    const currentLanguage = Languages[currentLocale]!;
 
     return (
         <AppShell
@@ -215,7 +215,7 @@ const AdminLayout = () => {
                                     </Menu.Item>
                                 </Menu.Target>
                                 <Menu.Dropdown>
-                                    {getAllLocales().map((locale) => {
+                                    {getAllLocales().map((locale: string) => {
                                         const language = Languages[locale];
                                         if (language === undefined) return null;
                                         const active = locale === currentLocale;

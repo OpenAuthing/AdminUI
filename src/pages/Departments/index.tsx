@@ -2,7 +2,6 @@ import PageHeader from '@/components/PageHeader';
 import Tree, { TreeNode } from '@/components/Tree';
 import {
     ActionIcon,
-    Button,
     Container,
     Input,
     LoadingOverlay,
@@ -12,10 +11,11 @@ import {
     rem,
 } from '@mantine/core';
 import { useDisclosure, useSet } from '@mantine/hooks';
-import classNames from 'classnames';
-import { MoreHorizontalIcon, Plus, SearchIcon } from 'lucide-react';
-import { useState } from 'react';
+import cx from 'clsx';
+import { MoreHorizontalIcon, PlusIcon, SearchIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { FormattedMessage, useModel } from 'umi';
+import DepartmentMembersTable from './components/DepartmentMembersTable';
 
 const DepartmentMenu = ({
     node,
@@ -37,7 +37,7 @@ const DepartmentMenu = ({
             <Menu.Target>
                 <ActionIcon unstyled>
                     <MoreHorizontalIcon
-                        className={classNames(
+                        className={cx(
                             'size-5 stroke-gray-400',
                             opened ? 'block' : 'hidden group-hover:block',
                         )}
@@ -62,6 +62,10 @@ export default () => {
         departmentTree,
         getDepartments,
     } = useModel('Departments.department');
+
+    useEffect(() => {
+        getDepartments();
+    }, []);
 
     // 部门切换时
     const onSelect = (node: TreeNode) => {
@@ -101,13 +105,13 @@ export default () => {
                             <FormattedMessage id="pages.departments.header.content" />
                         </PageHeader.Description>
                     </PageHeader.Content>
-                    <PageHeader.Actions>
+                    {/* <PageHeader.Actions>
                         <Button>Button</Button>
-                    </PageHeader.Actions>
+                    </PageHeader.Actions> */}
                 </PageHeader>
 
-                <div className="flex gap-8 w-full flex-1 overflow-y-hidden">
-                    <div className="flex flex-col gap-y-4 border-r overflow-hidden w-80">
+                <div className="flex gap-8 w-full flex-1 overflow-hidden">
+                    <div className="flex flex-col gap-y-4 border-r overflow-hidden w-80 min-w-80">
                         <div className="flex gap-x-0.5 w-full items-center justify-start px-4">
                             <Input
                                 className="flex-1"
@@ -117,7 +121,7 @@ export default () => {
                             />
                             <Tooltip label="Create department">
                                 <ActionIcon size="lg" variant="white">
-                                    <Plus className="size-5" />
+                                    <PlusIcon className="size-5" />
                                 </ActionIcon>
                             </Tooltip>
                         </div>
@@ -125,7 +129,7 @@ export default () => {
                             className="flex-1 w-full"
                             pos="relative"
                             px={rem(16)}
-                            maw={rem(320)}
+                            maw="100%"
                             scrollbars="xy"
                         >
                             <LoadingOverlay
@@ -149,8 +153,17 @@ export default () => {
                             />
                         </ScrollArea>
                     </div>
-                    <div className="flex-1 px-6 py-4">
-                        <div>asfsdfdsf</div>
+                    <div className="flex-1 w-full h-full max-w-full max-h-full overflow-hidden">
+                        <div className="flex gap-y-2 w-full h-full flex-col overflow-hidden">
+                            {selectedNode ? (
+                                <DepartmentMembersTable
+                                    departmentId={selectedNode?.key}
+                                    departmentName={selectedNode?.title}
+                                />
+                            ) : (
+                                <div></div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

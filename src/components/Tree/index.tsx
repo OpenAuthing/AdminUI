@@ -1,5 +1,5 @@
 import { Transition } from '@mantine/core';
-import classNames from 'classnames';
+import cx from 'clsx';
 import { ChevronDown, ChevronRight, LoaderIcon } from 'lucide-react';
 import React, { useState } from 'react';
 
@@ -128,7 +128,7 @@ const TreeNodeItem = ({
         <>
             <div
                 aria-selected={currentSeleted}
-                className={classNames(
+                className={cx(
                     'h-[38px] flex items-center hover:bg-gray-100 px-2 rounded cursor-pointer mb-1 transition-colors group',
                     'aria-selected:bg-blue-600 aria-selected:text-white',
                 )}
@@ -208,7 +208,7 @@ const Tree: React.FC<TreeProps> = (props) => {
     const isEmpty = (treeData?.length ?? 0) <= 0;
 
     return (
-        <div className={classNames('relative', className)}>
+        <div className={cx('relative', className)}>
             <div>
                 {treeData &&
                     treeData.map((node) => (

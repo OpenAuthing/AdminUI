@@ -7,7 +7,7 @@ import {
     TextInput,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import classNames from 'classnames';
+import cx from 'clsx';
 import { useState } from 'react';
 
 const ApplicationTypes: Record<string, {}> = {};
@@ -69,7 +69,7 @@ export default ({ opened, onClose, onCreate }: Props) => {
                                         key={index}
                                         onClick={() => setCurrent(index)}
                                         aria-checked={index === current}
-                                        className={classNames(
+                                        className={cx(
                                             'border rounded p-6 cursor-pointer transition-[border-color,box-shadow] overflow-hidden ring-1 ring-transparent aria-checked:ring-primary-600 aria-checked:border-primary-500',
                                         )}
                                     >

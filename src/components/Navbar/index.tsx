@@ -192,7 +192,7 @@ const getIcon = (icon?: MenuIconType) => {
 const Navbar = () => {
     const intl = useIntl();
     const { routes } = useAppData();
-    const selectedRoutes = useSelectedRoutes();
+    const selectedRoutes: any = useSelectedRoutes();
     const [menuTree, setMenuTree] = useState<NavMenuItemType[]>([]);
     useEffect(() => {
         const menuRoutes = [];
@@ -231,7 +231,7 @@ const Navbar = () => {
         () =>
             selectedRoutes
                 .filter((x: any) => x.route.showInMenu)
-                .map((x) => x.route.id),
+                .map((x: any) => x.route.id),
         [selectedRoutes],
     );
 

@@ -62,7 +62,11 @@ const RootContainer = ({ children }: { children: React.ReactNode }) => {
     return (
         <>
             <ColorSchemeScript />
-            <UseRequestProvider value={{ throwOnError: true }}>
+            <UseRequestProvider
+                value={{
+                    throwOnError: true,
+                }}
+            >
                 <MantineProvider theme={mantineTheme}>
                     <DatesProvider settings={{ locale: locale }}>
                         {children}
