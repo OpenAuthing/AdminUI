@@ -1,4 +1,4 @@
-import Content from '@/components/Content';
+import Content from '@/components/ContentContainer';
 import PageHeader from '@/components/PageHeader';
 import { Button, Space, UnstyledButton } from '@mantine/core';
 import { ArrowRightIcon } from 'lucide-react';

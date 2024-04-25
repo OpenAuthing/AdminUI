@@ -20,6 +20,9 @@ module.exports = {
             boxShadow: {
                 'black-inset': 'inset 0 0 0 1px #000000',
             },
+            size: {
+                45: '180px',
+            }
         },
     },
 };

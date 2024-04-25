@@ -1,4 +1,4 @@
-import Content from '@/components/Content';
+import Content from '@/components/ContentContainer';
 import PageHeader from '@/components/PageHeader';
 import { LineChart } from '@mantine/charts';
 import { Paper, Tooltip } from '@mantine/core';

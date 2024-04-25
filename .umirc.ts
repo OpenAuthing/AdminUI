@@ -7,6 +7,7 @@ export default defineConfig({
     esbuildMinifyIIFE: true,
     npmClient: 'yarn',
     helmet: false,
+    icons: {},
     history: {
         type: 'browser',
     },

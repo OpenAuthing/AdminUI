@@ -1,4 +1,4 @@
-import Content from '@/components/Content';
+import Content from '@/components/ContentContainer';
 import { Loader, Tabs, Text, keys } from '@mantine/core';
 import { ArrowLeftIcon } from 'lucide-react';
 import {
