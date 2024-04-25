@@ -54,6 +54,8 @@ const DepartmentMenu = ({
 };
 
 export default () => {
+    const [departmentTreeScrolled, setDepartmentTreeScrolled] =
+        useState<boolean>(false);
     const [selectedNode, setSelectedNode] = useState<TreeNode | null>(null);
     const expandedKeys = useSet<string>([]);
 
@@ -111,8 +113,13 @@ export default () => {
                 </PageHeader>
 
                 <div className="flex gap-8 w-full flex-1 overflow-hidden">
-                    <div className="flex flex-col gap-y-4 border-r overflow-hidden w-80 min-w-80">
-                        <div className="flex gap-x-0.5 w-full items-center justify-start px-4">
+                    <div className="flex flex-col border-r overflow-hidden w-80 min-w-80">
+                        <div
+                            className={cx(
+                                'flex gap-x-0.5 w-full items-center justify-start px-4 pb-4',
+                                { 'shadow-md': departmentTreeScrolled },
+                            )}
+                        >
                             <Input
                                 className="flex-1"
                                 type="search"
@@ -131,6 +138,9 @@ export default () => {
                             px={rem(16)}
                             maw="100%"
                             scrollbars="xy"
+                            onScrollPositionChange={({ x, y }) =>
+                                setDepartmentTreeScrolled(y !== 0)
+                            }
                         >
                             <LoadingOverlay
                                 visible={isLoadingRootDepartment}

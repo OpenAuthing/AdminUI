@@ -1,6 +1,6 @@
 // import { Transition } from "@headlessui/react";
 import { MenuIconType } from '@/types';
-import { MantineTransition, Transition } from '@mantine/core';
+import { MantineTransition, Text, Transition } from '@mantine/core';
 import {
     ChevronDown,
     ChevronUp,
@@ -85,9 +85,11 @@ const NestedNavMenu = ({
                                     aria-selected={selectedRouteKeys.includes(
                                         item.id,
                                     )}
-                                    className="mt-2 block py-2.5 pl-10 whitespace-nowrap font-medium text-sm rounded text-gray-500 hover:bg-blue-50 hover:text-primary-600 aria-selected:text-primary-600 aria-selected:bg-blue-100 transition-colors duration-300"
+                                    className="mt-1.5 block py-2.5 pl-10 rounded text-gray-500 hover:bg-blue-50 hover:text-primary-600 aria-selected:text-primary-600 aria-selected:bg-blue-100 transition-colors duration-300"
                                 >
-                                    <FormattedMessage id={item.label} />
+                                    <Text fw={500} size="sm">
+                                        <FormattedMessage id={item.label} />
+                                    </Text>
                                 </Link>
                             ))}
                         </div>
