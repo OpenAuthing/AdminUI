@@ -1,14 +1,18 @@
 import theme from '@/theme';
-import { ColorSchemeScript, MantineProvider, createTheme } from '@mantine/core';
+import {
+    Avatar,
+    ColorSchemeScript,
+    InputWrapper,
+    MantineProvider,
+    createTheme,
+} from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
 import React from 'react';
 import { UseRequestProvider, getLocale } from 'umi';
 
 import 'dayjs/locale/en';
 import 'dayjs/locale/zh-cn';
-
-const InputClassnames =
-    'ring-1 ring-transparent focus:ring-primary-500 transition-[shadow] disabled:opacity-100';
+import { UserIcon } from 'lucide-react';
 
 const mantineTheme = createTheme({
     colors: {
@@ -30,29 +34,19 @@ const mantineTheme = createTheme({
     fontFamily:
         'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
     components: {
-        TextInput: {
-            classNames: {
-                input: InputClassnames,
-            },
-        },
-        Textarea: {
-            classNames: {
-                input: InputClassnames,
-            },
-        },
-        Select: {
-            classNames: {
-                input: InputClassnames,
-            },
-        },
-        InputWrapper: {
+        InputWrapper: InputWrapper.extend({
             defaultProps: {
                 inputWrapperOrder: ['label', 'input', 'description', 'error'],
             },
-        },
+        }),
         Container: {
             classNames: 'px-6',
         },
+        Avatar: Avatar.extend({
+            defaultProps: {
+                children: <UserIcon className="size-5" />,
+            },
+        }),
     },
 });
 

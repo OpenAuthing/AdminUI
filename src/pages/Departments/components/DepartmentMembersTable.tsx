@@ -141,7 +141,9 @@ const DepartmentMembersTable: React.FC<DepartmentMembersTableProps> = ({
                             <Table.Tr key={row.id}>
                                 <Table.Td>
                                     <Group gap="xs">
-                                        <Avatar size="md" />
+                                        <Avatar size="md" src={row.avatar}>
+                                            {row.nickname?.substring(0, 1)}
+                                        </Avatar>
                                         <Flex direction="column">
                                             <Text size="sm" truncate>
                                                 {row.nickname}

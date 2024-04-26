@@ -53,9 +53,13 @@ const NestedNavMenu = ({
                 onClick={() => setOpended(!opened)}
             >
                 <span>{icon}</span>
-                <span className="flex-1 ml-3 whitespace-nowrap font-medium group-hover:text-primary-600 group-aria-selected:text-primary-600 transition-colors duration-300">
+                <Text
+                    className="flex-1 ml-3 truncate group-hover:text-primary-600 group-aria-selected:text-primary-600 transition-colors duration-300"
+                    size="sm"
+                    fw={500}
+                >
                     <FormattedMessage id={label} />
-                </span>
+                </Text>
                 <span className="group-hover:text-primary-600">
                     {opened ? (
                         <ChevronUp className="w-4 h-4 stroke-2" />
@@ -87,7 +91,7 @@ const NestedNavMenu = ({
                                     )}
                                     className="mt-1.5 block py-2.5 pl-10 rounded text-gray-500 hover:bg-blue-50 hover:text-primary-600 aria-selected:text-primary-600 aria-selected:bg-blue-100 transition-colors duration-300"
                                 >
-                                    <Text fw={500} size="sm">
+                                    <Text size="sm" fw={400} truncate>
                                         <FormattedMessage id={item.label} />
                                     </Text>
                                 </Link>
@@ -118,10 +122,14 @@ const NavMenuItem = ({
             aria-selected={selected}
             className="group flex items-center px-2 py-2.5 rounded hover:bg-blue-50 aria-selected:bg-blue-100 transition-colors duration-300"
         >
-            {icon}
-            <span className="ml-3 group-hover:text-blue-600 font-medium group-aria-selected:text-blue-600 transition-colors duration-300">
+            <span>{icon}</span>
+            <Text
+                className="flex1 ml-3 truncate group-hover:text-primary-600 group-aria-selected:text-primary-600 transition-colors duration-300"
+                size="sm"
+                fw={500}
+            >
                 {text}
-            </span>
+            </Text>
         </Link>
     );
 };

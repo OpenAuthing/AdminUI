@@ -116,7 +116,7 @@ export default () => {
                     <div className="flex flex-col border-r overflow-hidden w-80 min-w-80">
                         <div
                             className={cx(
-                                'flex gap-x-0.5 w-full items-center justify-start px-4 pb-4',
+                                'flex gap-x-0.5 w-full items-center justify-start px-4 pb-4 transition-shadow',
                                 { 'shadow-md': departmentTreeScrolled },
                             )}
                         >
