@@ -39,6 +39,9 @@ export function getStrength(password: string) {
 }
 
 export function validate(password?: string) {
+    if (password === undefined || password === '') {
+        return 'Password is required';
+    }
     for (var requirement of Requirements) {
         if (!requirement.re.test(password ?? '')) {
             return requirement.message;

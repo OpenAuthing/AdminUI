@@ -1,14 +1,22 @@
-import { ScrollArea } from '@mantine/core';
+import { Box } from '@mantine/core';
+import clsx from 'clsx';
 import { PropsWithChildren } from 'react';
 
-type Props = {} & PropsWithChildren;
+type Props = {
+    className?: string;
+} & PropsWithChildren;
 
-export default ({ children }: Props) => {
+export default ({ children, className }: Props) => {
     return (
-        <div className="xl:max-w-content mx-auto px-6 pt-10 pb-12">
-            <ScrollArea h="calc(100% - 88px)" scrollbars="y">
+        <div
+            className={clsx(
+                'xl:max-w-content mx-auto px-6 pt-10 pb-12',
+                className,
+            )}
+        >
+            <Box h="calc(100% - 88px)" className="overflow-hidden">
                 {children}
-            </ScrollArea>
+            </Box>
         </div>
     );
 };

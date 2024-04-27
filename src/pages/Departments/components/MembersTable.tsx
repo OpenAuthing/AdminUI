@@ -1,7 +1,9 @@
+import EmptyState from '@/components/EmptyState';
 import DepartmentService from '@/services/department.service';
 import {
     ActionIcon,
     Avatar,
+    Box,
     Button,
     Center,
     Flex,
@@ -24,7 +26,7 @@ import {
     PlusIcon,
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { useRequest } from 'umi';
+import { Icon, useRequest } from 'umi';
 
 interface ThProps extends TableThProps {
     sortable?: boolean;
@@ -66,12 +68,12 @@ function Th({
     );
 }
 
-interface DepartmentMembersTableProps {
+interface MembersTableProps {
     departmentName: string;
     departmentId: string;
 }
 
-const DepartmentMembersTable: React.FC<DepartmentMembersTableProps> = ({
+const MembersTable: React.FC<MembersTableProps> = ({
     departmentName,
     departmentId,
     ...others
@@ -80,7 +82,6 @@ const DepartmentMembersTable: React.FC<DepartmentMembersTableProps> = ({
 
     const {
         loading,
-        error,
         data,
         run: getMembers,
     } = useRequest(DepartmentService.getDepartmentMembers, {
@@ -88,7 +89,8 @@ const DepartmentMembersTable: React.FC<DepartmentMembersTableProps> = ({
         initialData: { totalCount: 0, items: [] },
     });
 
-    const { totalCount, items } = data ?? {};
+    const { totalCount, items = [] } = data ?? {};
+    const isEmpty = (items?.length ?? 0) === 0;
 
     useEffect(() => {
         getMembers({
@@ -99,6 +101,37 @@ const DepartmentMembersTable: React.FC<DepartmentMembersTableProps> = ({
         });
     }, [departmentId]);
 
+    const AddMemberButton = () => {
+        return (
+            <Button variant="link">
+                <PlusIcon className="w-4 h-4" />
+                <span>添加成员</span>
+            </Button>
+        );
+    };
+
+    if (isEmpty) {
+        return (
+            <Box pos="relative">
+                <LoadingOverlay visible={loading} />
+                <EmptyState className="border-none">
+                    <EmptyState.Icon>
+                        <Icon icon="local:empty-3" width="180" height="180" />
+                    </EmptyState.Icon>
+                    <EmptyState.Subtitle>{departmentName}</EmptyState.Subtitle>
+                    <EmptyState.Content>
+                        <EmptyState.Message>
+                            No members under this department.
+                        </EmptyState.Message>
+                        <EmptyState.Actions>
+                            <AddMemberButton />
+                        </EmptyState.Actions>
+                    </EmptyState.Content>
+                </EmptyState>
+            </Box>
+        );
+    }
+
     return (
         <div className="grid grid-rows-[max-content_1fr_max-content] h-full relative gap-4 overflow-hidden">
             <LoadingOverlay visible={loading} />
@@ -107,10 +140,7 @@ const DepartmentMembersTable: React.FC<DepartmentMembersTableProps> = ({
                     <span className="font-semibold">{departmentName}</span>
                 </div>
                 <div>
-                    <Button variant="link">
-                        <PlusIcon className="w-4 h-4" />
-                        <span>添加成员</span>
-                    </Button>
+                    <AddMemberButton />
                 </div>
             </div>
             <ScrollArea
@@ -119,7 +149,7 @@ const DepartmentMembersTable: React.FC<DepartmentMembersTableProps> = ({
                 <Table
                     horizontalSpacing="md"
                     verticalSpacing="md"
-                    miw={700}
+                    miw={1000}
                     layout="fixed"
                 >
                     <Table.Thead
@@ -130,7 +160,7 @@ const DepartmentMembersTable: React.FC<DepartmentMembersTableProps> = ({
                     >
                         <Table.Tr>
                             <Th>User</Th>
-                            <Th w={rem(280)}>Email</Th>
+                            <Th w={rem(220)}>Email</Th>
                             <Th w={rem(160)}>Phone</Th>
                             <Th w={rem(280)}>Departments</Th>
                             <Th w={rem(100)}></Th>
@@ -199,4 +229,4 @@ const DepartmentMembersTable: React.FC<DepartmentMembersTableProps> = ({
     );
 };
 
-export default DepartmentMembersTable;
+export default MembersTable;

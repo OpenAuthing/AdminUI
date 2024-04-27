@@ -1,10 +1,10 @@
 import { Factory, factory, useProps } from '@mantine/core';
 import { useId } from '@mantine/hooks';
 import React from 'react';
-import PageHeaderActions from './PageHeaderActions';
-import PageHeaderContent from './PageHeaderContent';
-import PageHeaderDescription from './PageHeaderDescription';
-import PageHeaderTitle from './PageHeaderTitle';
+import PageHeaderActions from './Actions';
+import PageHeaderContent from './Content';
+import PageHeaderDescription from './Description';
+import PageHeaderTitle from './Title';
 
 export interface PageHeaderProps {
     children?: React.ReactNode;

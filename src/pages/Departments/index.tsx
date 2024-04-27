@@ -15,7 +15,7 @@ import cx from 'clsx';
 import { MoreHorizontalIcon, PlusIcon, SearchIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { FormattedMessage, useModel } from 'umi';
-import DepartmentMembersTable from './components/DepartmentMembersTable';
+import MembersTable from './components/MembersTable';
 
 const DepartmentMenu = ({
     node,
@@ -166,12 +166,14 @@ export default () => {
                     <div className="flex-1 w-full h-full max-w-full max-h-full overflow-hidden">
                         <div className="flex gap-y-2 w-full h-full flex-col overflow-hidden">
                             {selectedNode ? (
-                                <DepartmentMembersTable
+                                <MembersTable
                                     departmentId={selectedNode?.key}
                                     departmentName={selectedNode?.title}
                                 />
                             ) : (
-                                <div></div>
+                                <div className="flex items-center justify-center h-full text-gray-400">
+                                    Select a department first.
+                                </div>
                             )}
                         </div>
                     </div>

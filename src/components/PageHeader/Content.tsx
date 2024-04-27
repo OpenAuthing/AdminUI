@@ -1,5 +1,5 @@
 import { Factory, factory } from '@mantine/core';
-import PageHeaderTitle from './PageHeaderTitle';
+import PageHeaderTitle from './Title';
 
 export interface PageHeaderContentProps {
     children?: React.ReactNode;

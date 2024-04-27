@@ -10,6 +10,7 @@
             "application": "Applications",
             "orginizations": "Orginizations",
             "departments": "Departments",
+            "employees": "Employees",
             "users": "Users",
             "usergroups": "User Groups",
             "authentication": "Authentication",

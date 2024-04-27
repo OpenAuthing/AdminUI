@@ -60,7 +60,7 @@ export default function Page() {
                     </div>
                 </div>
             </ContentContainer>
-            <CreateUserDialog opened={opened} onClose={close} />
+            {opened && <CreateUserDialog opened={opened} onClose={close} />}
         </>
     );
 }

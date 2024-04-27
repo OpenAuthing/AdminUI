@@ -78,16 +78,10 @@ const routes: Array<RouteType> = [
                                 label: 'routes.menus.departments',
                             },
                             {
-                                path: '/admin/users',
-                                component: 'Users',
+                                path: '/admin/employees',
+                                component: 'Employees',
                                 showInMenu: true,
-                                label: 'routes.menus.users',
-                            },
-                            {
-                                path: '/admin/user-groups',
-                                component: 'UserGroups',
-                                showInMenu: true,
-                                label: 'routes.menus.usergroups',
+                                label: 'routes.menus.employees',
                             },
                         ],
                     },
@@ -104,6 +98,18 @@ const routes: Array<RouteType> = [
                         icon: 'Key',
                         showInMenu: true,
                         routes: [
+                            {
+                                path: '/admin/users',
+                                component: 'Users',
+                                showInMenu: true,
+                                label: 'routes.menus.users',
+                            },
+                            {
+                                path: '/admin/user-groups',
+                                component: 'UserGroups',
+                                showInMenu: true,
+                                label: 'routes.menus.usergroups',
+                            },
                             {
                                 path: '/admin/roles',
                                 component: 'Roles',
