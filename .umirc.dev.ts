@@ -10,6 +10,6 @@ export default defineConfig({
 
         USER_PROFILE_URL: 'http://localhost:5129/#/settings/profile',
 
-        ADMIN_API_BASE_URL: 'http://localhost:5130',
+        ADMIN_API_BASE_URL: 'https://mock.apifox.com/m1/3236434-2267735-default',
     },
 });

@@ -17,7 +17,7 @@ import {
     TextInput,
     rem,
 } from '@mantine/core';
-import { useDisclosure, useInputState } from '@mantine/hooks';
+import { useDisclosure, useInputState, useIsFirstRender } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 import { MoreHorizontalIcon, PencilLineIcon, PlusIcon, SearchIcon, Trash2Icon } from 'lucide-react';
 import { memo } from 'react';
@@ -50,6 +50,7 @@ const PositionTablePagination = memo<PositionTablePaginationProps>(
 
 export default function Page() {
     const intl = useIntl();
+    const isFirstRender = useIsFirstRender();
     const [searchKey, setSearchKey] = useInputState('');
     const [addModalOpened, { close: closeAddModal, open: openAddModal }] = useDisclosure(false);
     const [editModalOpened, { close: closeEditModal, open: openEditModal }] = useDisclosure(false);
@@ -57,17 +58,16 @@ export default function Page() {
     const { pagination, loading, data, error, refresh } = useRequest(
         (page) => PositionService.getPositions(page.current, page.pageSize, searchKey),
         {
-            debounceInterval: 500,
+            manual: false,
+            // loadingDelay: 0,
+            // debounceInterval: 200,
+            throttleInterval: 500,
             paginated: true,
             refreshDeps: [searchKey],
             formatResult: ({ data }) => ({
                 total: data?.totalCount,
                 list: data?.items,
             }),
-            initialData: {
-                total: 0,
-                list: [],
-            },
         },
     );
 
@@ -98,22 +98,10 @@ export default function Page() {
 
     const { total = 0, list = [] } = data ?? {};
     const noRecords = total === 0;
-    const isEmpty = !loading && searchKey === '' && noRecords;
+    const isEmpty = !isFirstRender && searchKey === '' && noRecords;
     const showPagination = total > 10;
 
-    const CreateButton = memo(() => (
-        <Button
-            type="button"
-            onClick={openAddModal}
-        >
-            <Group gap={rem(4)}>
-                <PlusIcon className="size-4 mr-1" />
-                <Text size="sm">
-                    <FormattedMessage id="pages.positions.header.actions.addposition" />
-                </Text>
-            </Group>
-        </Button>
-    ));
+    console.log('loading', loading);
 
     const columns: TableColumn[] = [
         {
@@ -168,6 +156,20 @@ export default function Page() {
         },
     ];
 
+    const CreateButton = memo(() => (
+        <Button
+            type="button"
+            onClick={openAddModal}
+        >
+            <Group gap={rem(4)}>
+                <PlusIcon className="size-4 mr-1" />
+                <Text size="sm">
+                    <FormattedMessage id="pages.positions.header.actions.addposition" />
+                </Text>
+            </Group>
+        </Button>
+    ));
+
     return (
         <>
             <ContentContainer>
@@ -185,7 +187,7 @@ export default function Page() {
                     </PageHeader>
 
                     <Box pos="relative">
-                        <LoadingOverlay visible={loading} />
+                        <LoadingOverlay visible={loading ?? true} />
 
                         {isEmpty ? (
                             <EmptyState>
