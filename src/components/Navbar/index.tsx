@@ -1,5 +1,5 @@
 // import { Transition } from "@headlessui/react";
-import { MenuIconType } from '@/types';
+import { MenuIconType } from '@/@types';
 import { MantineTransition, Text, Transition } from '@mantine/core';
 import {
     ChevronDown,
@@ -15,13 +15,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { LinkProps } from 'react-router-dom';
-import {
-    FormattedMessage,
-    Link,
-    useAppData,
-    useIntl,
-    useSelectedRoutes,
-} from 'umi';
+import { FormattedMessage, Link, useAppData, useIntl, useSelectedRoutes } from 'umi';
 
 const menuTransition = {
     common: {},
@@ -86,12 +80,14 @@ const NestedNavMenu = ({
                                 <Link
                                     to={item.href}
                                     key={item.id}
-                                    aria-selected={selectedRouteKeys.includes(
-                                        item.id,
-                                    )}
+                                    aria-selected={selectedRouteKeys.includes(item.id)}
                                     className="mt-1.5 block py-2.5 pl-10 rounded text-gray-500 hover:bg-blue-50 hover:text-primary-600 aria-selected:text-primary-600 aria-selected:bg-blue-100 transition-colors duration-300"
                                 >
-                                    <Text size="sm" fw={400} truncate>
+                                    <Text
+                                        size="sm"
+                                        fw={400}
+                                        truncate
+                                    >
                                         <FormattedMessage id={item.label} />
                                     </Text>
                                 </Link>
@@ -110,12 +106,7 @@ interface NavMenuItemProps extends LinkProps {
     selected: boolean;
 }
 
-const NavMenuItem = ({
-    to,
-    text,
-    icon,
-    selected = false,
-}: NavMenuItemProps) => {
+const NavMenuItem = ({ to, text, icon, selected = false }: NavMenuItemProps) => {
     return (
         <Link
             to={to}
@@ -238,10 +229,7 @@ const Navbar = () => {
     }, []);
 
     const selectedRouteKeys = useMemo(
-        () =>
-            selectedRoutes
-                .filter((x: any) => x.route.showInMenu)
-                .map((x: any) => x.route.id),
+        () => selectedRoutes.filter((x: any) => x.route.showInMenu).map((x: any) => x.route.id),
         [selectedRoutes],
     );
 

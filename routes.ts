@@ -1,4 +1,4 @@
-import { MenuIconType } from '@/types';
+import { MenuIconType } from '@/@types';
 
 type RouteType = {
     component?: string | undefined;
@@ -78,10 +78,22 @@ const routes: Array<RouteType> = [
                                 label: 'routes.menus.departments',
                             },
                             {
-                                path: '/admin/employees',
-                                component: 'Employees',
+                                path: '/admin/positions',
+                                component: 'Positions',
                                 showInMenu: true,
-                                label: 'routes.menus.employees',
+                                label: 'routes.menus.positions',
+                            },
+                            {
+                                path: '/admin/users',
+                                component: 'Users',
+                                showInMenu: true,
+                                label: 'routes.menus.users',
+                            },
+                            {
+                                path: '/admin/user-groups',
+                                component: 'UserGroups',
+                                showInMenu: true,
+                                label: 'routes.menus.usergroups',
                             },
                         ],
                     },
@@ -98,18 +110,6 @@ const routes: Array<RouteType> = [
                         icon: 'Key',
                         showInMenu: true,
                         routes: [
-                            {
-                                path: '/admin/users',
-                                component: 'Users',
-                                showInMenu: true,
-                                label: 'routes.menus.users',
-                            },
-                            {
-                                path: '/admin/user-groups',
-                                component: 'UserGroups',
-                                showInMenu: true,
-                                label: 'routes.menus.usergroups',
-                            },
                             {
                                 path: '/admin/roles',
                                 component: 'Roles',

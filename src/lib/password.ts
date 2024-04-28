@@ -1,5 +1,4 @@
-const charset =
-    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 export function generate(length = 8) {
     let retVal = '';
     for (let i = 0; i < length; i++) {

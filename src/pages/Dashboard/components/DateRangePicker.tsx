@@ -69,7 +69,10 @@ const DateRangePicker = (props: DateRangePickerProps) => {
                         </div>
                     </div>
                     <div className="flex items-center justify-end p-4">
-                        <Button size="sm" variant="link">
+                        <Button
+                            size="sm"
+                            variant="link"
+                        >
                             Apply
                         </Button>
                     </div>

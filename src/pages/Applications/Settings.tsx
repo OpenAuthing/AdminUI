@@ -28,7 +28,10 @@ const ApplicationTypes = [
 const Copy = ({ value }: { value?: any }) => {
     const intl = useIntl();
     return (
-        <CopyButton value={value} timeout={2000}>
+        <CopyButton
+            value={value}
+            timeout={2000}
+        >
             {({ copied, copy }) => (
                 <Tooltip
                     label={intl.formatMessage({
@@ -51,8 +54,7 @@ const Copy = ({ value }: { value?: any }) => {
 };
 
 export default () => {
-    const [secretVisable, { toggle: secretVisableToggle }] =
-        useDisclosure(false);
+    const [secretVisable, { toggle: secretVisableToggle }] = useDisclosure(false);
     const form = useForm({});
     const submitBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -154,53 +156,31 @@ export default () => {
                                     disabled={true}
                                     value={'https://dgdfefdfe.authing.cn/oidc'}
                                     rightSection={
-                                        <Copy
-                                            value={
-                                                'https://dgdfefdfe.authing.cn/oidc'
-                                            }
-                                        />
+                                        <Copy value={'https://dgdfefdfe.authing.cn/oidc'} />
                                     }
                                 />
                                 <TextInput
                                     label="Token Endpoint"
                                     disabled={true}
-                                    value={
-                                        'https://dgdfefdfe.authing.cn/oidc/token'
-                                    }
+                                    value={'https://dgdfefdfe.authing.cn/oidc/token'}
                                     rightSection={
-                                        <Copy
-                                            value={
-                                                'https://dgdfefdfe.authing.cn/oidc/token'
-                                            }
-                                        />
+                                        <Copy value={'https://dgdfefdfe.authing.cn/oidc/token'} />
                                     }
                                 />
                                 <TextInput
                                     label="User Information Endpoint"
                                     disabled={true}
-                                    value={
-                                        'https://dgdfefdfe.authing.cn/oidc/me'
-                                    }
+                                    value={'https://dgdfefdfe.authing.cn/oidc/me'}
                                     rightSection={
-                                        <Copy
-                                            value={
-                                                'https://dgdfefdfe.authing.cn/oidc/me'
-                                            }
-                                        />
+                                        <Copy value={'https://dgdfefdfe.authing.cn/oidc/me'} />
                                     }
                                 />
                                 <TextInput
                                     label="User Information Endpoint"
                                     disabled={true}
-                                    value={
-                                        'https://dgdfefdfe.authing.cn/oidc/me'
-                                    }
+                                    value={'https://dgdfefdfe.authing.cn/oidc/me'}
                                     rightSection={
-                                        <Copy
-                                            value={
-                                                'https://dgdfefdfe.authing.cn/oidc/me'
-                                            }
-                                        />
+                                        <Copy value={'https://dgdfefdfe.authing.cn/oidc/me'} />
                                     }
                                 />
                                 <TextInput
@@ -258,9 +238,7 @@ export default () => {
                                             classNames={{
                                                 input: 'rounded-tl-none rounded-tr-none',
                                             }}
-                                            leftSection={
-                                                <LinkIcon className="size-4" />
-                                            }
+                                            leftSection={<LinkIcon className="size-4" />}
                                             placeholder="https://path.to/my_logo.png"
                                         />
                                     </div>
@@ -307,7 +285,11 @@ export default () => {
                         <div className="border-t w-[calc(100%-var(--app-shell-navbar-width))] flex items-center justify-center">
                             <div className="flex justify-between px-10 items-center 2xl:px-0 2xl:w-5/6 w-full h-full">
                                 <div className="flex items-center gap-x-3">
-                                    <Text size="sm" c="gray.6" fw={500}>
+                                    <Text
+                                        size="sm"
+                                        c="gray.6"
+                                        fw={500}
+                                    >
                                         Save changes
                                     </Text>
                                     <div>
@@ -315,10 +297,16 @@ export default () => {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-x-2">
-                                    <Button variant="transparent" c="gray.7">
+                                    <Button
+                                        variant="transparent"
+                                        c="gray.7"
+                                    >
                                         Cancel
                                     </Button>
-                                    <Button type="submit" ref={submitBtnRef}>
+                                    <Button
+                                        type="submit"
+                                        ref={submitBtnRef}
+                                    >
                                         Save Changes
                                     </Button>
                                 </div>
@@ -336,28 +324,31 @@ export default () => {
                                 Delete this application
                             </h6>
                             <p className="text-sm leading-6">
-                                All your apps using this client will stop
-                                working.
+                                All your apps using this client will stop working.
                             </p>
                         </div>
                         <div>
-                            <Button variant="filled" color="red.9">
+                            <Button
+                                variant="filled"
+                                color="red.9"
+                            >
                                 Delete
                             </Button>
                         </div>
                     </div>
                     <div className="flex items-center p-6 rounded text-[rgb(118,28,23)] bg-[rgb(251,238,237)]">
                         <div className="flex-1 grid grid-cols-1 gap-1">
-                            <h6 className="text-sm font-medium leading-6">
-                                Rotate secret
-                            </h6>
+                            <h6 className="text-sm font-medium leading-6">Rotate secret</h6>
                             <p className="text-sm leading-6">
-                                All authorized apps will need to be updated with
-                                the new client secret.
+                                All authorized apps will need to be updated with the new client
+                                secret.
                             </p>
                         </div>
                         <div>
-                            <Button variant="filled" color="red.9">
+                            <Button
+                                variant="filled"
+                                color="red.9"
+                            >
                                 Rotate
                             </Button>
                         </div>

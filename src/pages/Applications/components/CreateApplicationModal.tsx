@@ -1,11 +1,4 @@
-import {
-    Button,
-    CloseButton,
-    InputLabel,
-    Modal,
-    Text,
-    TextInput,
-} from '@mantine/core';
+import { Button, CloseButton, InputLabel, Modal, Text, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import cx from 'clsx';
 import { useState } from 'react';
@@ -44,7 +37,10 @@ export default ({ opened, onClose, onCreate }: Props) => {
             onClose={onClose}
             centered
         >
-            <Modal.Header mih={0} p="30px 30px 24px">
+            <Modal.Header
+                mih={0}
+                p="30px 30px 24px"
+            >
                 <h1 className="text-xl font-medium">Create Application</h1>
 
                 <CloseButton onClick={onClose} />
@@ -82,17 +78,19 @@ export default ({ opened, onClose, onCreate }: Props) => {
                                             >
                                                 Native
                                             </Text>
-                                            <Text size="sm" lh={1.5}>
-                                                Mobile, desktop, CLI and smart
-                                                device apps running natively.
+                                            <Text
+                                                size="sm"
+                                                lh={1.5}
+                                            >
+                                                Mobile, desktop, CLI and smart device apps running
+                                                natively.
                                             </Text>
                                             <Text
                                                 size="sm"
                                                 lh={1.5}
                                                 className="text-gray-500"
                                             >
-                                                e.g.: iOS, Electron, Apple TV
-                                                apps
+                                                e.g.: iOS, Electron, Apple TV apps
                                             </Text>
                                         </div>
                                     </div>
@@ -101,7 +99,10 @@ export default ({ opened, onClose, onCreate }: Props) => {
                         </div>
                     </div>
                     <div className="pb-5 pt-6 flex items-center justify-end gap-x-2">
-                        <Button variant="default" onClick={onClose}>
+                        <Button
+                            variant="default"
+                            onClick={onClose}
+                        >
                             Cancel
                         </Button>
                         <Button type="submit">Create</Button>

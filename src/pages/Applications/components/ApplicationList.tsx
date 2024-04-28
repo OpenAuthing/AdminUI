@@ -27,10 +27,11 @@ const ApplicationList = ({ list }: ApplicationListProps) => {
                             className="border-gray-200 border-solid border-b hover:bg-gray-100"
                             key={item.id}
                         >
-                            <Table.Td className="p-4" width={350}>
-                                <Link
-                                    to={`/admin/applications/${item.id}/settings`}
-                                >
+                            <Table.Td
+                                className="p-4"
+                                width={350}
+                            >
+                                <Link to={`/admin/applications/${item.id}/settings`}>
                                     <div className="flex gap-x-4 items-start">
                                         <div className="size-10 bg-gray-200/80 rounded flex items-center justify-center"></div>
                                         <div className="flex-1 grid grid-cols-1 justify-between">
@@ -57,7 +58,10 @@ const ApplicationList = ({ list }: ApplicationListProps) => {
                             <Table.Td className="p-4">
                                 <ClientId value={item.clientId} />
                             </Table.Td>
-                            <Table.Td className="p-4" width={70}>
+                            <Table.Td
+                                className="p-4"
+                                width={70}
+                            >
                                 <div className="flex items-center justify-end">
                                     <Menu
                                         width={180}
@@ -73,23 +77,17 @@ const ApplicationList = ({ list }: ApplicationListProps) => {
                                             </ActionIcon>
                                         </Menu.Target>
                                         <Menu.Dropdown className="p-2">
-                                            <Link
-                                                to={`/admin/applications/${item.id}/quickstart`}
-                                            >
+                                            <Link to={`/admin/applications/${item.id}/quickstart`}>
                                                 <Menu.Item className="text-[13px] font-medium px-2 py-1 text-gray-500">
                                                     <FormattedMessage id="pages.applications.list.actions.quickstart" />
                                                 </Menu.Item>
                                             </Link>
-                                            <Link
-                                                to={`/admin/applications/${item.id}/settings`}
-                                            >
+                                            <Link to={`/admin/applications/${item.id}/settings`}>
                                                 <Menu.Item className="text-[13px] font-medium px-2 py-1 text-gray-500">
                                                     <FormattedMessage id="pages.applications.list.actions.settings" />
                                                 </Menu.Item>
                                             </Link>
-                                            <Link
-                                                to={`/admin/applications/${item.id}/credentials`}
-                                            >
+                                            <Link to={`/admin/applications/${item.id}/credentials`}>
                                                 <Menu.Item className="text-[13px] font-medium px-2 py-1 text-gray-500">
                                                     <FormattedMessage id="pages.applications.list.actions.credentials" />
                                                 </Menu.Item>

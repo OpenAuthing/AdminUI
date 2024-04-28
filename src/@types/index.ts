@@ -17,3 +17,8 @@ export type MenuIconType =
     | 'MonitorSmartphone'
     | 'Palette'
     | 'Fingerprint';
+
+export type PaginitionReqParams = {
+    current: number;
+    pageSize: number;
+};

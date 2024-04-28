@@ -1,14 +1,11 @@
 import { cn } from '@/lib/utils';
 
-export const LogoIcon = ({
-    fill,
-    className,
-}: {
-    fill?: string;
-    className?: string;
-}) => {
+export const LogoIcon = ({ fill, className }: { fill?: string; className?: string }) => {
     return (
-        <svg className={cn('', className)} viewBox="0 0 80 80">
+        <svg
+            className={cn('', className)}
+            viewBox="0 0 80 80"
+        >
             <g
                 transform="matrix(0.808164727123819,0,0,0.808164727123819,0,0)"
                 fill={fill}
@@ -22,15 +19,12 @@ export const LogoIcon = ({
     );
 };
 
-export const LogoText = ({
-    fill,
-    className,
-}: {
-    fill?: string;
-    className?: string;
-}) => {
+export const LogoText = ({ fill, className }: { fill?: string; className?: string }) => {
     return (
-        <svg className={cn('text-center', className)} viewBox="0 0 290 60">
+        <svg
+            className={cn('text-center', className)}
+            viewBox="0 0 290 60"
+        >
             <defs id="SvgjsDefs2513"></defs>
             <g
                 transform="matrix(2.416823603264281,0,0,2.416823603264281,0,0)"
@@ -45,8 +39,14 @@ export const LogoText = ({
 export default () => {
     return (
         <div className="flex items-center gap-x-1">
-            <LogoIcon fill="#2563eb" className="w-8 h-8" />
-            <LogoText fill="#2563eb" className="flex-1" />
+            <LogoIcon
+                fill="#2563eb"
+                className="w-8 h-8"
+            />
+            <LogoText
+                fill="#2563eb"
+                className="flex-1"
+            />
         </div>
     );
 };

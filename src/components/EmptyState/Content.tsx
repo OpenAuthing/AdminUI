@@ -16,10 +16,7 @@ const Content = factory<ContentFactory>((props, ref) => {
     const { children, className, ...others } = props;
     return (
         <div
-            className={clsx(
-                'grid grid-cols-1 gap-4 max-w-[500px] mx-auto my-0',
-                className,
-            )}
+            className={clsx('grid grid-cols-1 gap-4 max-w-[500px] mx-auto my-0', className)}
             ref={ref}
             {...others}
         >

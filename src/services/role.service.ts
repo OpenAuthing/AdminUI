@@ -54,10 +54,7 @@ const RoleService = {
         return data;
     },
 
-    saveRoleSubjects: async (
-        id: string,
-        items: Array<{ type: RoleSubjectType; id: string }>,
-    ) => {
+    saveRoleSubjects: async (id: string, items: Array<{ type: RoleSubjectType; id: string }>) => {
         const { data } = await request(`${ROOT_URL}/${id}/subjects`, {
             method: 'PUT',
             data: {

@@ -26,9 +26,8 @@ export default function Page() {
                         <PageHeader.Content>
                             <PageHeader.Title>Roles</PageHeader.Title>
                             <PageHeader.Description>
-                                Create and manage Roles for your applications.
-                                Roles contain collections of Permissions and can
-                                be assigned to Users.
+                                Create and manage Roles for your applications. Roles contain
+                                collections of Permissions and can be assigned to Users.
                             </PageHeader.Description>
                         </PageHeader.Content>
                     </PageHeader>
@@ -42,14 +41,11 @@ export default function Page() {
                                     icon="local:empty-2"
                                 />
                             </EmptyState.Icon>
-                            <EmptyState.Subtitle>
-                                You don't have any roles yet.
-                            </EmptyState.Subtitle>
+                            <EmptyState.Subtitle>You don't have any roles yet.</EmptyState.Subtitle>
                             <EmptyState.Content>
                                 <EmptyState.Message>
-                                    Create roles to represent the types of users
-                                    that access your applications. Assign
-                                    permissions to those roles to control what
+                                    Create roles to represent the types of users that access your
+                                    applications. Assign permissions to those roles to control what
                                     users are allowed to do in your apps.
                                 </EmptyState.Message>
                                 <EmptyState.Actions>
@@ -60,7 +56,10 @@ export default function Page() {
                     </div>
                 </div>
             </ContentContainer>
-            <CreateRoleModal opened={opened} onClose={close} />
+            <CreateRoleModal
+                opened={opened}
+                onClose={close}
+            />
         </>
     );
 }

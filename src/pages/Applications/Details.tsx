@@ -104,7 +104,10 @@ export default () => {
                                     {keys(NavTabs).map((key) => {
                                         const item = NavTabs[key];
                                         return (
-                                            <Tabs.Tab key={key} value={key}>
+                                            <Tabs.Tab
+                                                key={key}
+                                                value={key}
+                                            >
                                                 {item.label}
                                             </Tabs.Tab>
                                         );

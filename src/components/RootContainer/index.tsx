@@ -1,12 +1,15 @@
 import theme from '@/theme';
 import {
     Avatar,
+    Button,
     ColorSchemeScript,
     InputWrapper,
+    LoadingOverlay,
     MantineProvider,
     createTheme,
 } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
+import { Notifications } from '@mantine/notifications';
 import React from 'react';
 import { UseRequestProvider, getLocale } from 'umi';
 
@@ -34,6 +37,20 @@ const mantineTheme = createTheme({
     fontFamily:
         'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
     components: {
+        Button: Button.extend({
+            defaultProps: {
+                loaderProps: {
+                    type: 'dots',
+                },
+            },
+        }),
+        LoadingOverlay: LoadingOverlay.extend({
+            defaultProps: {
+                overlayProps: {
+                    blur: 2,
+                },
+            },
+        }),
         InputWrapper: InputWrapper.extend({
             defaultProps: {
                 inputWrapperOrder: ['label', 'input', 'description', 'error'],
@@ -62,9 +79,8 @@ const RootContainer = ({ children }: { children: React.ReactNode }) => {
                 }}
             >
                 <MantineProvider theme={mantineTheme}>
-                    <DatesProvider settings={{ locale: locale }}>
-                        {children}
-                    </DatesProvider>
+                    <Notifications />
+                    <DatesProvider settings={{ locale: locale }}>{children}</DatesProvider>
                 </MantineProvider>
             </UseRequestProvider>
         </>

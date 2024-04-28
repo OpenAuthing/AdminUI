@@ -10,17 +10,15 @@ export type SubtitleFactory = Factory<{
     props: SubtitleProps;
 }>;
 
-const Subtitle = factory<SubtitleFactory>(
-    ({ className, children, ...others }, ref) => {
-        return (
-            <h4
-                className={clsx('mb-2 font-medium text-2xl', className)}
-                {...others}
-            >
-                {children}
-            </h4>
-        );
-    },
-);
+const Subtitle = factory<SubtitleFactory>(({ className, children, ...others }, ref) => {
+    return (
+        <h4
+            className={clsx('mb-2 font-medium text-2xl', className)}
+            {...others}
+        >
+            {children}
+        </h4>
+    );
+});
 
 export default Subtitle;

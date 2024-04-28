@@ -2,22 +2,13 @@ import { TreeNode } from '@/components/Tree';
 import DepartmentService from '@/services/department.service';
 import { useState } from 'react';
 
-const addChildrenToTree = (
-    tree: TreeNode[],
-    parentId: string,
-    children: TreeNode[],
-) => {
-    if (typeof parentId === 'undefined' || parentId === '' || parentId === null)
-        return children;
+const addChildrenToTree = (tree: TreeNode[], parentId: string, children: TreeNode[]) => {
+    if (typeof parentId === 'undefined' || parentId === '' || parentId === null) return children;
     return tree.map((node) => {
         if (node.key === parentId) {
             node.children = children;
         } else if (node.children) {
-            node.children = addChildrenToTree(
-                node.children,
-                parentId,
-                children,
-            );
+            node.children = addChildrenToTree(node.children, parentId, children);
         }
         return node;
     });
@@ -37,11 +28,7 @@ export default () => {
                 key: x.id,
                 title: x.name,
             }));
-            tree = addChildrenToTree(
-                departmentTree as TreeNode[],
-                parentId,
-                children || [],
-            );
+            tree = addChildrenToTree(departmentTree as TreeNode[], parentId, children || []);
         } else {
             setLoading(true);
 
@@ -49,10 +36,8 @@ export default () => {
                 const data = await DepartmentService.getChildren();
 
                 tree =
-                    data?.map(
-                        (x: any) =>
-                            ({ ...x, key: x.id, title: x.name } as TreeNode),
-                    ) ?? ([] as TreeNode[]);
+                    data?.map((x: any) => ({ ...x, key: x.id, title: x.name } as TreeNode)) ??
+                    ([] as TreeNode[]);
                 setDepartmentTree(tree);
             } finally {
                 setLoading(false);

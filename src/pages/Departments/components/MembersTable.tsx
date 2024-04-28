@@ -35,14 +35,7 @@ interface ThProps extends TableThProps {
     onSort?(): void;
 }
 
-function Th({
-    sortable,
-    children,
-    reversed,
-    sorted,
-    onSort,
-    ...others
-}: ThProps) {
+function Th({ sortable, children, reversed, sorted, onSort, ...others }: ThProps) {
     const Icon = sortable
         ? sorted
             ? reversed
@@ -54,7 +47,10 @@ function Th({
         <Table.Th {...others}>
             <UnstyledButton onClick={onSort}>
                 <Group justify="space-between">
-                    <Text fw={500} fz="sm">
+                    <Text
+                        fw={500}
+                        fz="sm"
+                    >
                         {children}
                     </Text>
                     {Icon && (
@@ -73,11 +69,7 @@ interface MembersTableProps {
     departmentId: string;
 }
 
-const MembersTable: React.FC<MembersTableProps> = ({
-    departmentName,
-    departmentId,
-    ...others
-}) => {
+const MembersTable: React.FC<MembersTableProps> = ({ departmentName, departmentId, ...others }) => {
     const [scrolled, setScrolled] = useState(false);
 
     const {
@@ -116,13 +108,15 @@ const MembersTable: React.FC<MembersTableProps> = ({
                 <LoadingOverlay visible={loading} />
                 <EmptyState className="border-none">
                     <EmptyState.Icon>
-                        <Icon icon="local:empty-3" width="180" height="180" />
+                        <Icon
+                            icon="local:empty-3"
+                            width="180"
+                            height="180"
+                        />
                     </EmptyState.Icon>
                     <EmptyState.Subtitle>{departmentName}</EmptyState.Subtitle>
                     <EmptyState.Content>
-                        <EmptyState.Message>
-                            No members under this department.
-                        </EmptyState.Message>
+                        <EmptyState.Message>No members under this department.</EmptyState.Message>
                         <EmptyState.Actions>
                             <AddMemberButton />
                         </EmptyState.Actions>
@@ -143,9 +137,7 @@ const MembersTable: React.FC<MembersTableProps> = ({
                     <AddMemberButton />
                 </div>
             </div>
-            <ScrollArea
-                onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
-            >
+            <ScrollArea onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
                 <Table
                     horizontalSpacing="md"
                     verticalSpacing="md"
@@ -155,7 +147,9 @@ const MembersTable: React.FC<MembersTableProps> = ({
                     <Table.Thead
                         className={cx(
                             'sticky top-0 bg-[var(--mantine-color-body)] transition-[box-shadow]',
-                            { ['shadow-md']: scrolled },
+                            {
+                                ['shadow-md']: scrolled,
+                            },
                         )}
                     >
                         <Table.Tr>
@@ -171,37 +165,54 @@ const MembersTable: React.FC<MembersTableProps> = ({
                             <Table.Tr key={row.id}>
                                 <Table.Td>
                                     <Group gap="xs">
-                                        <Avatar size="md" src={row.avatar}>
+                                        <Avatar
+                                            size="md"
+                                            src={row.avatar}
+                                        >
                                             {row.nickname?.substring(0, 1)}
                                         </Avatar>
                                         <Flex direction="column">
-                                            <Text size="sm" truncate>
+                                            <Text
+                                                size="sm"
+                                                truncate
+                                            >
                                                 {row.nickname}
                                             </Text>
-                                            <Text size="xs" c="gray.6" truncate>
+                                            <Text
+                                                size="xs"
+                                                c="gray.6"
+                                                truncate
+                                            >
                                                 {row.userName}
                                             </Text>
                                         </Flex>
                                     </Group>
                                 </Table.Td>
                                 <Table.Td>
-                                    <Text size="sm" truncate>
+                                    <Text
+                                        size="sm"
+                                        truncate
+                                    >
                                         {row.emailAddress}
                                     </Text>
                                 </Table.Td>
                                 <Table.Td>
-                                    <Text size="sm" truncate>
+                                    <Text
+                                        size="sm"
+                                        truncate
+                                    >
                                         {row.phoneNumber}
                                     </Text>
                                 </Table.Td>
                                 <Table.Td>
                                     {row.departments?.length ?? false ? (
-                                        <Text size="sm" c="gray.7" truncate>
+                                        <Text
+                                            size="sm"
+                                            c="gray.7"
+                                            truncate
+                                        >
                                             {row.departments
-                                                .map(
-                                                    (x: any) =>
-                                                        x.departmentName,
-                                                )
+                                                .map((x: any) => x.departmentName)
                                                 .join(', ')}
                                         </Text>
                                     ) : (

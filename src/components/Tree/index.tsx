@@ -139,11 +139,12 @@ const TreeNodeItem = ({
                     onClick={() => onItemClick(current)}
                 >
                     {level > 1 &&
-                        new Array(level - 1)
-                            .fill([])
-                            .map((_, index) => (
-                                <span key={index} className="w-4"></span>
-                            ))}
+                        new Array(level - 1).fill([]).map((_, index) => (
+                            <span
+                                key={index}
+                                className="w-4"
+                            ></span>
+                        ))}
                     <button
                         className="w-5 h-5 flex items-center justify-center mr-1"
                         onClick={async () => await onItemExpand(current)}

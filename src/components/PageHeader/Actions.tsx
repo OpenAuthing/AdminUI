@@ -8,10 +8,8 @@ export type PageHeaderActionsFactory = Factory<{
     props: PageHeaderActionsProps;
 }>;
 
-const PageHeaderActions = factory<PageHeaderActionsFactory>(
-    ({ children }, _) => {
-        return <Box>{children}</Box>;
-    },
-);
+const PageHeaderActions = factory<PageHeaderActionsFactory>(({ children }, _) => {
+    return <Box>{children}</Box>;
+});
 
 export default PageHeaderActions;

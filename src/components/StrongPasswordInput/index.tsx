@@ -11,13 +11,7 @@ import {
 import { XIcon } from 'lucide-react';
 import { useState } from 'react';
 
-const PasswordRequirement = ({
-    meets,
-    label,
-}: {
-    meets: boolean;
-    label: string;
-}) => {
+const PasswordRequirement = ({ meets, label }: { meets: boolean; label: string }) => {
     return (
         <Box
             c={meets ? 'teal' : 'red'}
@@ -25,12 +19,11 @@ const PasswordRequirement = ({
             mt={7}
             size="sm"
         >
-            {meets ? (
-                <CheckIcon className="size-4" />
-            ) : (
-                <XIcon className="size-4" />
-            )}{' '}
-            <Text ml={10} size="sm">
+            {meets ? <CheckIcon className="size-4" /> : <XIcon className="size-4" />}{' '}
+            <Text
+                ml={10}
+                size="sm"
+            >
                 {label}
             </Text>
         </Box>
@@ -84,7 +77,12 @@ const StrongPasswordInput: React.FC<StrongPasswordInputProps> = (props) => {
                 </div>
             </Popover.Target>
             <Popover.Dropdown>
-                <Progress color={color} value={strength} size={5} mb="xs" />
+                <Progress
+                    color={color}
+                    value={strength}
+                    size={5}
+                    mb="xs"
+                />
                 <PasswordRequirement
                     label="Includes at least 6 characters"
                     meets={password.length > 5}

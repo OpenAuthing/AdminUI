@@ -6,7 +6,10 @@ export default () => {
     return (
         <div className="flex items-center h-full">
             <div className="mr-auto flex gap-x-2 items-center">
-                <UnstyledButton component="a" href="/">
+                <UnstyledButton
+                    component="a"
+                    href="/"
+                >
                     <div className="flex items-center gap-x-0.5">
                         <LogoIcon className="size-8 fill-primary-500" />
                         <LogoText className="w-38 fill-primary-500" />

@@ -18,7 +18,12 @@ class Loading extends React.PureComponent {
     }
 
     render() {
-        return <LoadingBar color="#2998ff" ref={this.bar} />;
+        return (
+            <LoadingBar
+                color="#2998ff"
+                ref={this.bar}
+            />
+        );
     }
 }
 

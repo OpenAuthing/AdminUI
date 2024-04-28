@@ -1,7 +1,13 @@
 {
     "common": {
         "copy": "Copy",
-        "copied": "Copied"
+        "copied": "Copied",
+        "cancel": "Cancel",
+        "create": "Create",
+        "add": "Add",
+        "save": "Save",
+        "edit": "Edit",
+        "delete": "Delete"
     },
     "routes": {
         "menus": {
@@ -10,7 +16,7 @@
             "application": "Applications",
             "orginizations": "Orginizations",
             "departments": "Departments",
-            "employees": "Employees",
+            "positions": "Positions",
             "users": "Users",
             "usergroups": "User Groups",
             "authentication": "Authentication",
@@ -72,6 +78,28 @@
                     "settings": "Settings",
                     "credentials": "Credentials"
                 }
+            }
+        },
+        "positions": {
+            "header": {
+                "title": "Positions",
+                "description": "Unified management of position is carried out here to help maintain employee employment information in the user list accurately and quickly.",
+                "actions": {
+                    "addposition": "Add Position"
+                }
+            },
+            "empty": {
+                "subtitle": "You don't have any position yet.",
+                "message": "Add positions to maintain employee employment information and better organize employees."
+            },
+            "table": {
+                "columns": {
+                    "name": "Name",
+                    "description": "Description"
+                }
+            },
+            "add": {
+                "addposition": "Add Position"
             }
         }
     }

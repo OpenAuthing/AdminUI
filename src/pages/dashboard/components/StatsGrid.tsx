@@ -25,21 +25,36 @@ function StatsGrid() {
         const DiffIcon = stat.diff > 0 ? ArrowUpRightIcon : ArrowDownRightIcon;
 
         return (
-            <Paper withBorder p="md" radius="md" key={stat.title}>
+            <Paper
+                withBorder
+                p="md"
+                radius="md"
+                key={stat.title}
+            >
                 <Group justify="space-between">
-                    <Text size="xs" c="dimmed" className="font-bold uppercase">
+                    <Text
+                        size="xs"
+                        c="dimmed"
+                        className="font-bold uppercase"
+                    >
                         {stat.title}
                     </Text>
                     <Icon className="size-6 stroke-gray-400" />
                 </Group>
 
-                <Group align="flex-end" gap="xs" mt={25}>
-                    <Text className="text-2xl font-bold leading-none">
-                        {stat.value}
-                    </Text>
+                <Group
+                    align="flex-end"
+                    gap="xs"
+                    mt={25}
+                >
+                    <Text className="text-2xl font-bold leading-none">{stat.value}</Text>
                 </Group>
 
-                <Text fz="xs" c="dimmed" mt={7}>
+                <Text
+                    fz="xs"
+                    c="dimmed"
+                    mt={7}
+                >
                     Compared to previous month
                 </Text>
             </Paper>

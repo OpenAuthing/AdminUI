@@ -1,14 +1,7 @@
+import { ResponseResult } from '@/@types';
 import RootContainer from '@/components/RootContainer';
-import { ResponseResult } from '@/types';
 import React from 'react';
-import {
-    AxiosRequestConfig,
-    AxiosResponse,
-    RuntimeConfig,
-    getIntl,
-    getLocale,
-    history,
-} from 'umi';
+import { AxiosRequestConfig, AxiosResponse, RuntimeConfig, getIntl, getLocale, history } from 'umi';
 
 const toast = {
     error: (msg: string) => console.error(msg),
@@ -57,9 +50,7 @@ export const request: RuntimeConfig['request'] = {
 
                     history.push({
                         pathname: '/logout',
-                        search: `?returnUrl=${encodeURIComponent(
-                            '/account/login',
-                        )}`,
+                        search: `?returnUrl=${encodeURIComponent('/account/login')}`,
                     });
 
                     return;
@@ -108,11 +99,7 @@ export const request: RuntimeConfig['request'] = {
                 throw unauthorizedError;
             }
 
-            const {
-                code: errorCode,
-                message: errorMessage,
-                data,
-            } = response.data;
+            const { code: errorCode, message: errorMessage, data } = response.data;
             response.data = {
                 errorCode,
                 errorMessage,

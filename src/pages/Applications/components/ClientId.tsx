@@ -11,14 +11,15 @@ export default ({ value }: Props) => {
 
     return (
         <div className="grid grid-cols-[max-content_auto] items-center justify-start gap-x-2">
-            <span className="text-gray-500 font-medium text-sm">
-                Client Id:
-            </span>
+            <span className="text-gray-500 font-medium text-sm">Client Id:</span>
             <div className="flex gap-x-1 items-center justify-center">
                 <span className="text-xs bg-gray-200/80 text-gray-500 rounded px-2 py-1">
                     {value}
                 </span>
-                <CopyButton value={value} timeout={2000}>
+                <CopyButton
+                    value={value}
+                    timeout={2000}
+                >
                     {({ copied, copy }) => (
                         <Tooltip
                             label={intl.formatMessage({
@@ -28,9 +29,7 @@ export default ({ value }: Props) => {
                             position="top"
                         >
                             <ActionIcon
-                                className={
-                                    copied ? 'text-teal-500' : 'text-gray-700'
-                                }
+                                className={copied ? 'text-teal-500' : 'text-gray-700'}
                                 variant="subtle"
                                 onClick={copy}
                             >

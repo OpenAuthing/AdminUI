@@ -17,13 +17,7 @@ import { useEffect, useState } from 'react';
 import { FormattedMessage, useModel } from 'umi';
 import MembersTable from './components/MembersTable';
 
-const DepartmentMenu = ({
-    node,
-    selected,
-}: {
-    node: TreeNode;
-    selected: boolean;
-}) => {
+const DepartmentMenu = ({ node, selected }: { node: TreeNode; selected: boolean }) => {
     const [opened, { close, open }] = useDisclosure(false);
 
     return (
@@ -54,8 +48,7 @@ const DepartmentMenu = ({
 };
 
 export default () => {
-    const [departmentTreeScrolled, setDepartmentTreeScrolled] =
-        useState<boolean>(false);
+    const [departmentTreeScrolled, setDepartmentTreeScrolled] = useState<boolean>(false);
     const [selectedNode, setSelectedNode] = useState<TreeNode | null>(null);
     const expandedKeys = useSet<string>([]);
 
@@ -127,7 +120,10 @@ export default () => {
                                 leftSection={<SearchIcon className="size-4" />}
                             />
                             <Tooltip label="Create department">
-                                <ActionIcon size="lg" variant="white">
+                                <ActionIcon
+                                    size="lg"
+                                    variant="white"
+                                >
                                     <PlusIcon className="size-5" />
                                 </ActionIcon>
                             </Tooltip>

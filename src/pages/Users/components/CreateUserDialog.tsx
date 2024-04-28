@@ -54,7 +54,10 @@ const CreateUserDialog: React.FC<CreateUserDialogProps> = ({
             centered
         >
             <Box pos="relative">
-                <Modal.Header mih={0} p="30px 30px 24px">
+                <Modal.Header
+                    mih={0}
+                    p="30px 30px 24px"
+                >
                     <h1 className="text-xl font-medium">Create user</h1>
                     <CloseButton onClick={handleClose} />
                 </Modal.Header>
@@ -95,7 +98,10 @@ const CreateUserDialog: React.FC<CreateUserDialogProps> = ({
                             </div>
                         </div>
                         <div className="pb-5 pt-6 flex items-center justify-end gap-x-2">
-                            <Button variant="default" onClick={handleClose}>
+                            <Button
+                                variant="default"
+                                onClick={handleClose}
+                            >
                                 Cancel
                             </Button>
                             <Button type="submit">Create</Button>

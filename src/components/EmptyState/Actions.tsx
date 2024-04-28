@@ -14,10 +14,7 @@ const Actions = factory(({ children, className, ...others }, ref) => {
     return (
         <div
             ref={ref}
-            className={clsx(
-                'flex items-center justify-center text-center gap-2',
-                className,
-            )}
+            className={clsx('flex items-center justify-center text-center gap-2', className)}
             {...others}
         >
             {children}

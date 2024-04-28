@@ -26,18 +26,9 @@ import {
     UserIcon,
 } from 'lucide-react';
 import React from 'react';
-import {
-    FormattedMessage,
-    Outlet,
-    getAllLocales,
-    getLocale,
-    setLocale,
-} from 'umi';
+import { FormattedMessage, Outlet, getAllLocales, getLocale, setLocale } from 'umi';
 
-const Themes: Record<
-    MantineColorScheme,
-    { label: string; icon: React.ReactNode }
-> = {
+const Themes: Record<MantineColorScheme, { label: string; icon: React.ReactNode }> = {
     auto: { label: 'theme.system', icon: <MonitorIcon className="size-4" /> },
     light: { label: 'theme.light', icon: <SunIcon className="size-4" /> },
     dark: { label: 'theme.dark', icon: <MoonStarIcon className="size-4" /> },
@@ -96,7 +87,10 @@ const Languages: Record<any, { name: string; icon: React.ReactElement }> = {
                         d="M1-.3L-.7.8 0-1 .6.8-1-.3z"
                     ></path>
                 </defs>
-                <path fill="#de2910" d="M0 0h512v512H0z"></path>
+                <path
+                    fill="#de2910"
+                    d="M0 0h512v512H0z"
+                ></path>
                 <use
                     width="30"
                     height="20"
@@ -152,7 +146,10 @@ const AdminLayout = () => {
             padding="md"
         >
             <AppShell.Header>
-                <Group h="100%" px="md">
+                <Group
+                    h="100%"
+                    px="md"
+                >
                     <Burger
                         opened={opened}
                         onClick={toggle}
@@ -165,19 +162,25 @@ const AdminLayout = () => {
                 </Group>
             </AppShell.Header>
             <AppShell.Navbar>
-                <AppShell.Section p="md" grow component={ScrollArea}>
+                <AppShell.Section
+                    p="md"
+                    grow
+                    component={ScrollArea}
+                >
                     <Navbar />
                 </AppShell.Section>
                 <AppShell.Section>
-                    <Menu position="right-end" offset={-10} width={260}>
+                    <Menu
+                        position="right-end"
+                        offset={-10}
+                        width={260}
+                    >
                         <Menu.Target>
                             <div className="flex-initial grid grid-cols-1 items-center w-full h-16 border-t border-gray-200 transition-colors hover:bg-gray-50 cursor-pointer">
                                 <div className="group flex text-sm px-3 gap-x-2 items-center">
                                     <Avatar size={38} />
                                     <div className="flex flex-col gap-y-0.5 items-start justify-center">
-                                        <span className="font-medium">
-                                            Ender
-                                        </span>
+                                        <span className="font-medium">Ender</span>
                                         <span className="text-gray-600 text-xs">
                                             zengande@outlook.com
                                         </span>
@@ -193,7 +196,11 @@ const AdminLayout = () => {
                                 <FormattedMessage id="layouts.admin.menu.appearance" />
                             </Menu.Label>
 
-                            <Menu position="right-end" offset={10} width={160}>
+                            <Menu
+                                position="right-end"
+                                offset={10}
+                                width={160}
+                            >
                                 <Menu.Target>
                                     <Menu.Item
                                         closeMenuOnClick={false}
@@ -221,24 +228,16 @@ const AdminLayout = () => {
                                         const active = locale === currentLocale;
                                         return (
                                             <Menu.Item
-                                                onClick={() =>
-                                                    changeLang(locale)
-                                                }
+                                                onClick={() => changeLang(locale)}
                                                 key={locale}
                                                 leftSection={language.icon}
                                                 className={
-                                                    active
-                                                        ? 'text-primary-600'
-                                                        : 'text-gray-600'
+                                                    active ? 'text-primary-600' : 'text-gray-600'
                                                 }
                                             >
                                                 <div className="flex items-center justify-between">
-                                                    <span className="text-xs">
-                                                        {language.name}
-                                                    </span>
-                                                    {active && (
-                                                        <CheckIcon className="size-4" />
-                                                    )}
+                                                    <span className="text-xs">{language.name}</span>
+                                                    {active && <CheckIcon className="size-4" />}
                                                 </div>
                                             </Menu.Item>
                                         );
@@ -266,12 +265,7 @@ const AdminLayout = () => {
                                                 <FormattedMessage id="layouts.admin.menu.theme" />
                                             </span>
                                             <span className="text-xs text-gray-400">
-                                                <FormattedMessage
-                                                    id={
-                                                        Themes[colorScheme]
-                                                            .label
-                                                    }
-                                                />
+                                                <FormattedMessage id={Themes[colorScheme].label} />
                                             </span>
                                         </div>
                                     </Menu.Item>
@@ -285,23 +279,15 @@ const AdminLayout = () => {
                                                 key={key}
                                                 leftSection={theme.icon}
                                                 className={
-                                                    active
-                                                        ? 'text-primary-600'
-                                                        : 'text-gray-600'
+                                                    active ? 'text-primary-600' : 'text-gray-600'
                                                 }
-                                                onClick={() =>
-                                                    setColorScheme(key)
-                                                }
+                                                onClick={() => setColorScheme(key)}
                                             >
                                                 <div className="flex items-center justify-between">
                                                     <span className="text-xs">
-                                                        <FormattedMessage
-                                                            id={theme.label}
-                                                        />
+                                                        <FormattedMessage id={theme.label} />
                                                     </span>
-                                                    {active && (
-                                                        <CheckIcon className="size-4" />
-                                                    )}
+                                                    {active && <CheckIcon className="size-4" />}
                                                 </div>
                                             </Menu.Item>
                                         );
@@ -317,18 +303,14 @@ const AdminLayout = () => {
                             <Menu.Item
                                 component="a"
                                 href="/"
-                                leftSection={
-                                    <UserIcon className="size-4 stroke-gray-600" />
-                                }
+                                leftSection={<UserIcon className="size-4 stroke-gray-600" />}
                             >
                                 <FormattedMessage id="layouts.admin.menu.yourprofile" />
                             </Menu.Item>
                             <Menu.Item
                                 component="a"
                                 href="/admin"
-                                leftSection={
-                                    <SparklesIcon className="size-4 stroke-gray-600" />
-                                }
+                                leftSection={<SparklesIcon className="size-4 stroke-gray-600" />}
                             >
                                 <FormattedMessage id="layouts.admin.menu.gettingstarted" />
                             </Menu.Item>
@@ -337,9 +319,7 @@ const AdminLayout = () => {
 
                             <Menu.Item
                                 color="red"
-                                leftSection={
-                                    <LogOutIcon className="size-4 stroke-gray-600" />
-                                }
+                                leftSection={<LogOutIcon className="size-4 stroke-gray-600" />}
                                 component="a"
                                 href="/signout"
                             >

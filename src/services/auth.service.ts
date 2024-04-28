@@ -68,9 +68,7 @@ class AuthService {
         return data;
     }
 
-    public async getUser(
-        fromCache: boolean = true,
-    ): Promise<CurrentUserInfo | undefined> {
+    public async getUser(fromCache: boolean = true): Promise<CurrentUserInfo | undefined> {
         try {
             if (fromCache) {
                 const json = localStorage.getItem(UserStoreName);

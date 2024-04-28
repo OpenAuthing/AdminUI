@@ -1,7 +1,4 @@
-export function getSearchParam(
-    searchParams: URLSearchParams,
-    name: string,
-): string | null {
+export function getSearchParam(searchParams: URLSearchParams, name: string): string | null {
     const newParams = new URLSearchParams();
     for (const [name, value] of searchParams) {
         newParams.append(name.toLowerCase(), value);

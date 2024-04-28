@@ -6,14 +6,9 @@ import {
     TableThProps,
     Text,
     UnstyledButton,
-    keys,
 } from '@mantine/core';
 import clsx from 'clsx';
-import {
-    ChevronDownIcon,
-    ChevronUpIcon,
-    ChevronsDownUpIcon,
-} from 'lucide-react';
+import { ChevronDownIcon, ChevronUpIcon, ChevronsDownUpIcon } from 'lucide-react';
 import React from 'react';
 
 interface ThProps extends TableThProps {
@@ -23,14 +18,7 @@ interface ThProps extends TableThProps {
     onSort?(): void;
 }
 
-function Th({
-    sortable,
-    children,
-    reversed,
-    sorted,
-    onSort,
-    ...others
-}: ThProps) {
+function Th({ sortable, children, reversed, sorted, onSort, ...others }: ThProps) {
     const Icon = sortable
         ? sorted
             ? reversed
@@ -40,9 +28,15 @@ function Th({
         : undefined;
     return (
         <MantineTable.Th {...others}>
-            <UnstyledButton onClick={onSort}>
+            <UnstyledButton
+                onClick={onSort}
+                className={clsx(sortable ? 'cursor-pointer' : 'cursor-default')}
+            >
                 <Group justify="space-between">
-                    <Text fw={500} fz="sm">
+                    <Text
+                        fw={500}
+                        fz="sm"
+                    >
                         {children}
                     </Text>
                     {Icon && (
@@ -56,13 +50,15 @@ function Th({
     );
 }
 
-type RowRenderFunction<TData> = (item: TData) => React.ReactNode;
+type RowRenderFunction<TData> = (data: TData, columns: TableColumn[]) => React.ReactNode;
 
 export type TableColumn = {
-    key: string;
+    dataKey: string;
     title: string;
-    width?: number;
+    width?: number | string;
     sortable?: boolean;
+    align?: 'left' | 'center' | 'right' | 'justify' | 'char';
+    render?(value: any): React.ReactNode;
 };
 
 type TableProps<TData> = {
@@ -76,22 +72,30 @@ type TableProps<TData> = {
 
 export const TableTd = MantineTable.Td;
 
-function DefaultRowRender<TData extends object>(data: TData) {
-    return keys(data).map((key, index) => (
-        <TableTd key={index}>{data[key]?.toString() ?? '-'}</TableTd>
-    ));
-}
+const DefaultRowRender = (data: any, columns: TableColumn[]) => {
+    return columns.map((column, index) => {
+        const value = data[column.dataKey];
+
+        const content = column.render ? column.render(value) : value ?? '-';
+
+        return (
+            <TableTd
+                key={index}
+                align={column.align}
+            >
+                <Text
+                    size="sm"
+                    truncate
+                >
+                    {content}
+                </Text>
+            </TableTd>
+        );
+    });
+};
 
 const Table = <TData extends {}>(props: TableProps<TData>) => {
-    const {
-        columns,
-        fixedHeader,
-        scrolled,
-        items,
-        rowRender,
-        children,
-        ...others
-    } = props;
+    const { columns, fixedHeader, scrolled, items, rowRender, children, ...others } = props;
 
     const rowRenderFunc = rowRender || children || DefaultRowRender;
 
@@ -105,7 +109,7 @@ const Table = <TData extends {}>(props: TableProps<TData>) => {
             <MantineTable.Thead
                 className={clsx(
                     {
-                        ['sticky top-0 bg-[var(--mantine-color-body)] transition-[box-shadow]']:
+                        'sticky top-0 bg-[var(--mantine-color-body)] transition-[box-shadow]':
                             fixedHeader,
                     },
                     { ['shadow-md']: fixedHeader && scrolled },
@@ -114,9 +118,10 @@ const Table = <TData extends {}>(props: TableProps<TData>) => {
                 <MantineTable.Tr>
                     {columns.map((column) => (
                         <Th
-                            key={column.key}
+                            key={column.dataKey}
                             sortable={column.sortable}
                             w={column.width}
+                            align={column.align}
                         >
                             {column.title}
                         </Th>
@@ -125,9 +130,7 @@ const Table = <TData extends {}>(props: TableProps<TData>) => {
             </MantineTable.Thead>
             <MantineTable.Tbody>
                 {items?.map((row: any, index) => (
-                    <MantineTable.Tr key={index}>
-                        {rowRenderFunc && rowRenderFunc(row)}
-                    </MantineTable.Tr>
+                    <MantineTable.Tr key={index}>{rowRenderFunc(row, columns)}</MantineTable.Tr>
                 ))}
             </MantineTable.Tbody>
         </MantineTable>

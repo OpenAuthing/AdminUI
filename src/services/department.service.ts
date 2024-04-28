@@ -5,9 +5,7 @@ const ROOT_URL = '/api/admin/departments';
 
 const DepartmentService = {
     getChildren: async (parentId?: string) => {
-        const { data } = await request(
-            `${ROOT_URL}?parentId=${parentId ?? ''}`,
-        );
+        const { data } = await request(`${ROOT_URL}?parentId=${parentId ?? ''}`);
 
         return data;
     },
@@ -75,15 +73,12 @@ const DepartmentService = {
         userId: string;
         isLeader: boolean;
     }) => {
-        return await request(
-            `${ROOT_URL}/${departmentId}/members/${userId}/leader`,
-            {
-                method: 'PUT',
-                params: {
-                    isLeader,
-                },
+        return await request(`${ROOT_URL}/${departmentId}/members/${userId}/leader`, {
+            method: 'PUT',
+            params: {
+                isLeader,
             },
-        );
+        });
     },
     setMain: async ({
         departmentId,
@@ -94,15 +89,12 @@ const DepartmentService = {
         userId: string;
         isMain: boolean;
     }) => {
-        return await request(
-            `${ROOT_URL}/${departmentId}/members/${userId}/main`,
-            {
-                method: 'PUT',
-                params: {
-                    isMain,
-                },
+        return await request(`${ROOT_URL}/${departmentId}/members/${userId}/main`, {
+            method: 'PUT',
+            params: {
+                isMain,
             },
-        );
+        });
     },
 };
 

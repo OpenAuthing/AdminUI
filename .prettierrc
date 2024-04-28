@@ -1,6 +1,8 @@
 {
     "tabWidth": 4,
-    "printWidth": 80,
+    "printWidth": 100,
+    "bracketSameLine": false,
+    "singleAttributePerLine": true,
     "singleQuote": true,
     "trailingComma": "all",
     "proseWrap": "never",

@@ -13,9 +13,9 @@ export default function Page() {
                     <PageHeader.Content>
                         <PageHeader.Title>User Groups</PageHeader.Title>
                         <PageHeader.Description>
-                            An easy to use UI to help administrators manage user
-                            identities including password resets, creating and
-                            provisioning, blocking and deleting users.
+                            An easy to use UI to help administrators manage user identities
+                            including password resets, creating and provisioning, blocking and
+                            deleting users.
                         </PageHeader.Description>
                     </PageHeader.Content>
                 </PageHeader>
@@ -29,14 +29,11 @@ export default function Page() {
                                 icon="local:empty-1"
                             />
                         </EmptyState.Icon>
-                        <EmptyState.Subtitle>
-                            You don't have any users yet.
-                        </EmptyState.Subtitle>
+                        <EmptyState.Subtitle>You don't have any users yet.</EmptyState.Subtitle>
                         <EmptyState.Content>
                             <EmptyState.Message>
-                                All of your users will be found here, regardless
-                                of the authentication method they use to access
-                                your applications.
+                                All of your users will be found here, regardless of the
+                                authentication method they use to access your applications.
                             </EmptyState.Message>
                             <EmptyState.Actions>
                                 <Button>

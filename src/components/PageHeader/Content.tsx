@@ -12,10 +12,8 @@ export type PageHeaderContentFactory = Factory<{
     };
 }>;
 
-const PageHeaderContent = factory<PageHeaderContentFactory>(
-    ({ children }, _) => {
-        return <div className="flex-1 p-2 gap-2">{children}</div>;
-    },
-);
+const PageHeaderContent = factory<PageHeaderContentFactory>(({ children }, _) => {
+    return <div className="flex-1 p-2 gap-2">{children}</div>;
+});
 
 export default PageHeaderContent;

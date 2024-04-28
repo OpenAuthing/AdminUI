@@ -7,9 +7,7 @@ import { FormattedMessage } from 'umi';
 export default () => {
     return (
         <Content>
-            <PageHeader
-                title={<FormattedMessage id="pages.gettingstarted.header" />}
-            />
+            <PageHeader title={<FormattedMessage id="pages.gettingstarted.header" />} />
             <Space h="md" />
             <div className="grid auto-cols-fr gap-6">
                 <div className="flex rounded-xl w-full bg-gray-100">
@@ -45,18 +43,13 @@ export default () => {
                             <div className="size-12 rounded-full bg-gray-200"></div>
                         </div>
                         <div>
-                            <h3 className="mb-1 text-base font-medium">
-                                Invite your team members
-                            </h3>
+                            <h3 className="mb-1 text-base font-medium">Invite your team members</h3>
                             <p className="text-gray-600 text-sm leading-relaxed">
-                                Add additional admins to help with your
-                                integration and act as a backup account in case
-                                you lose access.
+                                Add additional admins to help with your integration and act as a
+                                backup account in case you lose access.
                             </p>
                             <div className="mt-4 text-sm">
-                                <span className="text-gray-600">
-                                    Learn more about
-                                </span>
+                                <span className="text-gray-600">Learn more about</span>
                             </div>
                         </div>
                         <div className="flex items-center justify-end">

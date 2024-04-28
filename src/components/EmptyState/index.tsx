@@ -6,8 +6,7 @@ import Icon from './Icon';
 import Message from './Message';
 import Subtitle from './Subtitle';
 
-export interface EmptyStateProps
-    extends React.HtmlHTMLAttributes<HTMLDivElement> {
+export interface EmptyStateProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
     children?: React.ReactNode;
 }
 

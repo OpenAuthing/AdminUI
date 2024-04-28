@@ -3,11 +3,7 @@ import { request } from '@/lib/request';
 const ROOT_URL = '/api/admin/usergroups';
 
 const UserGroupService = {
-    getAll: async (params: {
-        search?: string;
-        pageIndex?: number;
-        pageSize?: number;
-    }) => {
+    getAll: async (params: { search?: string; pageIndex?: number; pageSize?: number }) => {
         const { data } = await request(ROOT_URL, {
             method: 'GET',
             params,
