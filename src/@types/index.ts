@@ -22,3 +22,8 @@ export type PaginitionReqParams = {
     current: number;
     pageSize: number;
 };
+
+export enum RoleSubjectType {
+    User = 0,
+    UserGroup = 1,
+}

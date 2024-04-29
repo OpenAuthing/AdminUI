@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import Navbar from '@/components/Navbar';
+import { OidcUserStatus, useOidcUser, withOidcSecure } from '@axa-fr/react-oidc';
 import {
     AppShell,
     Avatar,
@@ -115,7 +116,8 @@ const Languages: Record<any, { name: string; icon: React.ReactElement }> = {
     },
 };
 
-const AdminLayout = () => {
+const AdminLayout: React.FC<any> = (props) => {
+    const user = useOidcUser();
     const [opened, { toggle }] = useDisclosure();
     const { colorScheme, setColorScheme } = useMantineColorScheme();
     const changeLang = (lang: string): void => {
@@ -123,6 +125,9 @@ const AdminLayout = () => {
     };
     const currentLocale = getLocale();
     const currentLanguage = Languages[currentLocale]!;
+
+    if (user.oidcUserLoadingState !== OidcUserStatus.Loaded) return null;
+    const currentUser = user.oidcUser;
 
     return (
         <AppShell
@@ -153,9 +158,9 @@ const AdminLayout = () => {
                                 <div className="group flex text-sm px-3 gap-x-2 items-center">
                                     <Avatar size={38} />
                                     <div className="flex flex-col gap-y-0.5 items-start justify-center">
-                                        <span className="font-medium">Ender</span>
+                                        <span className="font-medium">{currentUser.nickname}</span>
                                         <span className="text-gray-600 text-xs">
-                                            zengande@outlook.com
+                                            {currentUser.preferred_username}
                                         </span>
                                     </div>
                                     <UnstyledButton className="ml-auto">
@@ -285,7 +290,7 @@ const AdminLayout = () => {
                                 color="red"
                                 leftSection={<LogOutIcon className="size-4 stroke-gray-600" />}
                                 component="a"
-                                href="/signout"
+                                href="/sign-out"
                             >
                                 <FormattedMessage id="layouts.admin.menu.signout" />
                             </Menu.Item>
@@ -305,5 +310,4 @@ const AdminLayout = () => {
     );
 };
 
-export default AdminLayout;
-// export default withOidcSecure(AdminLayout);
+export default withOidcSecure(AdminLayout);

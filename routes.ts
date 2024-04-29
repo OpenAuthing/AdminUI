@@ -145,6 +145,14 @@ const routes: Array<RouteType> = [
                 ],
             },
             {
+                path: '/sign-out',
+                component: 'SignOut',
+            },
+            {
+                path: '/post-sign-out',
+                component: 'SignOut/Post',
+            },
+            {
                 path: '/',
                 redirect: '/admin/dashboard',
             },

@@ -22,6 +22,18 @@ class UserService {
             },
         });
     }
+
+    getUser(userId: string) {
+        return request(`${ROOT_URL}/${userId}`, {
+            method: 'GET',
+        });
+    }
+
+    getUserRoles(userId: string) {
+        return request(`${ROOT_URL}/${userId}/roles`, {
+            method: 'GET',
+        });
+    }
 }
 
 // const UserService = {

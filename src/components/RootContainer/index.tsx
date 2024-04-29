@@ -6,6 +6,7 @@ import {
     InputWrapper,
     LoadingOverlay,
     MantineProvider,
+    Tabs,
     createTheme,
 } from '@mantine/core';
 import { DatesProvider } from '@mantine/dates';
@@ -61,7 +62,16 @@ const mantineTheme = createTheme({
         },
         Avatar: Avatar.extend({
             defaultProps: {
+                color: 'primary.5',
                 children: <UserIcon className="size-5" />,
+            },
+        }),
+        Tabs: Tabs.extend({
+            defaultProps: {
+                fw: 500,
+            },
+            classNames: {
+                tab: 'data-[active=true]:text-primary-500',
             },
         }),
     },

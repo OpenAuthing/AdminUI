@@ -1,5 +1,6 @@
 import { ResponseResult } from '@/@types';
 import RootContainer from '@/components/RootContainer';
+import { OidcClient } from '@axa-fr/react-oidc';
 import React from 'react';
 import { AxiosRequestConfig, AxiosResponse, RuntimeConfig, getIntl, getLocale, history } from 'umi';
 
@@ -69,11 +70,11 @@ export const request: RuntimeConfig['request'] = {
     },
     requestInterceptors: [
         (config: AxiosRequestConfig) => {
-            // const oidc = getOidc()
-            // let headers = config.headers || {}
-            // if (oidc && oidc?.tokens) {
-            //     headers['Authorization'] = `Bearer ${oidc.tokens.accessToken}`
-            // }
+            const oidc = OidcClient.get();
+            let headers = config.headers || {};
+            if (oidc && oidc?.tokens) {
+                headers['Authorization'] = `Bearer ${oidc.tokens.accessToken}`;
+            }
 
             // Accept-Language
             const locale = getLocale();
@@ -117,4 +118,17 @@ export const rootContainer: RuntimeConfig['rootContainer'] = (
     args?: any,
 ) => {
     return React.createElement(RootContainer, null, lastContainer);
+};
+
+export const locale: RuntimeConfig['locale'] = {
+    // locale: string
+    // formats: CustomFormats
+    // messages: Record<string, string> | Record<string, MessageFormatElement[]>
+    // defaultLocale: string
+    // defaultFormats: CustomFormats
+    // timeZone?: string
+    // textComponent?: React.ComponentType | keyof React.ReactHTML
+    // wrapRichTextChunksInFragment?: boolean
+    // defaultRichTextElements?: Record<string, FormatXMLElementFn<React.ReactNode>>
+    // onError(err: string): void
 };

@@ -7,7 +7,9 @@
         "add": "Add",
         "save": "Save",
         "edit": "Edit",
-        "delete": "Delete"
+        "delete": "Delete",
+        "enabled": "Enabled",
+        "disabled": "Disabled"
     },
     "routes": {
         "menus": {
@@ -100,6 +102,36 @@
             },
             "add": {
                 "addposition": "Add Position"
+            }
+        },
+        "users": {
+            "search.placeholder": "Search users",
+            "header": {
+                "title": "Users",
+                "description": "An easy to use UI to help administrators manage user identities including password resets, creating and provisioning, blocking and deleting users.",
+                "actions": {
+                    "createuser": "Create User"
+                }
+            },
+            "empty": {
+                "subtitle": "You don't have any users yet.",
+                "message": "All of your users will be found here, regardless of the authentication method they use to access your applications."
+            },
+            "table": {
+                "columns": {
+                    "name": "Name",
+                    "email": "Email",
+                    "phone": "Phone",
+                    "status": "Status"
+                },
+                "actions": {
+                    "viewdetails": "View Details",
+                    "assignrole": "Assign Role",
+                    "assigngroup": "Assign Group",
+                    "sendverificationemail": "Send Verification Email",
+                    "disable": "Disable",
+                    "delete": "Delete"
+                }
             }
         }
     }

@@ -149,7 +149,7 @@ export default function Page() {
     const CreateButton = memo(() => (
         <Button type="button" onClick={openAddModal}>
             <Group gap={rem(4)}>
-                <PlusIcon className="size-4 mr-1" />
+                <PlusIcon className="size-4 stroke-2" />
                 <Text size="sm">
                     <FormattedMessage id="pages.positions.header.actions.addposition" />
                 </Text>

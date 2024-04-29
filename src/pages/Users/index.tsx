@@ -17,6 +17,7 @@ import {
     ScrollArea,
     Text,
     TextInput,
+    rem,
 } from '@mantine/core';
 import { useDebouncedValue, useDisclosure, useInputState } from '@mantine/hooks';
 import {
@@ -24,17 +25,17 @@ import {
     BookUserIcon,
     MailCheckIcon,
     MoreHorizontalIcon,
-    PlusIcon,
+    ShieldCheckIcon,
     Trash2Icon,
     UserRoundCheckIcon,
+    UserRoundPlusIcon,
     UserRoundSearchIcon,
 } from 'lucide-react';
 import { memo, useState } from 'react';
-import { Icon, Link, history, useIntl, useRequest } from 'umi';
+import { FormattedMessage, Icon, Link, history, useIntl, useRequest } from 'umi';
 import CreateUserDialog from './components/CreateUserDialog';
 
 const UserTable = Table<ListUserModel>;
-const MenuText = <Text size="xs" c="gray.6" fw={500}></Text>;
 
 export default function Page() {
     const intl = useIntl();
@@ -62,26 +63,19 @@ export default function Page() {
 
     const { total = 0, list = [] } = data ?? {};
 
-    const CreateUserButton = memo(() => (
-        <Button onClick={open}>
-            <PlusIcon className="size-5 mr-2" />
-            Create User
-        </Button>
-    ));
-
     const columns: TableColumn<ListUserModel>[] = [
         {
             dataKey: 'nickname',
-            title: 'User',
-            render(value, data) {
+            title: intl.formatMessage({ id: 'pages.users.table.columns.name' }),
+            render(value: string, data) {
                 return (
                     <Group gap="xs">
                         <Avatar size={40} src={data.avatar}>
-                            {data.nickname?.substring(0, 1) ?? 'U'}
+                            {data.nickname?.substring(0, 1).toUpperCase() ?? 'U'}
                         </Avatar>
                         <Flex direction="column" gap={4}>
                             <Link to={`/admin/users/${data.id}`}>
-                                <Text c="primary.5" size="sm" fw={500} truncate>
+                                <Text c="primary.5" size="sm" fw={600} truncate>
                                     {value}
                                 </Text>
                             </Link>
@@ -95,20 +89,20 @@ export default function Page() {
         },
         {
             dataKey: 'emailAddress',
-            title: 'Email Address',
+            title: intl.formatMessage({ id: 'pages.users.table.columns.email' }),
         },
         {
             dataKey: 'phoneNumber',
-            title: 'Phone Number',
+            title: intl.formatMessage({ id: 'pages.users.table.columns.phone' }),
         },
         {
             dataKey: 'enabled',
-            title: 'Status',
+            title: intl.formatMessage({ id: 'pages.users.table.columns.status' }),
             width: 120,
             render(value) {
                 return (
                     <Badge color={value ? 'green.9' : 'red.9'}>
-                        {value ? 'Enabled' : 'Disabled'}
+                        <FormattedMessage id={value ? 'common.enabled' : 'common.disabled'} />
                     </Badge>
                 );
             },
@@ -118,7 +112,7 @@ export default function Page() {
             title: '',
             width: '100px',
             align: 'right',
-            render: (id) => (
+            render: (id, row) => (
                 <Menu width={200} position="bottom-end" shadow="lg">
                     <Menu.Target>
                         <ActionIcon variant="outline" color="gray.6">
@@ -132,39 +126,68 @@ export default function Page() {
                             leftSection={<BookUserIcon className="size-4" />}
                         >
                             <Text size="xs" fw={500}>
-                                View Details
+                                <FormattedMessage id="pages.users.table.actions.viewdetails" />
                             </Text>
                         </Menu.Item>
-                        <Menu.Divider />
-                        <Menu.Item
-                            c="gray.6"
-                            leftSection={<UserRoundCheckIcon className="size-4" />}
-                        >
-                            <Text size="xs" fw={500}>
-                                Assign Group
-                            </Text>
-                        </Menu.Item>
-                        <Menu.Item c="gray.6" leftSection={<MailCheckIcon className="size-4" />}>
-                            <Text size="xs" fw={500}>
-                                Send Verification Email
-                            </Text>
-                        </Menu.Item>
-                        <Menu.Divider />
-                        <Menu.Item c="gray.6" leftSection={<BanIcon className="size-4" />}>
-                            <Text size="xs" fw={500}>
-                                Disable
-                            </Text>
-                        </Menu.Item>
-                        <Menu.Item c="red.6" leftSection={<Trash2Icon className="size-4" />}>
-                            <Text size="xs" fw={500}>
-                                Delete
-                            </Text>
-                        </Menu.Item>
+                        {!row.isSystemBuiltIn && (
+                            <>
+                                <Menu.Divider />
+                                <Menu.Item
+                                    c="gray.6"
+                                    leftSection={<ShieldCheckIcon className="size-4" />}
+                                >
+                                    <Text size="xs" fw={500}>
+                                        <FormattedMessage id="pages.users.table.actions.assignrole" />
+                                    </Text>
+                                </Menu.Item>
+                                <Menu.Item
+                                    c="gray.6"
+                                    leftSection={<UserRoundCheckIcon className="size-4" />}
+                                >
+                                    <Text size="xs" fw={500}>
+                                        <FormattedMessage id="pages.users.table.actions.assigngroup" />
+                                    </Text>
+                                </Menu.Item>
+                                <Menu.Item
+                                    c="gray.6"
+                                    leftSection={<MailCheckIcon className="size-4" />}
+                                >
+                                    <Text size="xs" fw={500}>
+                                        <FormattedMessage id="pages.users.table.actions.sendverificationemail" />
+                                    </Text>
+                                </Menu.Item>
+                                <Menu.Divider />
+                                <Menu.Item c="gray.6" leftSection={<BanIcon className="size-4" />}>
+                                    <Text size="xs" fw={500}>
+                                        <FormattedMessage id="pages.users.table.actions.disable" />
+                                    </Text>
+                                </Menu.Item>
+                                <Menu.Item
+                                    c="red.6"
+                                    leftSection={<Trash2Icon className="size-4" />}
+                                >
+                                    <Text size="xs" fw={500}>
+                                        <FormattedMessage id="pages.users.table.actions.delete" />
+                                    </Text>
+                                </Menu.Item>
+                            </>
+                        )}
                     </Menu.Dropdown>
                 </Menu>
             ),
         },
     ];
+
+    const CreateUserButton = memo(() => (
+        <Button onClick={open}>
+            <Group gap={rem(4)}>
+                <UserRoundPlusIcon className="size-4 stroke-2" />
+                <Text size="sm">
+                    <FormattedMessage id="pages.users.header.actions.createuser" />
+                </Text>
+            </Group>
+        </Button>
+    ));
 
     return (
         <>
@@ -172,13 +195,14 @@ export default function Page() {
                 <div className="grid grid-cols-1 gap-y-10">
                     <PageHeader>
                         <PageHeader.Content>
-                            <PageHeader.Title>Users</PageHeader.Title>
+                            <PageHeader.Title>
+                                <FormattedMessage id="pages.users.header.title" />
+                            </PageHeader.Title>
                             <PageHeader.Description>
-                                An easy to use UI to help administrators manage user identities
-                                including password resets, creating and provisioning, blocking and
-                                deleting users.
+                                <FormattedMessage id="pages.users.header.description" />
                             </PageHeader.Description>
                         </PageHeader.Content>
+                        <PageHeader.Actions>{!isEmpty && <CreateUserButton />}</PageHeader.Actions>
                     </PageHeader>
                     <Box pos="relative">
                         <LoadingOverlay visible={false} />
@@ -190,13 +214,11 @@ export default function Page() {
                                         <Icon height="180" width="180" icon="local:empty-1" />
                                     </EmptyState.Icon>
                                     <EmptyState.Subtitle>
-                                        You don't have any users yet.
+                                        <FormattedMessage id="pages.users.empty.subtitle" />
                                     </EmptyState.Subtitle>
                                     <EmptyState.Content>
                                         <EmptyState.Message>
-                                            All of your users will be found here, regardless of the
-                                            authentication method they use to access your
-                                            applications.
+                                            <FormattedMessage id="pages.users.empty.message" />
                                         </EmptyState.Message>
                                         <EmptyState.Actions>
                                             <CreateUserButton />
@@ -209,7 +231,9 @@ export default function Page() {
                                 <div className="flex items-center justify-between">
                                     <div className="flex-[1_0_auto]">
                                         <TextInput
-                                            placeholder="Search of positions"
+                                            placeholder={intl.formatMessage({
+                                                id: 'pages.users.search.placeholder',
+                                            })}
                                             leftSection={<UserRoundSearchIcon className="size-4" />}
                                         />
                                     </div>

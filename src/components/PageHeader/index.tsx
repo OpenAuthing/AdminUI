@@ -2,6 +2,7 @@ import { Factory, factory, useProps } from '@mantine/core';
 import { useId } from '@mantine/hooks';
 import React from 'react';
 import PageHeaderActions from './Actions';
+import PageHeaderAvatar from './Avatar';
 import PageHeaderContent from './Content';
 import PageHeaderDescription from './Description';
 import PageHeaderTitle from './Title';
@@ -15,9 +16,10 @@ export type PageHeaderFactory = Factory<{
     props: PageHeaderProps;
     ref: HTMLDivElement | null;
     staticComponents: {
+        Avatar: typeof PageHeaderAvatar;
+        Content: typeof PageHeaderContent;
         Title: typeof PageHeaderTitle;
         Description: typeof PageHeaderDescription;
-        Content: typeof PageHeaderContent;
         Actions: typeof PageHeaderActions;
     };
 }>;
@@ -37,6 +39,7 @@ const PageHeader = factory<PageHeaderFactory>((_props, ref) => {
     );
 });
 
+PageHeader.Avatar = PageHeaderAvatar;
 PageHeader.Title = PageHeaderTitle;
 PageHeader.Description = PageHeaderDescription;
 PageHeader.Content = PageHeaderContent;
