@@ -16,10 +16,7 @@ export default ({ value }: Props) => {
                 <span className="text-xs bg-gray-200/80 text-gray-500 rounded px-2 py-1">
                     {value}
                 </span>
-                <CopyButton
-                    value={value}
-                    timeout={2000}
-                >
+                <CopyButton value={value} timeout={2000}>
                     {({ copied, copy }) => (
                         <Tooltip
                             label={intl.formatMessage({

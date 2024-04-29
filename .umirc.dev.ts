@@ -8,8 +8,8 @@ export default defineConfig({
         ODIC_CLIENT_ID: 'openauthing-admin',
         ODIC_CLIENT_SECRET: '',
 
-        USER_PROFILE_URL: 'http://localhost:5129/#/settings/profile',
+        USER_PROFILE_URL: 'http://localhost:5129/settings/profile',
 
-        ADMIN_API_BASE_URL: 'https://mock.apifox.com/m1/3236434-2267735-default',
+        ADMIN_API_BASE_URL: 'http://localhost:5130',
     },
 });

@@ -20,10 +20,7 @@ const PasswordRequirement = ({ meets, label }: { meets: boolean; label: string }
             size="sm"
         >
             {meets ? <CheckIcon className="size-4" /> : <XIcon className="size-4" />}{' '}
-            <Text
-                ml={10}
-                size="sm"
-            >
+            <Text ml={10} size="sm">
                 {label}
             </Text>
         </Box>
@@ -77,12 +74,7 @@ const StrongPasswordInput: React.FC<StrongPasswordInputProps> = (props) => {
                 </div>
             </Popover.Target>
             <Popover.Dropdown>
-                <Progress
-                    color={color}
-                    value={strength}
-                    size={5}
-                    mb="xs"
-                />
+                <Progress color={color} value={strength} size={5} mb="xs" />
                 <PasswordRequirement
                     label="Includes at least 6 characters"
                     meets={password.length > 5}

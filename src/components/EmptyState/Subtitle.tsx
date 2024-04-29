@@ -12,10 +12,7 @@ export type SubtitleFactory = Factory<{
 
 const Subtitle = factory<SubtitleFactory>(({ className, children, ...others }, ref) => {
     return (
-        <h4
-            className={clsx('mb-2 font-medium text-2xl', className)}
-            {...others}
-        >
+        <h4 className={clsx('mb-2 font-medium text-2xl', className)} {...others}>
             {children}
         </h4>
     );

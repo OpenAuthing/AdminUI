@@ -28,10 +28,7 @@ const ApplicationTypes = [
 const Copy = ({ value }: { value?: any }) => {
     const intl = useIntl();
     return (
-        <CopyButton
-            value={value}
-            timeout={2000}
-        >
+        <CopyButton value={value} timeout={2000}>
             {({ copied, copy }) => (
                 <Tooltip
                     label={intl.formatMessage({
@@ -40,11 +37,7 @@ const Copy = ({ value }: { value?: any }) => {
                     withArrow
                     position="top"
                 >
-                    <ActionIcon
-                        className="text-gray-700"
-                        variant="subtle"
-                        onClick={copy}
-                    >
+                    <ActionIcon className="text-gray-700" variant="subtle" onClick={copy}>
                         <CopyIcon className="size-4" />
                     </ActionIcon>
                 </Tooltip>
@@ -229,10 +222,7 @@ export default () => {
                                 >
                                     <div className="grid grid-cols-1 pb-1">
                                         <div className="flex items-center justify-center h-32 border border-b-0 border-[val(--input-bd)] rounded-tl-md rounded-tr-md">
-                                            <img
-                                                className="h-14"
-                                                src="/assets/logo.png"
-                                            />
+                                            <img className="h-14" src="/assets/logo.png" />
                                         </div>
                                         <TextInput
                                             classNames={{
@@ -285,11 +275,7 @@ export default () => {
                         <div className="border-t w-[calc(100%-var(--app-shell-navbar-width))] flex items-center justify-center">
                             <div className="flex justify-between px-10 items-center 2xl:px-0 2xl:w-5/6 w-full h-full">
                                 <div className="flex items-center gap-x-3">
-                                    <Text
-                                        size="sm"
-                                        c="gray.6"
-                                        fw={500}
-                                    >
+                                    <Text size="sm" c="gray.6" fw={500}>
                                         Save changes
                                     </Text>
                                     <div>
@@ -297,16 +283,10 @@ export default () => {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-x-2">
-                                    <Button
-                                        variant="transparent"
-                                        c="gray.7"
-                                    >
+                                    <Button variant="transparent" c="gray.7">
                                         Cancel
                                     </Button>
-                                    <Button
-                                        type="submit"
-                                        ref={submitBtnRef}
-                                    >
+                                    <Button type="submit" ref={submitBtnRef}>
                                         Save Changes
                                     </Button>
                                 </div>
@@ -328,10 +308,7 @@ export default () => {
                             </p>
                         </div>
                         <div>
-                            <Button
-                                variant="filled"
-                                color="red.9"
-                            >
+                            <Button variant="filled" color="red.9">
                                 Delete
                             </Button>
                         </div>
@@ -345,10 +322,7 @@ export default () => {
                             </p>
                         </div>
                         <div>
-                            <Button
-                                variant="filled"
-                                color="red.9"
-                            >
+                            <Button variant="filled" color="red.9">
                                 Rotate
                             </Button>
                         </div>

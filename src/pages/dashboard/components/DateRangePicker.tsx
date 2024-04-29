@@ -39,12 +39,7 @@ const DateRangePicker = (props: DateRangePickerProps) => {
     };
 
     return (
-        <Popover
-            position="bottom-end"
-            offset={0}
-            shadow="lg"
-            withinPortal={false}
-        >
+        <Popover position="bottom-end" offset={0} shadow="lg" withinPortal={false}>
             <Popover.Target>
                 <UnstyledButton className="flex items-center gap-x-2 px-3 py-2 rounded-md border border-solid text-gray-600 border-gray-300">
                     <CalendarDaysIcon className="size-4" />
@@ -69,10 +64,7 @@ const DateRangePicker = (props: DateRangePickerProps) => {
                         </div>
                     </div>
                     <div className="flex items-center justify-end p-4">
-                        <Button
-                            size="sm"
-                            variant="link"
-                        >
+                        <Button size="sm" variant="link">
                             Apply
                         </Button>
                     </div>

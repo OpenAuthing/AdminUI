@@ -51,11 +51,7 @@ export default () => {
                     <div className="flex items-center justify-end">
                         <DateRangePicker />
                     </div>
-                    <Paper
-                        withBorder
-                        p="md"
-                        radius="md"
-                    >
+                    <Paper withBorder p="md" radius="md">
                         <div className="grid grid-cols-1 gap-y-6">
                             <div className="flex gap-x-2 items-center">
                                 <h2 className="text-lg text-gray-500 font-medium">

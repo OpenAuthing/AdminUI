@@ -30,17 +30,8 @@ export default ({ opened, onClose, onCreate }: Props) => {
     };
 
     return (
-        <Modal
-            size="50rem"
-            withCloseButton={false}
-            opened={opened}
-            onClose={onClose}
-            centered
-        >
-            <Modal.Header
-                mih={0}
-                p="30px 30px 24px"
-            >
+        <Modal size="50rem" withCloseButton={false} opened={opened} onClose={onClose} centered>
+            <Modal.Header mih={0} p="30px 30px 24px">
                 <h1 className="text-xl font-medium">Create Application</h1>
 
                 <CloseButton onClick={onClose} />
@@ -71,25 +62,14 @@ export default ({ opened, onClose, onCreate }: Props) => {
                                     >
                                         <div className="grid grid-cols-1 text-center justify-center gap-4">
                                             <div className="mx-auto size-16 bg-gray-200/80 rounded"></div>
-                                            <Text
-                                                component="h6"
-                                                size="sm"
-                                                fw={500}
-                                            >
+                                            <Text component="h6" size="sm" fw={500}>
                                                 Native
                                             </Text>
-                                            <Text
-                                                size="sm"
-                                                lh={1.5}
-                                            >
+                                            <Text size="sm" lh={1.5}>
                                                 Mobile, desktop, CLI and smart device apps running
                                                 natively.
                                             </Text>
-                                            <Text
-                                                size="sm"
-                                                lh={1.5}
-                                                className="text-gray-500"
-                                            >
+                                            <Text size="sm" lh={1.5} className="text-gray-500">
                                                 e.g.: iOS, Electron, Apple TV apps
                                             </Text>
                                         </div>
@@ -99,10 +79,7 @@ export default ({ opened, onClose, onCreate }: Props) => {
                         </div>
                     </div>
                     <div className="pb-5 pt-6 flex items-center justify-end gap-x-2">
-                        <Button
-                            variant="default"
-                            onClick={onClose}
-                        >
+                        <Button variant="default" onClick={onClose}>
                             Cancel
                         </Button>
                         <Button type="submit">Create</Button>

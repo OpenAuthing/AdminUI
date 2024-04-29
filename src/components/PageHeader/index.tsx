@@ -31,12 +31,7 @@ const PageHeader = factory<PageHeaderFactory>((_props, ref) => {
     const uid = useId(id);
 
     return (
-        <div
-            ref={ref}
-            id={uid}
-            className="flex justify-between items-center gap-x-4"
-            {...others}
-        >
+        <div ref={ref} id={uid} className="flex justify-between items-center gap-x-4" {...others}>
             {children}
         </div>
     );

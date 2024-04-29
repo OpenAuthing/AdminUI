@@ -27,28 +27,16 @@ const ApplicationList = ({ list }: ApplicationListProps) => {
                             className="border-gray-200 border-solid border-b hover:bg-gray-100"
                             key={item.id}
                         >
-                            <Table.Td
-                                className="p-4"
-                                width={350}
-                            >
+                            <Table.Td className="p-4" width={350}>
                                 <Link to={`/admin/applications/${item.id}/settings`}>
                                     <div className="flex gap-x-4 items-start">
                                         <div className="size-10 bg-gray-200/80 rounded flex items-center justify-center"></div>
                                         <div className="flex-1 grid grid-cols-1 justify-between">
-                                            <Text
-                                                truncate="end"
-                                                size="sm"
-                                                c="primary"
-                                                fw={500}
-                                            >
+                                            <Text truncate="end" size="sm" c="primary" fw={500}>
                                                 {item.name}
                                             </Text>
 
-                                            <Text
-                                                size="sm"
-                                                className="text-gray-500"
-                                                fw={500}
-                                            >
+                                            <Text size="sm" className="text-gray-500" fw={500}>
                                                 {item.typeLabel}
                                             </Text>
                                         </div>
@@ -58,21 +46,11 @@ const ApplicationList = ({ list }: ApplicationListProps) => {
                             <Table.Td className="p-4">
                                 <ClientId value={item.clientId} />
                             </Table.Td>
-                            <Table.Td
-                                className="p-4"
-                                width={70}
-                            >
+                            <Table.Td className="p-4" width={70}>
                                 <div className="flex items-center justify-end">
-                                    <Menu
-                                        width={180}
-                                        position="bottom-end"
-                                        shadow="lg"
-                                    >
+                                    <Menu width={180} position="bottom-end" shadow="lg">
                                         <Menu.Target>
-                                            <ActionIcon
-                                                variant="default"
-                                                aria-label="Settings"
-                                            >
+                                            <ActionIcon variant="default" aria-label="Settings">
                                                 <MoreHorizontalIcon className="size-5 stroke-gray-500" />
                                             </ActionIcon>
                                         </Menu.Target>

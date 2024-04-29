@@ -18,17 +18,8 @@ const CreateRoleModal: React.FC<CreateRoleModalProps> = ({
     const handleCreate = (value: any) => {};
 
     return (
-        <Modal
-            size="40rem"
-            withCloseButton={false}
-            opened={opened}
-            onClose={onClose}
-            centered
-        >
-            <Modal.Header
-                mih={0}
-                p="30px 30px 24px"
-            >
+        <Modal size="40rem" withCloseButton={false} opened={opened} onClose={onClose} centered>
+            <Modal.Header mih={0} p="30px 30px 24px">
                 <h1 className="text-xl font-medium">New Role</h1>
                 <CloseButton onClick={onClose} />
             </Modal.Header>
@@ -49,10 +40,7 @@ const CreateRoleModal: React.FC<CreateRoleModalProps> = ({
                         />
                     </div>
                     <div className="pb-5 pt-6 flex items-center justify-end gap-x-2">
-                        <Button
-                            variant="default"
-                            onClick={onClose}
-                        >
+                        <Button variant="default" onClick={onClose}>
                             Cancel
                         </Button>
                         <Button type="submit">Create</Button>

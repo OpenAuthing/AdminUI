@@ -1,4 +1,4 @@
-import { CreatePositionModel } from '@/@types/Position';
+import { CreatePositionModel } from '@/@types/position';
 import { request } from '@/lib/request';
 
 class PositionService {

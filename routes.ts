@@ -85,9 +85,18 @@ const routes: Array<RouteType> = [
                             },
                             {
                                 path: '/admin/users',
-                                component: 'Users',
                                 showInMenu: true,
                                 label: 'routes.menus.users',
+                                routes: [
+                                    {
+                                        path: '/admin/users',
+                                        component: 'Users',
+                                    },
+                                    {
+                                        path: '/admin/users/:id',
+                                        component: 'Users/Details',
+                                    },
+                                ],
                             },
                             {
                                 path: '/admin/user-groups',

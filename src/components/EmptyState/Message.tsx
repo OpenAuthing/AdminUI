@@ -9,14 +9,7 @@ export type MessageFactory = Factory<{
 
 const Message = factory<MessageFactory>(({ children, ...others }, ref) => {
     return (
-        <Text
-            mb={rem(8)}
-            size="sm"
-            c="gray.6"
-            ta="center"
-            lh="1.5rem"
-            {...others}
-        >
+        <Text mb={rem(8)} size="sm" c="gray.6" ta="center" lh="1.5rem" {...others}>
             {children}
         </Text>
     );

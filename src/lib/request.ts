@@ -8,7 +8,6 @@ export const request = (
     url: string,
     opts: any = {
         method: 'GET',
-        withCredentials: true,
         signal: controller.signal,
     },
 ) =>

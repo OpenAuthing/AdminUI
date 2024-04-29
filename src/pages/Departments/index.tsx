@@ -120,10 +120,7 @@ export default () => {
                                 leftSection={<SearchIcon className="size-4" />}
                             />
                             <Tooltip label="Create department">
-                                <ActionIcon
-                                    size="lg"
-                                    variant="white"
-                                >
+                                <ActionIcon size="lg" variant="white">
                                     <PlusIcon className="size-5" />
                                 </ActionIcon>
                             </Tooltip>
@@ -150,10 +147,7 @@ export default () => {
                                 selectedKey={selectedNode?.key}
                                 expandedKeys={expandedKeys}
                                 renderMoreMenu={(node, selected) => (
-                                    <DepartmentMenu
-                                        node={node}
-                                        selected={selected}
-                                    />
+                                    <DepartmentMenu node={node} selected={selected} />
                                 )}
                                 treeData={departmentTree}
                             />

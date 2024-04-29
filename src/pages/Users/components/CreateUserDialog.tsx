@@ -46,18 +46,9 @@ const CreateUserDialog: React.FC<CreateUserDialogProps> = ({
     };
 
     return (
-        <Modal
-            size="40rem"
-            withCloseButton={false}
-            opened={opened}
-            onClose={handleClose}
-            centered
-        >
+        <Modal size="40rem" withCloseButton={false} opened={opened} onClose={handleClose} centered>
             <Box pos="relative">
-                <Modal.Header
-                    mih={0}
-                    p="30px 30px 24px"
-                >
+                <Modal.Header mih={0} p="30px 30px 24px">
                     <h1 className="text-xl font-medium">Create user</h1>
                     <CloseButton onClick={handleClose} />
                 </Modal.Header>
@@ -88,20 +79,13 @@ const CreateUserDialog: React.FC<CreateUserDialogProps> = ({
                                     }}
                                     rightSection={undefined}
                                 />
-                                <Button
-                                    size="sm"
-                                    variant="outline"
-                                    onClick={generatePassword}
-                                >
+                                <Button size="sm" variant="outline" onClick={generatePassword}>
                                     Generate
                                 </Button>
                             </div>
                         </div>
                         <div className="pb-5 pt-6 flex items-center justify-end gap-x-2">
-                            <Button
-                                variant="default"
-                                onClick={handleClose}
-                            >
+                            <Button variant="default" onClick={handleClose}>
                                 Cancel
                             </Button>
                             <Button type="submit">Create</Button>

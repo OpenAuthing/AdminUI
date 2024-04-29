@@ -71,10 +71,7 @@ const NestedNavMenu = ({
                 keepMounted
             >
                 {(style) => (
-                    <div
-                        style={{ ...style }}
-                        className="grid grid-rows-[0fr] opacity-0"
-                    >
+                    <div style={{ ...style }} className="grid grid-rows-[0fr] opacity-0">
                         <div className="w-full overflow-hidden">
                             {items.map((item) => (
                                 <Link
@@ -83,11 +80,7 @@ const NestedNavMenu = ({
                                     aria-selected={selectedRouteKeys.includes(item.id)}
                                     className="mt-1.5 block py-2.5 pl-10 rounded text-gray-500 hover:bg-blue-50 hover:text-primary-600 aria-selected:text-primary-600 aria-selected:bg-blue-100 transition-colors duration-300"
                                 >
-                                    <Text
-                                        size="sm"
-                                        fw={400}
-                                        truncate
-                                    >
+                                    <Text size="sm" fw={400} truncate>
                                         <FormattedMessage id={item.label} />
                                     </Text>
                                 </Link>

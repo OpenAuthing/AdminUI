@@ -52,10 +52,7 @@ export default function Page() {
                     <ApplicationList list={applications} />
                 </div>
             </div>
-            <CreateApplicationModal
-                opened={opened}
-                onClose={close}
-            />
+            <CreateApplicationModal opened={opened} onClose={close} />
         </Content>
     );
 }

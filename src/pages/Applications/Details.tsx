@@ -75,20 +75,11 @@ export default () => {
                         <div className="flex gap-x-6 items-start">
                             <div className="size-16 rounded bg-gray-200/80"></div>
                             <div className="grid grid-cols-1 justify-between">
-                                <Text
-                                    component="h1"
-                                    size="1.8rem"
-                                    fw={500}
-                                    lh={1.25}
-                                >
+                                <Text component="h1" size="1.8rem" fw={500} lh={1.25}>
                                     Default Client
                                 </Text>
                                 <div className="flex items-center gap-x-4">
-                                    <Text
-                                        size="sm"
-                                        className="text-gray-500"
-                                        fw={500}
-                                    >
+                                    <Text size="sm" className="text-gray-500" fw={500}>
                                         Single Page Application
                                     </Text>
                                     <ClientId value="1234561234564sadfsdgsdgefefafsd" />
@@ -96,18 +87,12 @@ export default () => {
                             </div>
                         </div>
                         <div className="grid grid-cols-1 gap-y-6">
-                            <Tabs
-                                value={currentTabKey}
-                                onChange={handleTabChange}
-                            >
+                            <Tabs value={currentTabKey} onChange={handleTabChange}>
                                 <Tabs.List>
                                     {keys(NavTabs).map((key) => {
                                         const item = NavTabs[key];
                                         return (
-                                            <Tabs.Tab
-                                                key={key}
-                                                value={key}
-                                            >
+                                            <Tabs.Tab key={key} value={key}>
                                                 {item.label}
                                             </Tabs.Tab>
                                         );

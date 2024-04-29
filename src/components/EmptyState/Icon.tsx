@@ -12,10 +12,7 @@ export type IconFactory = Factory<{
 
 const Icon = factory<IconFactory>(({ className, children, ...others }, ref) => {
     return (
-        <div
-            className={clsx('mb-4 flex items-center flex-col text-center', className)}
-            {...others}
-        >
+        <div className={clsx('mb-4 flex items-center flex-col text-center', className)} {...others}>
             {children}
         </div>
     );

@@ -1,4 +1,4 @@
-import { Position } from '@/@types/Position';
+import { Position } from '@/@types/position';
 import ContentContainer from '@/components/ContentContainer';
 import EmptyState from '@/components/EmptyState';
 import PageHeader from '@/components/PageHeader';
@@ -17,10 +17,10 @@ import {
     TextInput,
     rem,
 } from '@mantine/core';
-import { useDisclosure, useInputState, useIsFirstRender } from '@mantine/hooks';
+import { useDebouncedValue, useDisclosure, useInputState } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 import { MoreHorizontalIcon, PencilLineIcon, PlusIcon, SearchIcon, Trash2Icon } from 'lucide-react';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { FormattedMessage, Icon, useIntl, useRequest } from 'umi';
 import AddPositionModal from './components/AddPositionModal';
 
@@ -38,11 +38,7 @@ const PositionTablePagination = memo<PositionTablePaginationProps>(
 
         return (
             <div className="pb-6 flex items-center justify-end">
-                <Pagination
-                    total={totalPage}
-                    value={current}
-                    onChange={changeCurrent}
-                />
+                <Pagination total={totalPage} value={current} onChange={changeCurrent} />
             </div>
         );
     },
@@ -50,24 +46,26 @@ const PositionTablePagination = memo<PositionTablePaginationProps>(
 
 export default function Page() {
     const intl = useIntl();
-    const isFirstRender = useIsFirstRender();
+    const [isEmpty, setEmpty] = useState<boolean>(false);
     const [searchKey, setSearchKey] = useInputState('');
+    const [debouncedSearchKey] = useDebouncedValue(searchKey, 200);
     const [addModalOpened, { close: closeAddModal, open: openAddModal }] = useDisclosure(false);
     const [editModalOpened, { close: closeEditModal, open: openEditModal }] = useDisclosure(false);
 
     const { pagination, loading, data, error, refresh } = useRequest(
-        (page) => PositionService.getPositions(page.current, page.pageSize, searchKey),
+        (page) => PositionService.getPositions(page.current, page.pageSize, debouncedSearchKey),
         {
             manual: false,
-            // loadingDelay: 0,
-            // debounceInterval: 200,
             throttleInterval: 500,
             paginated: true,
-            refreshDeps: [searchKey],
+            refreshDeps: [debouncedSearchKey],
             formatResult: ({ data }) => ({
                 total: data?.totalCount,
                 list: data?.items,
             }),
+            onSuccess: (data, params) => {
+                setEmpty(data.total === 0 && params[0].current === 1 && debouncedSearchKey === '');
+            },
         },
     );
 
@@ -98,12 +96,11 @@ export default function Page() {
 
     const { total = 0, list = [] } = data ?? {};
     const noRecords = total === 0;
-    const isEmpty = !isFirstRender && searchKey === '' && noRecords;
     const showPagination = total > 10;
 
     console.log('loading', loading);
 
-    const columns: TableColumn[] = [
+    const columns: TableColumn<Position>[] = [
         {
             dataKey: 'name',
             title: intl.formatMessage({
@@ -123,16 +120,9 @@ export default function Page() {
             width: '100px',
             align: 'right',
             render: (id) => (
-                <Menu
-                    width={120}
-                    position="bottom-end"
-                    shadow="lg"
-                >
+                <Menu width={120} position="bottom-end" shadow="lg">
                     <Menu.Target>
-                        <ActionIcon
-                            variant="subtle"
-                            c="gray.6"
-                        >
+                        <ActionIcon variant="subtle" c="gray.6">
                             <MoreHorizontalIcon className="size-5" />
                         </ActionIcon>
                     </Menu.Target>
@@ -157,10 +147,7 @@ export default function Page() {
     ];
 
     const CreateButton = memo(() => (
-        <Button
-            type="button"
-            onClick={openAddModal}
-        >
+        <Button type="button" onClick={openAddModal}>
             <Group gap={rem(4)}>
                 <PlusIcon className="size-4 mr-1" />
                 <Text size="sm">
@@ -192,11 +179,7 @@ export default function Page() {
                         {isEmpty ? (
                             <EmptyState>
                                 <EmptyState.Icon>
-                                    <Icon
-                                        height="180"
-                                        width="180"
-                                        icon="local:empty-1"
-                                    />
+                                    <Icon height="180" width="180" icon="local:empty-1" />
                                 </EmptyState.Icon>
                                 <EmptyState.Subtitle>
                                     <FormattedMessage id="pages.positions.empty.subtitle" />
@@ -233,10 +216,7 @@ export default function Page() {
                                     </ScrollArea>
                                 </div>
 
-                                <PositionTablePagination
-                                    visible={showPagination}
-                                    {...pagination}
-                                />
+                                <PositionTablePagination visible={showPagination} {...pagination} />
                             </div>
                         )}
                     </Box>

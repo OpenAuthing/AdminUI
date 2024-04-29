@@ -23,11 +23,7 @@ export default function Page() {
                 <div>
                     <EmptyState>
                         <EmptyState.Icon>
-                            <Icon
-                                height="180"
-                                width="180"
-                                icon="local:empty-1"
-                            />
+                            <Icon height="180" width="180" icon="local:empty-1" />
                         </EmptyState.Icon>
                         <EmptyState.Subtitle>You don't have any users yet.</EmptyState.Subtitle>
                         <EmptyState.Content>

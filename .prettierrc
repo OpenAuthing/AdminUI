@@ -2,7 +2,7 @@
     "tabWidth": 4,
     "printWidth": 100,
     "bracketSameLine": false,
-    "singleAttributePerLine": true,
+    "singleAttributePerLine": false,
     "singleQuote": true,
     "trailingComma": "all",
     "proseWrap": "never",
