@@ -34,6 +34,13 @@ class UserService {
             method: 'GET',
         });
     }
+
+    assignRoles(userId: string, roleIds: string[]) {
+        return request(`${ROOT_URL}/${userId}/roles`, {
+            method: 'POST',
+            data: roleIds,
+        });
+    }
 }
 
 // const UserService = {

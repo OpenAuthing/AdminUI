@@ -10,6 +10,7 @@ import {
     Badge,
     Box,
     Button,
+    Center,
     Flex,
     Group,
     LoadingOverlay,
@@ -62,6 +63,7 @@ export default function Page() {
     );
 
     const { total = 0, list = [] } = data ?? {};
+    const noRecords = total === 0;
 
     const columns: TableColumn<ListUserModel>[] = [
         {
@@ -231,6 +233,8 @@ export default function Page() {
                                 <div className="flex items-center justify-between">
                                     <div className="flex-[1_0_auto]">
                                         <TextInput
+                                            value={searchKey}
+                                            onChange={setSearchKey}
                                             placeholder={intl.formatMessage({
                                                 id: 'pages.users.search.placeholder',
                                             })}
@@ -243,6 +247,17 @@ export default function Page() {
                                     <ScrollArea>
                                         <UserTable columns={columns} items={list} miw={1000} />
                                     </ScrollArea>
+                                    {noRecords && (
+                                        <Center
+                                            className="bg-gray-100/80 rounded"
+                                            p={rem(16)}
+                                            mt={rem(16)}
+                                        >
+                                            <Text size="sm" c="gray.6">
+                                                No users found.
+                                            </Text>
+                                        </Center>
+                                    )}
                                 </div>
 
                                 {/* <PositionTablePagination

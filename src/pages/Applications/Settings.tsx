@@ -236,7 +236,7 @@ export default () => {
                                 <Select
                                     label="Application Type"
                                     disabled={true}
-                                    defaultValue={ApplicationTypes[0].value}
+                                    defaultValue={ApplicationTypes[0]?.value}
                                     data={ApplicationTypes}
                                 />
                             </div>

@@ -6,6 +6,7 @@ import {
     InputWrapper,
     LoadingOverlay,
     MantineProvider,
+    Modal,
     Tabs,
     createTheme,
 } from '@mantine/core';
@@ -72,6 +73,13 @@ const mantineTheme = createTheme({
             },
             classNames: {
                 tab: 'data-[active=true]:text-primary-500',
+            },
+        }),
+        Modal: Modal.extend({
+            defaultProps: {
+                overlayProps: {
+                    blur: 2,
+                },
             },
         }),
     },

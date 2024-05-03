@@ -1,11 +1,18 @@
 import { ResponseResult } from '@/@types';
 import RootContainer from '@/components/RootContainer';
 import { OidcClient } from '@axa-fr/react-oidc';
+import { notifications } from '@mantine/notifications';
 import React from 'react';
 import { AxiosRequestConfig, AxiosResponse, RuntimeConfig, getIntl, getLocale, history } from 'umi';
 
 const toast = {
-    error: (msg: string) => console.error(msg),
+    error: (msg: string) => {
+        notifications.show({
+            color: 'red.8',
+            title: 'Request Error',
+            message: msg,
+        });
+    },
 };
 
 export const request: RuntimeConfig['request'] = {

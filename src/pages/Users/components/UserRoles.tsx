@@ -3,18 +3,30 @@ import { UserRoleModel } from '@/@types/user';
 import Table, { TableColumn } from '@/components/Table';
 import { UserService } from '@/services';
 import { ActionIcon, Box, Button, Center, Flex, LoadingOverlay, Text, rem } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { Trash2Icon } from 'lucide-react';
 import { useRequest } from 'umi';
 import { PropsWithUserId } from '.';
+import AssignRoleModal from './AssignRoleModal';
 
 const UserRoleTable = Table<UserRoleModel>;
 
 type UserRolesProps = PropsWithUserId<{}>;
 
 export default ({ userId }: UserRolesProps) => {
+    const [opened, { close, open }] = useDisclosure(false);
+
     const { loading, data } = useRequest(() => UserService.getUserRoles(userId));
+    const { run: assignRoles, loading: assigning } = useRequest(UserService.assignRoles, {
+        manual: true,
+    });
 
     const isEmpty = (data?.length ?? 0) === 0;
+    const exludeRoles = data?.map((r: any) => r.id) ?? [];
+
+    const assign = (roleIds: string[]) => {
+        assignRoles(userId, roleIds);
+    };
 
     const columns: TableColumn<UserRoleModel>[] = [
         { dataKey: 'roleName', title: 'Name' },
@@ -47,27 +59,37 @@ export default ({ userId }: UserRolesProps) => {
     ];
 
     return (
-        <Box mih={500} pos="relative">
-            <LoadingOverlay visible={loading} />
-            <Flex direction="column" gap={rem(24)}>
-                <Flex align="center" justify="space-between">
-                    <Text size="sm" c="gray.7">
-                        All Roles assigned to this User.
-                    </Text>
-                    <Button>Assign Role</Button>
-                </Flex>
+        <>
+            <Box mih={500} pos="relative">
+                <LoadingOverlay visible={loading} />
+                <Flex direction="column" gap={rem(24)}>
+                    <Flex align="center" justify="space-between">
+                        <Text size="sm" c="gray.7">
+                            All Roles assigned to this User.
+                        </Text>
+                        <Button onClick={open}>Assign Role</Button>
+                    </Flex>
 
-                <Box className="flex-1">
-                    <UserRoleTable columns={columns} items={data} />
-                    {isEmpty && (
-                        <Center className="bg-gray-100/80 rounded" p={rem(16)} mt={rem(16)}>
-                            <Text size="sm" c="gray.6">
-                                There are no roles assigned to this user yet.
-                            </Text>
-                        </Center>
-                    )}
-                </Box>
-            </Flex>
-        </Box>
+                    <Box className="flex-1">
+                        <UserRoleTable columns={columns} items={data} />
+                        {isEmpty && (
+                            <Center className="bg-gray-100/80 rounded" p={rem(16)} mt={rem(16)}>
+                                <Text size="sm" c="gray.6">
+                                    There are no roles assigned to this user yet.
+                                </Text>
+                            </Center>
+                        )}
+                    </Box>
+                </Flex>
+            </Box>
+
+            <AssignRoleModal
+                exludeRoles={exludeRoles}
+                assigning={assigning}
+                opened={opened}
+                onClose={close}
+                onSubmit={assign}
+            />
+        </>
     );
 };

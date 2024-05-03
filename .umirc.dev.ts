@@ -10,6 +10,6 @@ export default defineConfig({
 
         USER_PROFILE_URL: 'https://110.41.18.47:8081/settings/profile',
 
-        ADMIN_API_BASE_URL: 'https://110.41.18.47:8082',
+        ADMIN_API_BASE_URL: 'http://localhost:5130',
     },
 });

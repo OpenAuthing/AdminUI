@@ -1,68 +1,37 @@
-import { RoleSubjectType } from '@/@types/role';
+import { PaginitionReqParams } from '@/@types';
+import { CreateRoleReq } from '@/@types/role';
 import { request } from '@/lib/request';
 
 const ROOT_URL = '/api/admin/roles';
 
-const RoleService = {
-    getAll: async (params: { pageIndex: number; pageSize: number }) => {
-        const { data } = await request(ROOT_URL, {
-            params,
-        });
-        return data;
-    },
-
-    get: async (id: string) => {
-        const { data } = await request(`${ROOT_URL}/${id}`);
-        return data;
-    },
-
-    create: async (input: any) => {
-        const { data } = await request(ROOT_URL, {
-            method: 'POST',
-            data: input,
-        });
-        return data;
-    },
-
-    update: async (id: string, input: any) => {
-        const { data } = await request(`${ROOT_URL}/${id}`, {
-            method: 'PUT',
-            data: input,
-        });
-        return data;
-    },
-
-    delete: async (id: string) => {
-        const { data } = await request(`${ROOT_URL}/${id}`, {
-            method: 'DELETE',
-        });
-        return data;
-    },
-
-    toggleEnabled: async (id: string, enabled: boolean) => {
-        const { data } = await request(`${ROOT_URL}/${id}/toggle-enabled`, {
-            method: 'PUT',
+class RoleService {
+    getRoles(
+        params: {
+            searchKey?: string;
+        } & PaginitionReqParams,
+    ) {
+        return request(ROOT_URL, {
+            method: 'GET',
             params: {
-                enabled,
+                pageIndex: params.current,
+                pageSize: params.pageSize,
+                searchKey: params.searchKey,
             },
         });
-        return data;
-    },
+    }
 
-    getRoleSubjects: async (id: string) => {
-        const { data } = await request(`${ROOT_URL}/${id}/subjects`);
-        return data;
-    },
-
-    saveRoleSubjects: async (id: string, items: Array<{ type: RoleSubjectType; id: string }>) => {
-        const { data } = await request(`${ROOT_URL}/${id}/subjects`, {
-            method: 'PUT',
-            data: {
-                subjects: items,
-            },
+    getRole(id: string) {
+        return request(`${ROOT_URL}/${id}`, {
+            method: 'GET',
         });
-        return data;
-    },
-};
+    }
+
+    createRole(req: CreateRoleReq) {
+        return request(ROOT_URL, {
+            method: 'POST',
+            data: req,
+        });
+    }
+}
 
 export default RoleService;

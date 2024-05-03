@@ -121,9 +121,18 @@ const routes: Array<RouteType> = [
                         routes: [
                             {
                                 path: '/admin/roles',
-                                component: 'Roles',
                                 showInMenu: true,
                                 label: 'routes.menus.roles',
+                                routes: [
+                                    {
+                                        path: '/admin/roles',
+                                        component: 'Roles',
+                                    },
+                                    {
+                                        path: '/admin/roles/:id/:tab',
+                                        component: 'Roles/Details',
+                                    },
+                                ],
                             },
                         ],
                     },
