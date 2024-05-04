@@ -9,7 +9,9 @@
         "edit": "Edit",
         "delete": "Delete",
         "enabled": "Enabled",
-        "disabled": "Disabled"
+        "disabled": "Disabled",
+        "user": "User",
+        "usergroup": "User Group"
     },
     "routes": {
         "menus": {
@@ -132,6 +134,11 @@
                     "disable": "Disable",
                     "delete": "Delete"
                 }
+            }
+        },
+        "roles": {
+            "subjects": {
+                "selected": "Selected: {userCount, plural, =0 {No users} one {# user} other {# users}}, {userGroupCount, plural, =0 {No groups} one {# group} other {# groups}}"
             }
         }
     }

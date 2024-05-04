@@ -1,10 +1,6 @@
 import { CloseButton, LoadingOverlay, Modal } from '@mantine/core';
-
-interface AddSubjectFormProps {}
-
-const AddSubjectForm: React.FC<AddSubjectFormProps> = () => {
-    return <form></form>;
-};
+import React from 'react';
+import { AddSubjectForm } from './AddSubjectForm';
 
 interface AddSubjectModalProps {
     opened: boolean;

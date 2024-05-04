@@ -32,6 +32,12 @@ class RoleService {
             data: req,
         });
     }
+
+    getSubjects(roleId: string) {
+        return request(`${ROOT_URL}/${roleId}/subjects`, {
+            method: 'GET',
+        });
+    }
 }
 
 export default RoleService;

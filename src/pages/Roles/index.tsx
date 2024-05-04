@@ -22,6 +22,7 @@ import { useDebouncedValue, useDisclosure, useInputState } from '@mantine/hooks'
 import { MoreHorizontalIcon, PlusIcon, SearchIcon } from 'lucide-react';
 import { memo, useState } from 'react';
 import { FormattedDate, Icon, Link, history, useIntl, useRequest } from 'umi';
+import AddSubjectModal from './components/AddSubjectModal';
 import CreateRoleModal from './components/CreateModal';
 
 const RoleTable = Table<ListRoleRes>;
@@ -31,7 +32,10 @@ export default function Page() {
     const [isEmpty, setEmpty] = useState<boolean>(false);
     const [searchKey, setSearchKey] = useInputState('');
     const [debouncedSearchKey] = useDebouncedValue(searchKey, 200);
-    const [opened, { open, close }] = useDisclosure(false);
+    const [createModalOpened, { open: openCreateModal, close: closeCreateModal }] =
+        useDisclosure(false);
+    const [assignModalOpened, { open: openAssignModal, close: closeAssignModal }] =
+        useDisclosure(false);
 
     const { pagination, loading, data, error, refresh } = useRequest(
         (page) => RoleService.getRoles({ ...page, searchKey: debouncedSearchKey }),
@@ -64,7 +68,7 @@ export default function Page() {
     const noRecords = total === 0;
 
     const CreateRoleButton = memo(() => (
-        <Button onClick={open}>
+        <Button onClick={openCreateModal}>
             <PlusIcon className="size-5 mr-2" />
             Create Role
         </Button>
@@ -150,7 +154,7 @@ export default function Page() {
                                     </Text>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item c="gray.6" onClick={() => {}}>
+                            <Menu.Item c="gray.6" onClick={openAssignModal}>
                                 <Text size="xs" fw={500}>
                                     Assign To Subjects
                                 </Text>
@@ -245,11 +249,12 @@ export default function Page() {
                 </div>
             </ContentContainer>
             <CreateRoleModal
-                opened={opened}
-                onClose={close}
+                opened={createModalOpened}
+                onClose={closeCreateModal}
                 onCreate={createRole}
                 creating={creating}
             />
+            <AddSubjectModal opened={assignModalOpened} onClose={closeAssignModal} />
         </>
     );
 }

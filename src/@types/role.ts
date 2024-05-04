@@ -25,6 +25,6 @@ export interface CreateRoleReq {
 
 export interface ListRoleSubjectRes {
     id: string;
-    type: RoleSubjectType;
+    subjectType: RoleSubjectType;
     name: string;
 }
