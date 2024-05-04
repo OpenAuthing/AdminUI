@@ -15,6 +15,7 @@ import { Notifications } from '@mantine/notifications';
 import React from 'react';
 import { UseRequestProvider, getLocale } from 'umi';
 
+import { ModalsProvider } from '@mantine/modals';
 import 'dayjs/locale/en';
 import 'dayjs/locale/zh-cn';
 import { UserIcon } from 'lucide-react';
@@ -98,7 +99,9 @@ const RootContainer = ({ children }: { children: React.ReactNode }) => {
             >
                 <MantineProvider theme={mantineTheme}>
                     <Notifications />
-                    <DatesProvider settings={{ locale: locale }}>{children}</DatesProvider>
+                    <ModalsProvider>
+                        <DatesProvider settings={{ locale: locale }}>{children}</DatesProvider>
+                    </ModalsProvider>
                 </MantineProvider>
             </UseRequestProvider>
         </>

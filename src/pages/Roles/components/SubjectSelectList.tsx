@@ -1,26 +1,39 @@
 import { ListUserModel } from '@/@types/user';
 import { UserGroupService, UserService } from '@/services';
-import { Avatar, Box, Flex, Group, Input, LoadingOverlay, ScrollArea, Text } from '@mantine/core';
+import {
+    Avatar,
+    Box,
+    Center,
+    Flex,
+    Group,
+    Input,
+    LoadingOverlay,
+    ScrollArea,
+    Text,
+    rem,
+} from '@mantine/core';
 import { useDebouncedValue, useInputState } from '@mantine/hooks';
 import clsx from 'clsx';
-import { SearchIcon } from 'lucide-react';
+import { CheckIcon, SearchIcon } from 'lucide-react';
 import React, { memo } from 'react';
-import { useRequest } from 'umi';
+import { useIntl, useRequest } from 'umi';
 
 interface SelectListProps {
     visible: boolean;
     onItemClick?: (item: any) => void;
+    selectedIds?: Set<string>;
 }
 
 interface SubjectSelectListProps<TData extends object> extends SelectListProps {
     style?: React.CSSProperties;
     searchPlaceholder?: string;
     service: (params: any) => Promise<any>;
-    children: (item: TData) => React.ReactNode;
+    children: (item: TData, isSelected: boolean) => React.ReactNode;
 }
 
-const SubjectSelectList = <TData extends object>(props: SubjectSelectListProps<TData>) => {
-    const { searchPlaceholder, style, visible, service, children, onItemClick } = props;
+const SubjectSelectList = <TData extends { id: string }>(props: SubjectSelectListProps<TData>) => {
+    const { searchPlaceholder, style, visible, selectedIds, service, children, onItemClick } =
+        props;
 
     const [searchKey, setSearchKey] = useInputState('');
     const [debouncedSearchKey] = useDebouncedValue(searchKey, 200);
@@ -61,15 +74,21 @@ const SubjectSelectList = <TData extends object>(props: SubjectSelectListProps<T
                 <LoadingOverlay visible={loading} />
                 <ScrollArea h="100%">
                     <div className="grid grid-cols-1 gap-y-1">
-                        {list.map((item, index) => (
-                            <div
-                                key={index}
-                                className="px-1 py-2 rounded transition-colors cursor-pointer hover:bg-gray-100"
-                                onClick={() => handleItemClick(item)}
-                            >
-                                {children(item)}
-                            </div>
-                        ))}
+                        {list.map((item) => {
+                            const isSelected = selectedIds?.has(item.id) ?? false;
+                            return (
+                                <div
+                                    key={item.id}
+                                    className={clsx(
+                                        'px-1 py-2 rounded transition-colors cursor-pointer',
+                                        isSelected ? 'bg-primary-50/60' : 'hover:bg-gray-100',
+                                    )}
+                                    onClick={() => handleItemClick(item)}
+                                >
+                                    {children(item, isSelected)}
+                                </div>
+                            );
+                        })}
                     </div>
                 </ScrollArea>
             </Box>
@@ -77,17 +96,18 @@ const SubjectSelectList = <TData extends object>(props: SubjectSelectListProps<T
     );
 };
 
-const UserSelectList = memo<SelectListProps>(({ visible }) => {
+const UserSelectList = memo<SelectListProps>((props) => {
+    const intl = useIntl();
     return (
         <SubjectSelectList<ListUserModel>
-            visible={visible}
-            searchPlaceholder="Search of users"
+            {...props}
+            searchPlaceholder={intl.formatMessage({ id: 'pages.users.search.placeholder' })}
             service={UserService.getUsers}
         >
-            {(data) => (
+            {(data, selected) => (
                 <Group>
                     <Avatar src={data.avatar}>{data.userName.substring(0, 1).toUpperCase()}</Avatar>
-                    <Flex direction="column">
+                    <Flex style={{ flex: 1 }} direction="column">
                         <Text size="sm" fw={500}>
                             {data.nickname}
                         </Text>
@@ -95,17 +115,21 @@ const UserSelectList = memo<SelectListProps>(({ visible }) => {
                             {data.userName}
                         </Text>
                     </Flex>
+                    <Center w={rem(40)}>
+                        {selected && <CheckIcon className="size-4 text-green-500" />}
+                    </Center>
                 </Group>
             )}
         </SubjectSelectList>
     );
 });
 
-const UserGroupSelectList = memo<SelectListProps>(({ visible }) => {
+const UserGroupSelectList = memo<SelectListProps>((props) => {
+    const intl = useIntl();
     return (
         <SubjectSelectList<any>
-            visible={visible}
-            searchPlaceholder="Search of groups"
+            {...props}
+            searchPlaceholder={intl.formatMessage({ id: 'pages.usergroups.search.placeholder' })}
             service={UserGroupService.getGroups}
         >
             {(data) => <div>{data.name}</div>}

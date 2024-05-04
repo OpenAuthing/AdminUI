@@ -1,4 +1,4 @@
-import { ListRoleRes } from '@/@types/role';
+import { AddRoleSubjectItem, ListRoleRes } from '@/@types/role';
 import ContentContainer from '@/components/ContentContainer';
 import EmptyState from '@/components/EmptyState';
 import PageHeader from '@/components/PageHeader';
@@ -21,23 +21,26 @@ import {
 import { useDebouncedValue, useDisclosure, useInputState } from '@mantine/hooks';
 import { MoreHorizontalIcon, PlusIcon, SearchIcon } from 'lucide-react';
 import { memo, useState } from 'react';
-import { FormattedDate, Icon, Link, history, useIntl, useRequest } from 'umi';
+import { FormattedDate, Icon, Link, history, useRequest } from 'umi';
 import AddSubjectModal from './components/AddSubjectModal';
 import CreateRoleModal from './components/CreateModal';
 
 const RoleTable = Table<ListRoleRes>;
 
 export default function Page() {
-    const intl = useIntl();
+    const [addSubjectsRoleId, setAddSubjectsRoleId] = useState<string>();
     const [isEmpty, setEmpty] = useState<boolean>(false);
     const [searchKey, setSearchKey] = useInputState('');
     const [debouncedSearchKey] = useDebouncedValue(searchKey, 200);
-    const [createModalOpened, { open: openCreateModal, close: closeCreateModal }] =
-        useDisclosure(false);
-    const [assignModalOpened, { open: openAssignModal, close: closeAssignModal }] =
-        useDisclosure(false);
+    const [createModalOpened, { open: openCreateModal, close: closeCreateModal }] = useDisclosure();
+    const [assignModalOpened, { open: openAssignModal, close: closeAssignModal }] = useDisclosure(
+        false,
+        {
+            onClose: () => setAddSubjectsRoleId(undefined),
+        },
+    );
 
-    const { pagination, loading, data, error, refresh } = useRequest(
+    const { loading, data, refresh } = useRequest(
         (page) => RoleService.getRoles({ ...page, searchKey: debouncedSearchKey }),
         {
             manual: false,
@@ -63,6 +66,23 @@ export default function Page() {
             }
         },
     });
+    const { run: addSubjects } = useRequest(RoleService.addSubjects, {
+        manual: true,
+        onSuccess(data, params) {
+            closeAssignModal();
+        },
+    });
+
+    const handleOpenAssignModal = (roleId: string) => {
+        setAddSubjectsRoleId(roleId);
+        openAssignModal();
+    };
+
+    const handleAddSubjects = async (subjects: AddRoleSubjectItem[]) => {
+        if (addSubjectsRoleId) {
+            await addSubjects(addSubjectsRoleId, { subjects });
+        }
+    };
 
     const { total = 0, list = [] } = data ?? {};
     const noRecords = total === 0;
@@ -154,7 +174,7 @@ export default function Page() {
                                     </Text>
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item c="gray.6" onClick={openAssignModal}>
+                            <Menu.Item c="gray.6" onClick={() => handleOpenAssignModal(value)}>
                                 <Text size="xs" fw={500}>
                                     Assign To Subjects
                                 </Text>
@@ -254,7 +274,11 @@ export default function Page() {
                 onCreate={createRole}
                 creating={creating}
             />
-            <AddSubjectModal opened={assignModalOpened} onClose={closeAssignModal} />
+            <AddSubjectModal
+                opened={assignModalOpened}
+                onClose={closeAssignModal}
+                onAdd={handleAddSubjects}
+            />
         </>
     );
 }

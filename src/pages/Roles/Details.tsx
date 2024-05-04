@@ -4,17 +4,17 @@ import PageHeader from '@/components/PageHeader';
 import withRouteParams from '@/hoc/withRouteParams';
 import { Badge, Box, Flex, Group, LoadingOverlay, Space, Tabs, rem } from '@mantine/core';
 import React, { Suspense, lazy, useEffect } from 'react';
-import { Link, Navigate, useModel } from 'umi';
+import { FormattedMessage, Link, Navigate, useModel } from 'umi';
 
 const tabs = [
     {
         key: 'settings',
-        label: 'Settings',
+        label: 'pages.roles.details.settings.tab',
         component: lazy(() => import('./components/Settings')),
     },
     {
         key: 'subjects',
-        label: 'Subjects',
+        label: 'pages.roles.details.subjects.tab',
         component: lazy(() => import('./components/Subjects')),
     },
 ];
@@ -62,7 +62,9 @@ const RoleDetailsPage: React.FC<RoleDetailsPageProps> = (props) => {
                             <Tabs.List>
                                 {tabs.map(({ key, label }) => (
                                     <Link key={key} to={`/admin/roles/${id}/${key}`}>
-                                        <Tabs.Tab value={key}>{label}</Tabs.Tab>
+                                        <Tabs.Tab value={key}>
+                                            <FormattedMessage id={label} />
+                                        </Tabs.Tab>
                                     </Link>
                                 ))}
                             </Tabs.List>

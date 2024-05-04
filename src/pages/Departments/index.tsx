@@ -7,6 +7,7 @@ import {
     LoadingOverlay,
     Menu,
     ScrollArea,
+    Text,
     Tooltip,
     rem,
 } from '@mantine/core';
@@ -14,7 +15,7 @@ import { useDisclosure, useSet } from '@mantine/hooks';
 import cx from 'clsx';
 import { MoreHorizontalIcon, PlusIcon, SearchIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { FormattedMessage, useModel } from 'umi';
+import { FormattedMessage, Icon, useModel } from 'umi';
 import MembersTable from './components/MembersTable';
 
 const DepartmentMenu = ({ node, selected }: { node: TreeNode; selected: boolean }) => {
@@ -161,8 +162,16 @@ export default () => {
                                     departmentName={selectedNode?.title}
                                 />
                             ) : (
-                                <div className="flex items-center justify-center h-full text-gray-400">
-                                    Select a department first.
+                                <div className="flex flex-col h-full pt-12">
+                                    <Icon
+                                        icon="local:arrow-1"
+                                        height="100"
+                                        width="200"
+                                        stroke="var(--mantine-color-gray-5)"
+                                    />
+                                    <Text pl={rem(120)} c="gray.6" size="sm">
+                                        <FormattedMessage id="pages.departments.noselected" />
+                                    </Text>
                                 </div>
                             )}
                         </div>

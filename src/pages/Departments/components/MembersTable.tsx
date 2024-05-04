@@ -25,8 +25,8 @@ import {
     MoreHorizontalIcon,
     PlusIcon,
 } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
-import { Icon, useRequest } from 'umi';
+import React, { memo, useEffect, useState } from 'react';
+import { FormattedMessage, Icon, useRequest } from 'umi';
 
 interface ThProps extends TableThProps {
     sortable?: boolean;
@@ -90,14 +90,18 @@ const MembersTable: React.FC<MembersTableProps> = ({ departmentName, departmentI
         });
     }, [departmentId]);
 
-    const AddMemberButton = () => {
+    const AddMemberButton = memo(() => {
         return (
             <Button variant="link">
-                <PlusIcon className="w-4 h-4" />
-                <span>添加成员</span>
+                <Group gap={rem(4)}>
+                    <PlusIcon className="w-4 h-4" />
+                    <Text size="sm">
+                        <FormattedMessage id="pages.departments.members.add" />
+                    </Text>
+                </Group>
             </Button>
         );
-    };
+    });
 
     if (isEmpty) {
         return (

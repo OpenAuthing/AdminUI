@@ -1,10 +1,24 @@
 import { RoleSubjectType } from '@/@types';
-import { ListRoleSubjectRes } from '@/@types/role';
+import { AddRoleSubjectItem, ListRoleSubjectRes } from '@/@types/role';
 import Table, { TableColumn } from '@/components/Table';
 import { RoleService } from '@/services';
-import { Box, Button, Center, Flex, LoadingOverlay, Text, rem } from '@mantine/core';
+import {
+    ActionIcon,
+    Avatar,
+    Badge,
+    Box,
+    Button,
+    Center,
+    Flex,
+    Group,
+    LoadingOverlay,
+    Text,
+    rem,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { useRequest } from 'umi';
+import { modals } from '@mantine/modals';
+import { Trash2Icon } from 'lucide-react';
+import { FormattedDate, FormattedMessage, useIntl, useRequest } from 'umi';
 import { PropsWithRoleId } from '.';
 import AddSubjectModal from './AddSubjectModal';
 
@@ -13,27 +27,138 @@ const RoleSubjectTable = Table<ListRoleSubjectRes>;
 type RoleSubjectsProps = PropsWithRoleId<{}>;
 
 const RoleSubjects: React.FC<RoleSubjectsProps> = ({ roleId }) => {
+    const intl = useIntl();
+
     const [opened, { open, close }] = useDisclosure(false);
-    const { loading, data } = useRequest(() => RoleService.getSubjects(roleId));
+
+    const { loading, data, refresh } = useRequest(() => RoleService.getSubjects(roleId));
+    const { run: addSubjects } = useRequest(RoleService.addSubjects, {
+        manual: true,
+        async onSuccess(data, params) {
+            close();
+
+            await refresh();
+        },
+    });
+    const { run: deleteSubject } = useRequest(RoleService.deleteSubject, {
+        manual: true,
+        async onSuccess(data, params) {
+            await refresh();
+        },
+    });
+
+    const isEmpty = data?.length === 0 ?? true;
+
+    const handleAddSubjects = async (subjects: AddRoleSubjectItem[]) => {
+        await addSubjects(roleId, { subjects });
+    };
+
+    const handleRemove = (subjectId: string, subjectName: string) => {
+        modals.openConfirmModal({
+            title: intl.formatMessage({
+                id: 'pages.roles.details.subjects.remove.confirmmodal.title',
+            }),
+            children: (
+                <Text size="sm">
+                    {intl.formatMessage(
+                        {
+                            id: 'pages.roles.details.subjects.remove.confirmmodal.content',
+                        },
+                        { name: subjectName },
+                    )}
+                </Text>
+            ),
+            centered: true,
+            labels: {
+                confirm: intl.formatMessage({
+                    id: 'pages.roles.details.subjects.remove.confirmmodal.confirm',
+                }),
+                cancel: intl.formatMessage({
+                    id: 'pages.roles.details.subjects.remove.confirmmodal.cancel',
+                }),
+            },
+            confirmProps: { color: 'red.8' },
+            onConfirm: () => deleteSubject(roleId, subjectId),
+        });
+    };
 
     const columns: TableColumn<ListRoleSubjectRes>[] = [
-        { dataKey: 'name', title: 'Name' },
+        {
+            dataKey: 'name',
+            title: 'Name',
+            render(value, data) {
+                return (
+                    <Group>
+                        <Avatar src={data.avatar} size={rem(38)}>
+                            {value.slice(0, 1).toUpperCase()}
+                        </Avatar>
+                        <Flex direction="column">
+                            <Text size="sm" fw={500}>
+                                {value}
+                            </Text>
+                            <Text size="xs" c="gray.6">
+                                {data.description}
+                            </Text>
+                        </Flex>
+                    </Group>
+                );
+            },
+        },
         {
             dataKey: 'subjectType',
             title: 'Type',
             render(value) {
-                const description = value === RoleSubjectType.User ? 'User' : 'User Group';
+                if (value === RoleSubjectType.UserGroup) {
+                    return (
+                        <Badge color="grape">
+                            <FormattedMessage id="common.usergroup" />
+                        </Badge>
+                    );
+                }
+
                 return (
-                    <Text size="sm" c="gray.7">
-                        {description}
+                    <Badge color="indigo">
+                        <FormattedMessage id="common.user" />
+                    </Badge>
+                );
+            },
+        },
+        {
+            dataKey: 'creationTime',
+            title: 'Time',
+            render(value) {
+                return (
+                    <Text size="sm" c="gray.6">
+                        <FormattedDate
+                            value={value}
+                            year="numeric"
+                            month="long"
+                            day="numeric"
+                            hour="numeric"
+                            minute="numeric"
+                            second="numeric"
+                        />
                     </Text>
                 );
             },
         },
-        { dataKey: 'id', title: '', width: 80 },
+        {
+            dataKey: 'id',
+            title: '',
+            width: 80,
+            render(value, data) {
+                return (
+                    <ActionIcon
+                        variant="outline"
+                        color="red.5"
+                        onClick={() => handleRemove(value, data.name)}
+                    >
+                        <Trash2Icon className="size-4" />
+                    </ActionIcon>
+                );
+            },
+        },
     ];
-
-    const isEmpty = true;
 
     return (
         <>
@@ -42,9 +167,11 @@ const RoleSubjects: React.FC<RoleSubjectsProps> = ({ roleId }) => {
                 <Flex direction="column" gap={rem(24)}>
                     <Flex align="center" justify="space-between">
                         <Text size="sm" c="gray.7">
-                            Subjects that have this role assigned.
+                            <FormattedMessage id="pages.roles.details.subjects.tips" />
                         </Text>
-                        <Button onClick={open}>Add Subjects</Button>
+                        <Button onClick={open}>
+                            <FormattedMessage id="pages.roles.details.subjects.add" />
+                        </Button>
                     </Flex>
 
                     <Box className="flex-1">
@@ -52,14 +179,14 @@ const RoleSubjects: React.FC<RoleSubjectsProps> = ({ roleId }) => {
                         {isEmpty && (
                             <Center className="bg-gray-100/80 rounded" p={rem(16)} mt={rem(16)}>
                                 <Text size="sm" c="gray.6">
-                                    There are no subjects assigned to this role
+                                    <FormattedMessage id="pages.roles.details.subjects.norecords" />
                                 </Text>
                             </Center>
                         )}
                     </Box>
                 </Flex>
             </Box>
-            <AddSubjectModal opened={opened} onClose={close} />
+            <AddSubjectModal opened={opened} onClose={close} onAdd={handleAddSubjects} />
         </>
     );
 };

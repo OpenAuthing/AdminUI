@@ -1,5 +1,5 @@
 import { PaginitionReqParams } from '@/@types';
-import { CreateRoleReq } from '@/@types/role';
+import { AddRoleSubjectReq, CreateRoleReq } from '@/@types/role';
 import { request } from '@/lib/request';
 
 const ROOT_URL = '/api/admin/roles';
@@ -36,6 +36,19 @@ class RoleService {
     getSubjects(roleId: string) {
         return request(`${ROOT_URL}/${roleId}/subjects`, {
             method: 'GET',
+        });
+    }
+
+    addSubjects(roleId: string, req: AddRoleSubjectReq) {
+        return request(`${ROOT_URL}/${roleId}/subjects`, {
+            method: 'POST',
+            data: req,
+        });
+    }
+
+    deleteSubject(roleId: string, subjectId: string) {
+        return request(`${ROOT_URL}/${roleId}/subjects/${subjectId}`, {
+            method: 'DELETE',
         });
     }
 }

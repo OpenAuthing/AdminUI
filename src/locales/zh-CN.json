@@ -1,7 +1,17 @@
 {
     "common": {
         "copy": "复制",
-        "copied": "已复制"
+        "copied": "已复制",
+        "cancel": "取消",
+        "create": "创建 ",
+        "add": "添加",
+        "save": "保存",
+        "edit": "编辑",
+        "delete": "删除",
+        "enabled": "可用",
+        "disabled": "禁用",
+        "user": "用户",
+        "usergroup": "用户组"
     },
     "routes": {
         "menus": {
@@ -10,6 +20,7 @@
             "application": "应用管理",
             "orginizations": "组织部门",
             "departments": "部门管理",
+            "positions": "岗位管理",
             "users": "用户管理",
             "usergroups": "用户组管理",
             "authentication": "身份认证",
@@ -55,7 +66,11 @@
         },
         "departments": {
             "header": "部门管理",
-            "header.description": "部门管理"
+            "header.content": "在这里管理您的部门，您可以添加、编辑和删除部门，以及维护员工的组织关系。",
+            "noselected": "请先选择一个部门",
+            "members": {
+                "add": "添加成员"
+            }
         },
         "applications": {
             "header": {
@@ -71,6 +86,85 @@
                     "settings": "应用设置",
                     "credentials": "应用凭证"
                 }
+            }
+        },
+        "positions": {
+            "header": {
+                "title": "岗位管理",
+                "description": "在此对职位进行统一管理，有助于准确、快速地维护用户列表中的员工任职信息。",
+                "actions": {
+                    "addposition": "添加岗位"
+                }
+            },
+            "empty": {
+                "subtitle": "您还没有任何岗位。",
+                "message": "添加职位，维护员工岗位信息，更好地组织员工。"
+            },
+            "table": {
+                "columns": {
+                    "name": "名称",
+                    "description": "描述"
+                }
+            },
+            "add": {
+                "addposition": "添加岗位"
+            }
+        },
+        "users": {
+            "search.placeholder": "搜索用户",
+            "header": {
+                "title": "用户管理",
+                "description": "通过易于使用的 UI 可以帮助您管理用户身份，包括密码重置、创建和配置、禁用和删除用户。",
+                "actions": {
+                    "createuser": "创建用户"
+                }
+            },
+            "empty": {
+                "subtitle": "您还没有任何用户。",
+                "message": "您的所有用户都将在此处找到，无论他们使用何种身份验证方法访问您的应用程序。"
+            },
+            "table": {
+                "columns": {
+                    "name": "用户",
+                    "email": "邮箱",
+                    "phone": "手机号码",
+                    "status": "状态"
+                },
+                "actions": {
+                    "viewdetails": "查看详情",
+                    "assignrole": "分配角色",
+                    "assigngroup": "分配用户组",
+                    "sendverificationemail": "发送验证邮件",
+                    "disable": "禁用",
+                    "delete": "删除"
+                }
+            }
+        },
+        "usergroups": {
+            "search.placeholder": "搜索用户组"
+        },
+        "roles": {
+            "details": {
+                "settings": {
+                    "tab": "设置"
+                },
+                "subjects": {
+                    "tab": "用户或用户组",
+                    "tips": "分配有此角色的用户或用户组",
+                    "add": "添加用户或用户组",
+                    "norecords": "没有用户或用户组拥有此角色。",
+                    "selected": "已选择: {user, plural, =0 {无用户} other {# 个用户}}, {group, plural, =0 {无用户组} other {# 个用户组}}",
+                    "remove.confirmmodal": {
+                        "title": "请确认您的操作",
+                        "content": "您确定要从这个角色中移除对象 [{name}] 吗？",
+                        "confirm": "确定移除",
+                        "cancel": "我再想想"
+                    }
+                }
+            },
+            "addsubjects": {
+                "title": "添加用户或用户组",
+                "noselected": "选择要分配此角色的用户或用户组"
             }
         }
     }

@@ -66,7 +66,11 @@
         },
         "departments": {
             "header": "Deparments",
-            "header.content": "Manage your departments here, you can add, edit and delete departments."
+            "header.content": "Manage your departments here, you can add, edit and delete departments.",
+            "noselected": "Select a department first.",
+            "members": {
+                "add": "Add Member"
+            }
         },
         "applications": {
             "header": {
@@ -107,7 +111,7 @@
             }
         },
         "users": {
-            "search.placeholder": "Search users",
+            "search.placeholder": "Search of users",
             "header": {
                 "title": "Users",
                 "description": "An easy to use UI to help administrators manage user identities including password resets, creating and provisioning, blocking and deleting users.",
@@ -136,9 +140,31 @@
                 }
             }
         },
+        "usergroups": {
+            "search.placeholder": "Search of user groups"
+        },
         "roles": {
-            "subjects": {
-                "selected": "Selected: {userCount, plural, =0 {No users} one {# user} other {# users}}, {userGroupCount, plural, =0 {No groups} one {# group} other {# groups}}"
+            "details": {
+                "settings": {
+                    "tab": "Settings"
+                },
+                "subjects": {
+                    "tab": "Subjects",
+                    "tips": "Subjects that have this role assigned.",
+                    "add": "Add Subjects",
+                    "norecords": "There are no subjects assigned to this role.",
+                    "selected": "Selected: {user, plural, =0 {No users} one {# user} other {# users}}, {group, plural, =0 {No groups} one {# group} other {# groups}}",
+                    "remove.confirmmodal": {
+                        "title": "Please confirm your action",
+                        "content": "Are you sure you want to remove [{name}] from this role?",
+                        "confirm": "Remove",
+                        "cancel": "Cancel"
+                    }
+                }
+            },
+            "addsubjects": {
+                "title": "Add Subjects",
+                "noselected": "Select one or more subjects."
             }
         }
     }

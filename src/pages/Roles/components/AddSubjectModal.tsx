@@ -1,24 +1,28 @@
+import { AddRoleSubjectItem } from '@/@types/role';
 import { CloseButton, LoadingOverlay, Modal } from '@mantine/core';
 import React from 'react';
+import { FormattedMessage } from 'umi';
 import { AddSubjectForm } from './AddSubjectForm';
 
 interface AddSubjectModalProps {
     opened: boolean;
     onClose: () => void;
-    onAdd?: (subject: string) => void;
+    onAdd: (subjects: AddRoleSubjectItem[]) => Promise<void>;
 }
 
 const AddSubjectModal: React.FC<AddSubjectModalProps> = ({ opened, onClose, onAdd }) => {
     return (
         <Modal size="55rem" opened={opened} onClose={onClose} centered withCloseButton={false}>
             <Modal.Header>
-                <h1 className="text-xl font-medium">Add Subjects</h1>
+                <h1 className="text-xl font-medium">
+                    <FormattedMessage id="pages.roles.addsubjects.title" />
+                </h1>
                 <CloseButton onClick={onClose} />
             </Modal.Header>
             <Modal.Body pos="relative">
                 <LoadingOverlay visible={false} />
 
-                <AddSubjectForm />
+                <AddSubjectForm onCancel={onClose} onAdd={onAdd} />
             </Modal.Body>
         </Modal>
     );
