@@ -26,10 +26,10 @@ import {
     BookUserIcon,
     MailCheckIcon,
     MoreHorizontalIcon,
+    PlusIcon,
     ShieldCheckIcon,
     Trash2Icon,
     UserRoundCheckIcon,
-    UserRoundPlusIcon,
     UserRoundSearchIcon,
 } from 'lucide-react';
 import { memo, useState } from 'react';
@@ -183,10 +183,8 @@ export default function Page() {
     const CreateUserButton = memo(() => (
         <Button onClick={open}>
             <Group gap={rem(4)}>
-                <UserRoundPlusIcon className="size-4 stroke-2" />
-                <Text size="sm">
-                    <FormattedMessage id="pages.users.header.actions.createuser" />
-                </Text>
+                <PlusIcon className="size-4 stroke-2" />
+                <FormattedMessage id="pages.users.header.actions.createuser" />
             </Group>
         </Button>
     ));

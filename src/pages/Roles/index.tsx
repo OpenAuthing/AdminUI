@@ -11,6 +11,7 @@ import {
     Button,
     Center,
     Flex,
+    Group,
     LoadingOverlay,
     Menu,
     ScrollArea,
@@ -67,7 +68,7 @@ export default function Page() {
             }
         },
     });
-    const { run: addSubjects } = useRequest(RoleService.addSubjects, {
+    const { run: addSubjects, loading: adding } = useRequest(RoleService.addSubjects, {
         manual: true,
         onSuccess(data, params) {
             closeAssignModal();
@@ -90,8 +91,10 @@ export default function Page() {
 
     const CreateRoleButton = memo(() => (
         <Button onClick={openCreateModal}>
-            <PlusIcon className="size-5 mr-2" />
-            <FormattedMessage id="pages.roles.index.header.actions.create" />
+            <Group gap={rem(4)}>
+                <PlusIcon className="size-4 stroke-2" />
+                <FormattedMessage id="pages.roles.index.header.actions.create" />
+            </Group>
         </Button>
     ));
 
@@ -281,6 +284,7 @@ export default function Page() {
             />
             <AddSubjectModal
                 opened={assignModalOpened}
+                adding={adding}
                 onClose={closeAssignModal}
                 onAdd={handleAddSubjects}
             />

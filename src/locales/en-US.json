@@ -153,7 +153,10 @@
             }
         },
         "usergroups": {
-            "search.placeholder": "Search of user groups"
+            "search.placeholder": "Search of user groups",
+            "create": {
+                "title": "Create User Group"
+            }
         },
         "roles": {
             "index": {

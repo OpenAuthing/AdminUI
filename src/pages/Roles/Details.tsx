@@ -53,7 +53,7 @@ const RoleDetailsPage: React.FC<RoleDetailsPageProps> = (props) => {
                         <PageHeader.Title>
                             <Group>
                                 {role.name}
-                                <Badge color="violet.6">System</Badge>
+                                {role.isSystemBuiltIn && <Badge color="violet.6">System</Badge>}
                             </Group>
                         </PageHeader.Title>
                         <PageHeader.Description>{role.description}</PageHeader.Description>

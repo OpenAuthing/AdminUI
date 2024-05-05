@@ -1,4 +1,5 @@
 import { PaginitionReqParams } from '@/@types';
+import { CreateUserGroupReq } from '@/@types/usergroup';
 import { request } from '@/lib/request';
 
 const ROOT_URL = '/api/admin/usergroups';
@@ -16,6 +17,13 @@ class UserGroupService {
                 pageSize: params.pageSize,
                 searchKey: params.searchKey,
             },
+        });
+    }
+
+    createGroup(req: CreateUserGroupReq) {
+        return request(ROOT_URL, {
+            method: 'POST',
+            data: req,
         });
     }
 }

@@ -13,7 +13,6 @@ import {
     Menu,
     Pagination,
     ScrollArea,
-    Text,
     TextInput,
     rem,
 } from '@mantine/core';
@@ -150,9 +149,7 @@ export default function Page() {
         <Button type="button" onClick={openAddModal}>
             <Group gap={rem(4)}>
                 <PlusIcon className="size-4 stroke-2" />
-                <Text size="sm">
-                    <FormattedMessage id="pages.positions.header.actions.addposition" />
-                </Text>
+                <FormattedMessage id="pages.positions.header.actions.addposition" />
             </Group>
         </Button>
     ));

@@ -99,10 +99,13 @@ const routes: Array<RouteType> = [
                                 ],
                             },
                             {
-                                path: '/admin/user-groups',
-                                component: 'UserGroups',
+                                path: '/admin/groups',
                                 showInMenu: true,
                                 label: 'routes.menus.usergroups',
+                                routes: [
+                                    { path: '/admin/groups', component: 'UserGroups' },
+                                    { path: '/admin/groups/:id', component: 'UserGroups/Details' },
+                                ],
                             },
                         ],
                     },
