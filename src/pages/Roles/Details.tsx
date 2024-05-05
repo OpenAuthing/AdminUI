@@ -4,7 +4,7 @@ import PageHeader from '@/components/PageHeader';
 import withRouteParams from '@/hoc/withRouteParams';
 import { Badge, Box, Flex, Group, LoadingOverlay, Space, Tabs, rem } from '@mantine/core';
 import React, { Suspense, lazy, useEffect } from 'react';
-import { FormattedMessage, Link, Navigate, useModel } from 'umi';
+import { FormattedMessage, Link, Navigate, useIntl, useModel } from 'umi';
 
 const tabs = [
     {
@@ -25,6 +25,7 @@ interface RoleDetailsPageProps {
 }
 
 const RoleDetailsPage: React.FC<RoleDetailsPageProps> = (props) => {
+    const intl = useIntl();
     const { id, tab } = props;
     const tabKeys = tabs.map((tab) => tab.key);
 
@@ -39,7 +40,10 @@ const RoleDetailsPage: React.FC<RoleDetailsPageProps> = (props) => {
 
     return (
         <ContentContainer>
-            <PageBackButton text="Back to roles" backTo="/admin/roles" />
+            <PageBackButton
+                text={intl.formatMessage({ id: 'pages.roles.details.back' })}
+                backTo="/admin/roles"
+            />
             <Space h={rem(16)} />
             <Flex pos="relative" direction="column" rowGap={rem(40)}>
                 <LoadingOverlay visible={loading} zIndex={201} />

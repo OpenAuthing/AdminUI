@@ -207,7 +207,7 @@ export default function Page() {
                         <PageHeader.Actions>{!isEmpty && <CreateUserButton />}</PageHeader.Actions>
                     </PageHeader>
                     <Box pos="relative">
-                        <LoadingOverlay visible={false} />
+                        <LoadingOverlay visible={loading} />
 
                         {isEmpty ? (
                             <EmptyState>

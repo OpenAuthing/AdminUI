@@ -271,7 +271,8 @@ const AdminLayout: React.FC<any> = (props) => {
 
                             <Menu.Item
                                 component="a"
-                                href="/"
+                                href={USER_PROFILE_URL}
+                                target="_blank"
                                 leftSection={<UserIcon className="size-4 stroke-gray-600" />}
                             >
                                 <FormattedMessage id="layouts.admin.menu.yourprofile" />

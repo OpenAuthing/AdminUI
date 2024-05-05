@@ -69,7 +69,19 @@
             "header.content": "Manage your departments here, you can add, edit and delete departments.",
             "noselected": "Select a department first.",
             "members": {
-                "add": "Add Member"
+                "add": "Add Member",
+                "table": {
+                    "columns": {
+                        "name": "User",
+                        "email": "Email",
+                        "phone": "Phone",
+                        "departments": "Departments"
+                    },
+                    "actions": {
+                        "viewdetails": "查看详情",
+                        "remove": "移除"
+                    }
+                }
             }
         },
         "applications": {
@@ -144,9 +156,56 @@
             "search.placeholder": "Search of user groups"
         },
         "roles": {
+            "index": {
+                "header": {
+                    "title": "Roles",
+                    "description": "Create and manage Roles for your applications. Roles contain collections of Permissions and can be assigned to Users or Groups.",
+                    "actions": {
+                        "create": "Create Role"
+                    }
+                },
+                "search.placeholder": "Search of roles",
+                "table": {
+                    "columns": {
+                        "name": "Name",
+                        "description": "Description",
+                        "status": "Status",
+                        "creationtime": "Creation Time"
+                    },
+                    "actions": {
+                        "viewdetails": "View Details",
+                        "assign": "Assign To Subjects",
+                        "delete": "Delete Role"
+                    }
+                },
+                "empty": {
+                    "subtitle": "You don't have any roles yet.",
+                    "message": "Create roles to represent the types of users that access your applications. Assign permissions to those roles to control what users are allowed to do in your apps."
+                }
+            },
             "details": {
+                "back": "Back to roles",
                 "settings": {
-                    "tab": "Settings"
+                    "tab": "Settings",
+                    "form": {
+                        "name.label": "Name",
+                        "name.placeholder": "Enter role name",
+                        "description.label": "Description",
+                        "description.placeholder": "Enter role description",
+                        "save": "Save"
+                    },
+                    "dangerzone": {
+                        "title": "Danger Zone",
+                        "delete.title": "Delete this role",
+                        "delete.content": "Once you delete a role, there is no going back. Please be certain.",
+                        "delete.button": "Delete this role"
+                    },
+                    "remove.confirmmodal": {
+                        "title": "Please confirm your action",
+                        "content": "Are you sure you want to delete this role?",
+                        "confirm": "Delete",
+                        "cancel": "Cancel"
+                    }
                 },
                 "subjects": {
                     "tab": "Subjects",
@@ -159,6 +218,13 @@
                         "content": "Are you sure you want to remove [{name}] from this role?",
                         "confirm": "Remove",
                         "cancel": "Cancel"
+                    },
+                    "table": {
+                        "columns": {
+                            "name": "Name",
+                            "type": "Type",
+                            "creationtime": "Added At"
+                        }
                     }
                 }
             },

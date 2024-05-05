@@ -23,6 +23,11 @@ export interface CreateRoleReq {
     description: string;
 }
 
+export interface UpdateRoleReq {
+    name: string;
+    description: string;
+}
+
 export interface ListRoleSubjectRes {
     id: string;
     subjectType: RoleSubjectType;

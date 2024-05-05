@@ -21,13 +21,14 @@ import {
 import { useDebouncedValue, useDisclosure, useInputState } from '@mantine/hooks';
 import { MoreHorizontalIcon, PlusIcon, SearchIcon } from 'lucide-react';
 import { memo, useState } from 'react';
-import { FormattedDate, Icon, Link, history, useRequest } from 'umi';
+import { FormattedDate, FormattedMessage, Icon, Link, history, useIntl, useRequest } from 'umi';
 import AddSubjectModal from './components/AddSubjectModal';
 import CreateRoleModal from './components/CreateModal';
 
 const RoleTable = Table<ListRoleRes>;
 
 export default function Page() {
+    const intl = useIntl();
     const [addSubjectsRoleId, setAddSubjectsRoleId] = useState<string>();
     const [isEmpty, setEmpty] = useState<boolean>(false);
     const [searchKey, setSearchKey] = useInputState('');
@@ -90,14 +91,14 @@ export default function Page() {
     const CreateRoleButton = memo(() => (
         <Button onClick={openCreateModal}>
             <PlusIcon className="size-5 mr-2" />
-            Create Role
+            <FormattedMessage id="pages.roles.index.header.actions.create" />
         </Button>
     ));
 
     const columns: TableColumn<ListRoleRes>[] = [
         {
             dataKey: 'name',
-            title: 'Name',
+            title: intl.formatMessage({ id: 'pages.roles.index.table.columns.name' }),
             width: 300,
             render(value, data) {
                 return (
@@ -117,10 +118,13 @@ export default function Page() {
                 );
             },
         },
-        { dataKey: 'description', title: 'Description' },
+        {
+            dataKey: 'description',
+            title: intl.formatMessage({ id: 'pages.roles.index.table.columns.description' }),
+        },
         {
             dataKey: 'enabled',
-            title: 'Status',
+            title: intl.formatMessage({ id: 'pages.roles.index.table.columns.status' }),
             width: 110,
             render(value) {
                 return (
@@ -132,7 +136,7 @@ export default function Page() {
         },
         {
             dataKey: 'creationTime',
-            title: 'Creation Time',
+            title: intl.formatMessage({ id: 'pages.roles.index.table.columns.creationtime' }),
             width: 190,
             render(value) {
                 return (
@@ -170,19 +174,19 @@ export default function Page() {
                             <Menu.Item c="gray.6">
                                 <Link to={`/admin/roles/${value}/settings`}>
                                     <Text size="xs" fw={500}>
-                                        View Details
+                                        <FormattedMessage id="pages.roles.index.table.actions.viewdetails" />
                                     </Text>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item c="gray.6" onClick={() => handleOpenAssignModal(value)}>
                                 <Text size="xs" fw={500}>
-                                    Assign To Subjects
+                                    <FormattedMessage id="pages.roles.index.table.actions.assign" />
                                 </Text>
                             </Menu.Item>
                             <Menu.Divider />
                             <Menu.Item c="red.6" onClick={() => {}}>
                                 <Text size="xs" fw={500}>
-                                    Delete Role
+                                    <FormattedMessage id="pages.roles.index.table.actions.delete" />
                                 </Text>
                             </Menu.Item>
                         </Menu.Dropdown>
@@ -198,10 +202,11 @@ export default function Page() {
                 <div className="grid grid-cols-1 gap-y-10">
                     <PageHeader>
                         <PageHeader.Content>
-                            <PageHeader.Title>Roles</PageHeader.Title>
+                            <PageHeader.Title>
+                                <FormattedMessage id="pages.roles.index.header.title" />
+                            </PageHeader.Title>
                             <PageHeader.Description>
-                                Create and manage Roles for your applications. Roles contain
-                                collections of Permissions and can be assigned to Users.
+                                <FormattedMessage id="pages.roles.index.header.description" />
                             </PageHeader.Description>
                         </PageHeader.Content>
                         <PageHeader.Actions>{!isEmpty && <CreateRoleButton />}</PageHeader.Actions>
@@ -216,13 +221,11 @@ export default function Page() {
                                     <Icon height="180" width="180" icon="local:empty-2" />
                                 </EmptyState.Icon>
                                 <EmptyState.Subtitle>
-                                    You don't have any roles yet.
+                                    <FormattedMessage id="pages.roles.index.empty.subtitle" />
                                 </EmptyState.Subtitle>
                                 <EmptyState.Content>
                                     <EmptyState.Message>
-                                        Create roles to represent the types of users that access
-                                        your applications. Assign permissions to those roles to
-                                        control what users are allowed to do in your apps.
+                                        <FormattedMessage id="pages.roles.index.empty.message" />
                                     </EmptyState.Message>
                                     <EmptyState.Actions>
                                         <CreateRoleButton />
@@ -236,7 +239,9 @@ export default function Page() {
                                         <TextInput
                                             value={searchKey}
                                             onChange={setSearchKey}
-                                            placeholder="Search of roles"
+                                            placeholder={intl.formatMessage({
+                                                id: 'pages.roles.index.search.placeholder',
+                                            })}
                                             leftSection={<SearchIcon className="size-4" />}
                                         />
                                     </div>

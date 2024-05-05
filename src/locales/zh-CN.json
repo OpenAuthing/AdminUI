@@ -58,7 +58,7 @@
                 "learnmore": "了解更多"
             },
             "nextsteps": {
-                "title": "Next Steps"
+                "title": "下一步"
             }
         },
         "dashboard": {
@@ -69,7 +69,19 @@
             "header.content": "在这里管理您的部门，您可以添加、编辑和删除部门，以及维护员工的组织关系。",
             "noselected": "请先选择一个部门",
             "members": {
-                "add": "添加成员"
+                "add": "添加成员",
+                "table": {
+                    "columns": {
+                        "name": "用户",
+                        "email": "邮箱",
+                        "phone": "手机号码",
+                        "departments": "部门"
+                    },
+                    "actions": {
+                        "viewdetails": "查看详情",
+                        "remove": "移除"
+                    }
+                }
             }
         },
         "applications": {
@@ -111,7 +123,6 @@
             }
         },
         "users": {
-            "search.placeholder": "搜索用户",
             "header": {
                 "title": "用户管理",
                 "description": "通过易于使用的 UI 可以帮助您管理用户身份，包括密码重置、创建和配置、禁用和删除用户。",
@@ -119,6 +130,7 @@
                     "createuser": "创建用户"
                 }
             },
+            "search.placeholder": "搜索用户",
             "empty": {
                 "subtitle": "您还没有任何用户。",
                 "message": "您的所有用户都将在此处找到，无论他们使用何种身份验证方法访问您的应用程序。"
@@ -144,9 +156,56 @@
             "search.placeholder": "搜索用户组"
         },
         "roles": {
+            "index": {
+                "header": {
+                    "title": "角色管理",
+                    "description": "为您的应用程序创建和管理角色。角色包含权限的集合，可以分配给用户或组。",
+                    "actions": {
+                        "create": "创建角色"
+                    }
+                },
+                "search.placeholder": "搜索角色",
+                "table": {
+                    "columns": {
+                        "name": "名称",
+                        "description": "描述",
+                        "status": "状态",
+                        "creationtime": "创建时间"
+                    },
+                    "actions": {
+                        "viewdetails": "查看详情",
+                        "assign": "分配给用户或用户组",
+                        "delete": "删除角色"
+                    }
+                },
+                "empty": {
+                    "subtitle": "您还没有任何角色。",
+                    "message": "创建角色，为这些角色分配权限，以控制允许用户在应用程序中执行的操作。"
+                }
+            },
             "details": {
+                "back": "返回角色列表",
                 "settings": {
-                    "tab": "设置"
+                    "tab": "设置",
+                    "form": {
+                        "name.label": "名称",
+                        "name.placeholder": "输入角色名称",
+                        "description.label": "描述",
+                        "description.placeholder": "输入角色描述",
+                        "save": "保存"
+                    },
+                    "dangerzone": {
+                        "title": "危险区域",
+                        "delete.title": "删除这个角色",
+                        "delete.content": "一旦删除角色，就无法恢复，请谨慎操作。",
+                        "delete.button": "删除角色"
+                    },
+                    "remove.confirmmodal": {
+                        "title": "请确认您的操作",
+                        "content": "您确定你要删除这个角色？",
+                        "confirm": "确认删除",
+                        "cancel": "取消"
+                    }
                 },
                 "subjects": {
                     "tab": "用户或用户组",
@@ -159,6 +218,13 @@
                         "content": "您确定要从这个角色中移除对象 [{name}] 吗？",
                         "confirm": "确定移除",
                         "cancel": "我再想想"
+                    },
+                    "table": {
+                        "columns": {
+                            "name": "名称",
+                            "type": "类型",
+                            "creationtime": "添加时间"
+                        }
                     }
                 }
             },

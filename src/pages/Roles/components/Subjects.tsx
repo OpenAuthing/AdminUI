@@ -85,7 +85,7 @@ const RoleSubjects: React.FC<RoleSubjectsProps> = ({ roleId }) => {
     const columns: TableColumn<ListRoleSubjectRes>[] = [
         {
             dataKey: 'name',
-            title: 'Name',
+            title: intl.formatMessage({ id: 'pages.roles.details.subjects.table.columns.name' }),
             render(value, data) {
                 return (
                     <Group>
@@ -106,7 +106,7 @@ const RoleSubjects: React.FC<RoleSubjectsProps> = ({ roleId }) => {
         },
         {
             dataKey: 'subjectType',
-            title: 'Type',
+            title: intl.formatMessage({ id: 'pages.roles.details.subjects.table.columns.type' }),
             render(value) {
                 if (value === RoleSubjectType.UserGroup) {
                     return (
@@ -125,7 +125,9 @@ const RoleSubjects: React.FC<RoleSubjectsProps> = ({ roleId }) => {
         },
         {
             dataKey: 'creationTime',
-            title: 'Time',
+            title: intl.formatMessage({
+                id: 'pages.roles.details.subjects.table.columns.creationtime',
+            }),
             render(value) {
                 return (
                     <Text size="sm" c="gray.6">

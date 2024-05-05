@@ -1,5 +1,5 @@
 import { PaginitionReqParams } from '@/@types';
-import { AddRoleSubjectReq, CreateRoleReq } from '@/@types/role';
+import { AddRoleSubjectReq, CreateRoleReq, UpdateRoleReq } from '@/@types/role';
 import { request } from '@/lib/request';
 
 const ROOT_URL = '/api/admin/roles';
@@ -29,6 +29,13 @@ class RoleService {
     createRole(req: CreateRoleReq) {
         return request(ROOT_URL, {
             method: 'POST',
+            data: req,
+        });
+    }
+
+    updateRole(id: string, req: UpdateRoleReq) {
+        return request(`${ROOT_URL}/${id}`, {
+            method: 'PUT',
             data: req,
         });
     }
