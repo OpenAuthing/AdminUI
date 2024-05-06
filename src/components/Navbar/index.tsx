@@ -78,9 +78,9 @@ const NestedNavMenu = ({
                                     to={item.href}
                                     key={item.id}
                                     aria-selected={selectedRouteKeys.includes(item.id)}
-                                    className="mt-1.5 block py-2.5 pl-10 rounded text-gray-500 hover:bg-blue-50 hover:text-primary-600 aria-selected:text-primary-600 aria-selected:bg-blue-100 transition-colors duration-300"
+                                    className="mt-1.5 block py-2.5 pl-10 rounded text-gray-400 hover:bg-blue-50 hover:text-primary-600 aria-selected:text-primary-600 aria-selected:bg-blue-100 transition-colors duration-300"
                                 >
-                                    <Text size="sm" fw={400} truncate>
+                                    <Text size="xs" fw={600} truncate>
                                         <FormattedMessage id={item.label} />
                                     </Text>
                                 </Link>
