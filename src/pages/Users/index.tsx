@@ -61,6 +61,16 @@ export default function Page() {
             },
         },
     );
+    const { run: createUser, loading: creating } = useRequest(UserService.createUser, {
+        manual: true,
+        onSuccess(data) {
+            if (data) {
+                close();
+
+                history.push(`/admin/users/${data}`);
+            }
+        },
+    });
 
     const { total = 0, list = [] } = data ?? {};
     const noRecords = total === 0;
@@ -268,7 +278,12 @@ export default function Page() {
                     <div></div>
                 </div>
             </ContentContainer>
-            <CreateUserDialog opened={opened} onClose={close} />
+            <CreateUserDialog
+                loading={creating}
+                opened={opened}
+                onClose={close}
+                onCreate={createUser}
+            />
         </>
     );
 }

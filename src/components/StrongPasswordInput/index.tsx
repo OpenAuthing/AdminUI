@@ -66,7 +66,6 @@ const StrongPasswordInput: React.FC<StrongPasswordInputProps> = (props) => {
                     <PasswordInput
                         withAsterisk
                         autoComplete="new-password"
-                        label="Your password"
                         placeholder="Your password"
                         value={password}
                         {...passwordInputProps}

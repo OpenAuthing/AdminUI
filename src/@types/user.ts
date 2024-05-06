@@ -34,3 +34,10 @@ export interface UserRoleModel {
     assignmentSubjectId: string;
     assignmentSubjectName?: string;
 }
+
+export interface CreateUserReq {
+    nickname: string;
+    username: string;
+    password: string;
+    phoneNumber: string;
+}

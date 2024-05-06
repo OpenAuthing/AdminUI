@@ -1,4 +1,5 @@
 import { PaginitionReqParams } from '@/@types';
+import { CreateUserReq } from '@/@types/user';
 import { request } from '@/lib/request';
 
 const ROOT_URL = '/api/admin/users';
@@ -26,6 +27,13 @@ class UserService {
     getUser(userId: string) {
         return request(`${ROOT_URL}/${userId}`, {
             method: 'GET',
+        });
+    }
+
+    createUser(req: CreateUserReq) {
+        return request(ROOT_URL, {
+            method: 'POST',
+            data: req,
         });
     }
 
