@@ -20,10 +20,22 @@ class UserGroupService {
         });
     }
 
+    getGroup(id: string) {
+        return request(`${ROOT_URL}/${id}`, {
+            method: 'GET',
+        });
+    }
+
     createGroup(req: CreateUserGroupReq) {
         return request(ROOT_URL, {
             method: 'POST',
             data: req,
+        });
+    }
+
+    getGroupMembers(groupId: string) {
+        return request(`${ROOT_URL}/${groupId}/members`, {
+            method: 'GET',
         });
     }
 }

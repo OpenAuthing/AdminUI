@@ -156,6 +156,49 @@
             "search.placeholder": "Search of user groups",
             "create": {
                 "title": "Create User Group"
+            },
+            "details": {
+                "back": "Back to groups",
+                "tabs": {
+                    "details": "Details",
+                    "members": "Members"
+                },
+                "editform": {
+                    "name": {
+                        "label": "Name",
+                        "placeholder": "Enter group name"
+                    },
+                    "description": {
+                        "label": "Description",
+                        "placeholder": "Enter group description"
+                    },
+                    "save": "Save"
+                },
+                "dangerzone": {
+                    "title": "Danger Zone",
+                    "delete.title": "Delete this group",
+                    "delete.content": "Once you delete this group, there is no going back. Please be certain.",
+                    "delete.button": "Delete this group"
+                },
+                "members": {
+                    "tips": "All members of this group.",
+                    "add": "Add Members",
+                    "norecords": "There are no members in this group.",
+                    "selected": "Selected: {user, plural, =0 {No users} one {# user} other {# users}}",
+                    "table": {
+                        "columns": {
+                            "name": "Name",
+                            "email": "Email",
+                            "phone": "Phone",
+                            "creationtime": "Added At"
+                        }
+                    },
+                    "addmodal": {
+                        "title": "Add Members",
+                        "noselected": "Select one or more users.",
+                        "add": "Add"
+                    }
+                }
             }
         },
         "roles": {
